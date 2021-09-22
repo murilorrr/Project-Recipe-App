@@ -1,4 +1,4 @@
-import React, { Provider } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
@@ -7,11 +7,10 @@ import appProvider from './contextAPI/appProvider';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-
   <BrowserRouter>
-    <Provider store={ appProvider }>
+    <appProvider>
       <App />
-    </Provider>
+    </appProvider>
   </BrowserRouter>, document.getElementById('root'),
 );
 
