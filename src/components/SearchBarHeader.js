@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 const optionsDefault = {
   checkRadio: '',
-  input: 'g',
+  input: 'ga',
   pageName: '',
 };
 
@@ -43,10 +43,11 @@ export default function SearchBarHeader() {
 
   const handleClick = () => {
     const { checkRadio, input } = options;
-
-    // logica para escolhe a fetch correta
-    themealdbFetch(checkRadio, input);
-    thecocktaildbFetch(checkRadio, input);
+    console.log(input, checkRadio);
+    if (input.length > 1 && checkRadio === 'first_letter_search') return alert('error');
+    console.log('passou');
+    if (pageName === '/comidas') return themealdbFetch(checkRadio, input);
+    if (pageName === '/bebidas') return thecocktaildbFetch(checkRadio, input);
   };
 
   return (
