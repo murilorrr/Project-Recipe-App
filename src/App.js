@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NotFound, Login } from './pages';
 import DrinkDetails from './pages/DrinkDetails';
@@ -8,6 +9,8 @@ import FoodDetails from './pages/FoodDetails';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
+import RecipeFoods from './pages/RecipeFoods';
+import Login from './pages/Login';
 
 function App() {
   return (
