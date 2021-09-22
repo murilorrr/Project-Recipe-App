@@ -8,10 +8,10 @@ import { NotFound, Comidas, Bebidas, ComidasDetails,
 function App() {
   return (
     <Switch>
-      <Route path="/comidas" component={ Comidas } />
-      <Route path="/bebidas" component={ Bebidas } />
       <Route path="/comidas/:id" component={ ComidasDetails } />
       <Route path="/bebidas/:id" component={ BebidasDetails } />
+      <Route path="/comidas" component={ Comidas } />
+      <Route path="/bebidas" component={ Bebidas } />
       <Route exact path="/" component={ Login } />
       <Route path="*" component={ NotFound } />
     </Switch>
