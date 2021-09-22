@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Login() {
+function Drinks() {
   return (
     <div>In Development</div>
   );
 }
 
-export default Login;
+export default Drinks;
