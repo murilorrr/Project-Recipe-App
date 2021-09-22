@@ -10,12 +10,13 @@ function App() {
     <BrowserRouter>
       {/* <Provider store={ appProvider }> */}
       <Switch>
-        {/* <Route path="/comidas" component={ comidas } />
+        {/*
+         <Route path="/comidas" component={ comidas } />
           <Route path="/bebidas" component={ bebidas } />
           <Route path="/comidas/:id" component={ comidasDetails } />
           <Route path="/bebidas/:id" component={ bebidasDetails } />
           <Route exact path="/" component={ Login } /> */}
-        <Route exact path="/testComponet" component={ SearchBarHeader } />
+        <Route exact path="/teste" component={ SearchBarHeader } />
       </Switch>
       {/* </Provider> */}
     </BrowserRouter>
