@@ -10,12 +10,12 @@ import Login from './pages/Login';
 function App() {
   return (
     <Switch>
-//       <Route path="/comidas/:id" component={ ComidasDetails } />
-//       <Route path="/bebidas/:id" component={ BebidasDetails } />
+      {/* <Route path="/comidas/:id" component={ ComidasDetails } /> */}
+      {/* <Route path="/bebidas/:id" component={ BebidasDetails } /> */}
       <Route path="/comidas" component={ RecipeFoods } />
-//       <Route path="/bebidas" component={ Bebidas } />
-      <Route exact path="/" component={ Login } />
-//       <Route path="*" component={ NotFound } />
+      <Route path="/" component={ Login } />
+      {/* <Route path="/bebidas" component={ Bebidas } /> */}
+      {/* <Route path="*" component={ NotFound } /> */}
     </Switch>
   );
 }
