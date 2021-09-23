@@ -9,6 +9,8 @@ const optionsDefault = {
   listThecocktailOrThemeal: [],
 };
 
+const MAX_INDEX = 12;
+
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const themealdbFetch = async (checkRadio, input, options, setOptions) => {
@@ -19,9 +21,12 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
   };
 
   const themealdb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  // Se o re
-  setOptions({ ...options, listThecocktailOrThemeal: themealdb.meals || [] });
-  console.log(themealdb);
+  // se themealdb for null retorna lista [].
+  setOptions(
+    { ...options,
+      listThecocktailOrThemeal: themealdb.meals.slice(0, MAX_INDEX) || [] },
+  );
+
   return themealdb;
 };
 
@@ -35,7 +40,10 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   };
 
   const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  await setOptions({ ...options, listThecocktailOrThemeal: thecocktaildb.drinks });
+  await setOptions(
+    { ...options,
+      listThecocktailOrThemeal: thecocktaildb.drinks.slice(0, MAX_INDEX) },
+  );
   return thecocktaildb;
 };
 
