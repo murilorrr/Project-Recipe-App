@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import MiniCard from './MiniCard';
 
 const optionsDefault = {
   checkRadio: '',
-  input: 'g',
+  input: 'Lasagne',
   pageName: '',
   listThecocktailOrThemeal: [],
 };
@@ -43,7 +43,8 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
   await setOptions(
     { ...options,
-      listThecocktailOrThemeal: thecocktaildb.drinks.slice(0, MAX_INDEX) },
+      listThecocktailOrThemeal:
+      thecocktaildb.meals ? thecocktaildb.meals.slice(0, MAX_INDEX) : [] },
   );
   return thecocktaildb;
 };
@@ -108,9 +109,14 @@ export default function SearchBarHeader() {
       <button type="button" data-testid="exec-search-btn" onClick={ handleClick }>
         Buscar
       </button>
-      {options.listThecocktailOrThemeal.map(
-        (item, index) => <MiniCard key={ index } args={ { ...item, index, pageName } } />,
-      )}
+      {options.listThecocktailOrThemeal.length === 1
+        ? <Redirect to={ `/${options.listThecocktailOrThemeal[0].idMeal}` } />
+        : options.listThecocktailOrThemeal.map(
+          (item, index) => (<MiniCard
+            key={ index }
+            args={ { ...item, index, pageName } }
+          />),
+        )}
     </>
   );
 }
