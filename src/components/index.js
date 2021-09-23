@@ -1,5 +1,9 @@
-// import Mod2 from './Mod2'
+import CarrouselRecomendations from './CarrouselRecomendations';
+import FavoriteButton from './FavoriteButton';
+import ShareButton from './ShareButton';
 
-// export {
-//   Mod2
-// };
+export {
+  CarrouselRecomendations,
+  FavoriteButton,
+  ShareButton,
+};
