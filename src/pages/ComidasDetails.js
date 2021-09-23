@@ -7,6 +7,8 @@ import ShareButton from '../components/ShareButton';
 // import Context from '../contextAPI/Context';
 
 function ComidasDetails(props) {
+  const { history: { location: { pathname } }, history } = props;
+  console.log(pathname.includes('comidas'));
   const recipe = {
     meals: [
       {
@@ -65,7 +67,6 @@ function ComidasDetails(props) {
     ],
   };
   const { meals } = recipe;
-  const { history } = props;
 
   // const requestAPI = useContext(Context);
 
@@ -162,6 +163,9 @@ function ComidasDetails(props) {
 ComidasDetails.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
   }).isRequired,
 };
 
