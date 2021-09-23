@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import MiniCard from './MiniCard';
+import loadingIcon from '../images/searchLoanding.svg';
 
 const optionsDefault = {
   checkRadio: '',
   input: 'a',
   pageName: '',
   listThecocktailOrThemeal: [],
+  loading: true,
 };
 
 const MAX_INDEX = 12;
@@ -25,7 +27,8 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
   setOptions(
     { ...options,
       listThecocktailOrThemeal:
-      themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : [] },
+      themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : [],
+      loading: true },
   );
 
   return themealdb;
@@ -44,7 +47,8 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   await setOptions(
     { ...options,
       listThecocktailOrThemeal:
-      thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [] },
+      thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [],
+      loading: true },
   );
   return thecocktaildb;
 };
@@ -58,6 +62,7 @@ export default function SearchBarHeader() {
 
   const handleClick = () => {
     const { checkRadio, input } = options;
+    setOptions({ ...options, loading: false });
     if (input.length > 1 && checkRadio === 'first_letter_search') {
       return global.alert('Digite Apenas uma Lentra!!!');
     }
@@ -114,6 +119,7 @@ export default function SearchBarHeader() {
         ? <Redirect to={ `/${options.listThecocktailOrThemeal[0].idMeal}` } />
         : options.listThecocktailOrThemeal
           .map((item, i) => (<MiniCard key={ i } args={ { ...item, i, p } } />))}
+      <div>{options.loading || <img src={ loadingIcon } alt="loading icone" />}</div>
     </>
   );
 }
