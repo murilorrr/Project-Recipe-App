@@ -1,21 +1,23 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { NotFound, Comidas, Bebidas, ComidasDetails,
-//   BebidasDetails, Login } from './pages';
-import RecipeFoods from './pages/RecipeFoods';
-import Login from './pages/Login';
+import { Bebidas,
+  BebidasDetails,
+  ComidasDetails,
+  Login,
+  NotFound,
+  RecipeFoods } from './pages';
 
 function App() {
   return (
     <Switch>
-      {/* <Route path="/comidas/:id" component={ ComidasDetails } /> */}
-      {/* <Route path="/bebidas/:id" component={ BebidasDetails } /> */}
+      <Route path="/comidas/:id" component={ ComidasDetails } />
+      <Route path="/bebidas/:id" component={ BebidasDetails } />
       <Route path="/comidas" component={ RecipeFoods } />
       <Route path="/" component={ Login } />
-      {/* <Route path="/bebidas" component={ Bebidas } /> */}
-      {/* <Route path="*" component={ NotFound } /> */}
+      <Route path="/bebidas" component={ Bebidas } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }
