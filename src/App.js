@@ -15,9 +15,9 @@ function App() {
       <Route path="/comidas/:id" component={ ComidasDetails } />
       <Route path="/bebidas/:id" component={ BebidasDetails } />
       <Route path="/comidas" component={ RecipeFoods } />
-      <Route path="/" component={ Login } />
       <Route path="/bebidas" component={ Bebidas } />
       <Route path="*" component={ NotFound } />
+      <Route exact path="/" component={ Login } />
     </Switch>
   );
 }
