@@ -14,7 +14,7 @@ function FavoriteButton(props) {
     <button
       type="button"
       style={ style }
-      onClick={ setFavoriteHeart(!favoriteHeartState) }
+      onClick={ () => setFavoriteHeart(!favoriteHeartState) }
     >
       ICON
 

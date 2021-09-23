@@ -2,7 +2,7 @@ import React from 'react';
 import { node } from 'prop-types';
 import Context from './Context';
 
-function LoginProvider({ children }) {
+function appProvider({ children }) {
   //
   // FUNCOES E USO ACIMA
   //
@@ -22,8 +22,8 @@ function LoginProvider({ children }) {
   );
 }
 
-LoginProvider.propTypes = {
+appProvider.propTypes = {
   children: node.isRequired,
 };
 
-export default LoginProvider;
+export default appProvider;
