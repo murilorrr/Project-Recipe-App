@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import MiniCard from './MiniCard';
 
 const optionsDefault = {
   checkRadio: '',
   input: 'ga',
   pageName: '',
-  themealdb: '',
-  thecocktaildb: '',
+  listThecocktailOrThemeal: [],
 };
 
 // Fetch para as comidas
@@ -19,7 +19,8 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
   };
 
   const themealdb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  setOptions({ ...options, themealdb });
+  // Se o re
+  setOptions({ ...options, listThecocktailOrThemeal: themealdb.meals || [] });
   console.log(themealdb);
   return themealdb;
 };
@@ -34,7 +35,7 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   };
 
   const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  await setOptions({ ...options, thecocktaildb });
+  await setOptions({ ...options, listThecocktailOrThemeal: thecocktaildb.drinks });
   return thecocktaildb;
 };
 
@@ -46,8 +47,9 @@ export default function SearchBarHeader() {
 
   const handleClick = () => {
     const { checkRadio, input } = options;
-
-    if (input.length > 1 && checkRadio === 'first_letter_search') return alert('error');
+    if (input.length > 1 && checkRadio === 'first_letter_search') {
+      return global.alert('Digite Apenas uma Lentra!!!');
+    }
 
     if (pageName === '/comidas') {
       return themealdbFetch(checkRadio, input, options, setOptions);
@@ -97,6 +99,9 @@ export default function SearchBarHeader() {
       <button type="button" data-testid="exec-search-btn" onClick={ handleClick }>
         Buscar
       </button>
+      {options.listThecocktailOrThemeal.map(
+        (item, index) => <MiniCard key={ index } args={ { ...item, index } } />,
+      )}
     </>
   );
 }
