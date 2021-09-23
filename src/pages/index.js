@@ -1,18 +1,17 @@
 import NotFound from './NotFound';
-import Comidas from './Comidas';
-import Bebidas from './Bebidas';
-import BebidasDetails from './BebidasDetails';
-import ComidasDetails from './ComidasDetails';
+import Foods from './Foods';
+import Drinks from './Drinks';
+import DrinkDetails from './DrinkDetails';
+import FoodDetails from './FoodDetails';
 import Login from './Login';
 import RecipeFoods from './RecipeFoods';
-// import Mod2 from './Mod2'
 
 export {
   NotFound,
-  Comidas,
-  Bebidas,
+  Foods,
+  Drinks,
+  DrinkDetails,
+  FoodDetails,
   Login,
-  BebidasDetails,
-  ComidasDetails,
   RecipeFoods,
 };
