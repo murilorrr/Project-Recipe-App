@@ -9,10 +9,7 @@
   justify-content: center;
   width: 100%;
 }
-/* 
-.searchButton {
-  display: none;
-} */
+
 
 .rocksGlass {
   animation: shake 1s infinite ease;
