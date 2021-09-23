@@ -1,24 +1,24 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import appProvider from './contextAPI/appProvider';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import RecipeFoods from './pages/RecipeFoods';
-import Login from './pages/Login';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
+import { Bebidas,
+  BebidasDetails,
+  ComidasDetails,
+  Login,
+  NotFound,
+  RecipeFoods } from './pages';
 
 function App() {
   return (
-    <BrowserRouter>
-      {/* <Provider store={ appProvider }> */}
-      <Switch>
-        <Route path="/comidas" component={ RecipeFoods } />
-        {/*  <Route path="/bebidas" component={ bebidas } />
-          <Route path="/comidas/:id" component={ comidasDetails } />
-          <Route path="/bebidas/:id" component={ bebidasDetails } /> */}
-        <Route exact path="/" component={ Login } />
-      </Switch>
-      {/* </Provider> */}
-    </BrowserRouter>
+    <Switch>
+      <Route path="/comidas/:id" component={ ComidasDetails } />
+      <Route path="/bebidas/:id" component={ BebidasDetails } />
+      <Route path="/comidas" component={ RecipeFoods } />
+      <Route path="/bebidas" component={ Bebidas } />
+      <Route path="*" component={ NotFound } />
+      <Route exact path="/" component={ Login } />
+    </Switch>
   );
 }
 
