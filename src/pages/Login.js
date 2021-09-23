@@ -37,6 +37,7 @@ function Login(props) {
     saveEmail(Email);
 
     history.push('/comidas');
+    history.push('/asas');
   };
 
   return (
