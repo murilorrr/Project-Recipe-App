@@ -7,3 +7,9 @@ test.skip('Farewell, front-end', () => {
   const linkElement = getByText(/TRYBE/i);
   expect(linkElement).toBeInTheDocument();
 });
+
+// describe('testando pagina de login',() => {
+//   it('input de texto esta na página', () => {
+    
+//   })
+// })

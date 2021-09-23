@@ -1,12 +1,12 @@
 import React from 'react';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
-function Profile() {
+function RecipesMade() {
   return (
     <div>
-      <HeaderNoSearch word="Perfil" />
+      <HeaderNoSearch word="Receitas Feitas" />
     </div>
   );
 }
 
-export default Profile;
+export default RecipesMade;
