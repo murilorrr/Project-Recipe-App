@@ -5,11 +5,13 @@ const optionsDefault = {
   checkRadio: '',
   input: 'ga',
   pageName: '',
+  themealdb: '',
+  thecocktaildb: '',
 };
 
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
-const themealdbFetch = async (checkRadio, input) => {
+const themealdbFetch = async (checkRadio, input, options, setOptions) => {
   const themealdbEndPoint = {
     ingredient_search: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`,
@@ -17,13 +19,14 @@ const themealdbFetch = async (checkRadio, input) => {
   };
 
   const themealdb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  console.table(themealdb);
-  return themealdbEndPoint;
+  setOptions({ ...options, themealdb });
+  console.log(themealdb);
+  return themealdb;
 };
 
 // Fetch para as Bebidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
-const thecocktaildbFetch = async (checkRadio, input) => {
+const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   const themealdbEndPoint = {
     ingredient_search: `https:/www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`,
@@ -31,8 +34,8 @@ const thecocktaildbFetch = async (checkRadio, input) => {
   };
 
   const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  console.table(thecocktaildb);
-  return themealdbEndPoint;
+  await setOptions({ ...options, thecocktaildb });
+  return thecocktaildb;
 };
 
 export default function SearchBarHeader() {
@@ -43,11 +46,16 @@ export default function SearchBarHeader() {
 
   const handleClick = () => {
     const { checkRadio, input } = options;
-    console.log(input, checkRadio);
+
     if (input.length > 1 && checkRadio === 'first_letter_search') return alert('error');
-    console.log('passou');
-    if (pageName === '/comidas') return themealdbFetch(checkRadio, input);
-    if (pageName === '/bebidas') return thecocktaildbFetch(checkRadio, input);
+
+    if (pageName === '/comidas') {
+      return themealdbFetch(checkRadio, input, options, setOptions);
+    }
+
+    if (pageName === '/bebidas') {
+      return thecocktaildbFetch(checkRadio, input, options, setOptions);
+    }
   };
 
   return (
