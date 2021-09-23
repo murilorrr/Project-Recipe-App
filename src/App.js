@@ -1,21 +1,21 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { NotFound, Login } from './pages';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
+import { Login, NotFound } from './pages';
 import DrinkDetails from './pages/DrinkDetails';
+import Drinks from './pages/Drinks';
+import Explore from './pages/Explore';
+import ExploreDrink from './pages/ExploreDrink';
+import ExploreDrinkIngred from './pages/ExploreDrinkIngred';
+import ExploreFood from './pages/ExploreFood';
+import ExploreFoodIngred from './pages/ExploreFoodIngred';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 import FoodDetails from './pages/FoodDetails';
 import Foods from './pages/Foods';
-import Drinks from './pages/Drinks';
-import Profile from './pages/Profile';
-import Explore from './pages/Explore';
 import OriginFood from './pages/OriginFood';
-import ExploreFood from './pages/ExploreFood';
-import ExploreDrink from './pages/ExploreDrink';
-import ExploreFoodIngred from './pages/ExploreFoodIngred';
-import ExploreDrinkIngred from './pages/ExploreDrinkIngred';
+import Profile from './pages/Profile';
 import RecipesMade from './pages/RecipesMade';
-import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
