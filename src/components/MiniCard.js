@@ -3,9 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function MiniCard({ args }) {
-  const { i: index = '' } = args;
+  const { i: index = '', p } = args;
   return (
-    <Link to={ `/dfasdfasdfa/${args.idMeal || args.idDrink}` }>
+    <Link to={ `${p}/${args.idMeal || args.idDrink}` }>
       <section data-testid={ `${index}-recipe-card` }>
         <section>
           <img

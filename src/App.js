@@ -1,23 +1,23 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import './App.css';
 import SearchBarHeader from './components/SearchBarHeader';
-import LoginProvider from './contextAPI/appProvider';
+import { Bebidas, BebidasDetails, Comidas, ComidasDetails, Login } from './pages';
 
 function App() {
   return (
     <BrowserRouter>
-      <LoginProvider store={ appProvider }>
-        <Switch>
-          <Route path="/comidas" component={ SearchBarHeader } />
-          <Route path="/bebidas" component={ SearchBarHeader } />
-          <Route path="/comidas/:id" component={ comidasDetails } />
-          <Route path="/bebidas/:id" component={ bebidasDetails } />
-          <Route exact path="/" component={ Login } />
-          <Route exact path="/teste" component={ SearchBarHeader } />
-        </Switch>
-      </LoginProvider>
+
+      <Switch>
+        <Route path="/comidas" component={ Comidas } />
+        <Route path="/bebidas" component={ Bebidas } />
+        <Route path="/comidas/:id" component={ ComidasDetails } />
+        <Route path="/bebidas/:id" component={ BebidasDetails } />
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/teste" component={ SearchBarHeader } />
+      </Switch>
+
     </BrowserRouter>
   );
 }
