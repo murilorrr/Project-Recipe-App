@@ -4,7 +4,6 @@ import Bebidas from './Drinks';
 import BebidasDetails from './DrinkDetails';
 import ComidasDetails from './FoodDetails';
 import Login from './Login';
-import RecipeFoods from './RecipeFoods';
 // import Mod2 from './Mod2'
 
 export {
@@ -14,5 +13,4 @@ export {
   Login,
   BebidasDetails,
   ComidasDetails,
-  RecipeFoods,
 };
