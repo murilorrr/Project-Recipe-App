@@ -4,7 +4,7 @@ import MiniCard from './MiniCard';
 
 const optionsDefault = {
   checkRadio: '',
-  input: 'ga',
+  input: 'g',
   pageName: '',
   listThecocktailOrThemeal: [],
 };
@@ -24,7 +24,8 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
   // se themealdb for null retorna lista [].
   setOptions(
     { ...options,
-      listThecocktailOrThemeal: themealdb.meals.slice(0, MAX_INDEX) || [] },
+      listThecocktailOrThemeal:
+      themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : [] },
   );
 
   return themealdb;
@@ -108,7 +109,7 @@ export default function SearchBarHeader() {
         Buscar
       </button>
       {options.listThecocktailOrThemeal.map(
-        (item, index) => <MiniCard key={ index } args={ { ...item, index } } />,
+        (item, index) => <MiniCard key={ index } args={ { ...item, index, pageName } } />,
       )}
     </>
   );
