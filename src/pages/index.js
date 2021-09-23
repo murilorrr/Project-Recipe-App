@@ -1,5 +1,4 @@
 import NotFound from './NotFound';
-import Comidas from './Comidas';
 import Bebidas from './Bebidas';
 import BebidasDetails from './BebidasDetails';
 import ComidasDetails from './ComidasDetails';
@@ -9,7 +8,6 @@ import RecipeFoods from './RecipeFoods';
 
 export {
   NotFound,
-  Comidas,
   Bebidas,
   Login,
   BebidasDetails,

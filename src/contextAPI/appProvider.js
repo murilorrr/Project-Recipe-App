@@ -6,9 +6,13 @@ function LoginProvider({ children }) {
   //
   // FUNCOES E USO ACIMA
   //
+  const requestAPI = (id) => {
+    console.log('request realizada');
+    return id;
+  };
 
   const contextValue = {
-    // prover para a aplicação
+    requestAPI,
   };
 
   return (
