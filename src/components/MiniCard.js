@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function MiniCard({ args }) {
-  const { index = '' } = args;
+  const { i: index = '' } = args;
   return (
     <section data-testid={ `${index}-recipe-card` }>
       <section>

@@ -4,7 +4,7 @@ import MiniCard from './MiniCard';
 
 const optionsDefault = {
   checkRadio: '',
-  input: 'Lasagne',
+  input: 'a',
   pageName: '',
   listThecocktailOrThemeal: [],
 };
@@ -44,7 +44,7 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   await setOptions(
     { ...options,
       listThecocktailOrThemeal:
-      thecocktaildb.meals ? thecocktaildb.meals.slice(0, MAX_INDEX) : [] },
+      thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [] },
   );
   return thecocktaildb;
 };
@@ -52,6 +52,7 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
 export default function SearchBarHeader() {
   // Pega a Url e assim sei qual e a pagina que estou.
   const pageName = useHistory().location.pathname;
+  const p = pageName;
 
   const [options, setOptions] = useState({ ...optionsDefault, pageName });
 
@@ -111,12 +112,8 @@ export default function SearchBarHeader() {
       </button>
       {options.listThecocktailOrThemeal.length === 1
         ? <Redirect to={ `/${options.listThecocktailOrThemeal[0].idMeal}` } />
-        : options.listThecocktailOrThemeal.map(
-          (item, index) => (<MiniCard
-            key={ index }
-            args={ { ...item, index, pageName } }
-          />),
-        )}
+        : options.listThecocktailOrThemeal
+          .map((item, i) => (<MiniCard key={ i } args={ { ...item, i, p } } />))}
     </>
   );
 }
