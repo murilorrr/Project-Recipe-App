@@ -2,8 +2,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import {FoodDetails } from './pages/FoodDetails';
-
+import {
+  DrinkDetails, Drinks, FoodDetails, Foods, Login, NotFound, Profile,
+} from './pages';
 
 function App() {
   return (

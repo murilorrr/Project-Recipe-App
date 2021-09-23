@@ -5,6 +5,7 @@ import DrinkDetails from './DrinkDetails';
 import FoodDetails from './FoodDetails';
 import Login from './Login';
 import RecipeFoods from './RecipeFoods';
+import Profile from './Profile';
 
 export {
   NotFound,
@@ -14,4 +15,5 @@ export {
   FoodDetails,
   Login,
   RecipeFoods,
+  Profile,
 };
