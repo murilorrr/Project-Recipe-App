@@ -7,7 +7,7 @@ import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading, StartRec
 // import Context from '../contextAPI/Context';
 
 function DrinkDetails(props) {
-  const { match: { params: { id } } } = props;
+  const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [recomendation, setRecomendation] = useState([]);
@@ -63,7 +63,7 @@ function DrinkDetails(props) {
         </div>
       </div>
       <div className="options">
-        <ShareButton />
+        <ShareButton location={ location } />
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
@@ -89,7 +89,7 @@ function DrinkDetails(props) {
       </div>
       <h3>Recomendados</h3>
       <CarrouselRecomendations recomendation={ recomendation } />
-      <StartRecipe id={ id } />
+      <StartRecipe id={ id } history={ history } />
     </div>
   );
 }
@@ -99,6 +99,12 @@ DrinkDetails.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }).isRequired,
 };
 

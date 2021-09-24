@@ -1,8 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function ShareButton() {
+const copy = require('clipboard-copy');
+
+function ShareButton(props) {
+  const { location: { pathname } } = props;
+
+  const onclick = () => {
+    copy(pathname);
+    alert('link copiado');
+  };
   return (
     <button
+      onClick={ onclick }
       data-testid="share-btn"
       type="button"
     >
@@ -12,6 +22,9 @@ function ShareButton() {
 }
 
 ShareButton.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 };
 
 export default ShareButton;

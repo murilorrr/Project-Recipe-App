@@ -2,12 +2,12 @@
 /* eslint-disable no-useless-escape */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading } from '../components';
+import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading, StartRecipe } from '../components';
 
 // import Context from '../contextAPI/Context';
 
 function FoodDetails(props) {
-  const { history, match: { params: { id } } } = props;
+  const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [recomendation, setRecomendation] = useState([]);
@@ -30,11 +30,6 @@ function FoodDetails(props) {
     };
     fetchAndSet();
   }, [id]);
-
-  const startRecipe = () => {
-    console.log('clicou');
-    return history.push(`/comidas/${id}/in-progress`);
-  };
 
   const getValuesInObject = (obj, value) => {
     const lista = [];
@@ -69,7 +64,7 @@ function FoodDetails(props) {
         </div>
       </div>
       <div className="options">
-        <ShareButton />
+        <ShareButton location={ location } />
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
@@ -95,16 +90,7 @@ function FoodDetails(props) {
       </div>
       <h3>Recomendadas</h3>
       <CarrouselRecomendations recomendation={ recomendation } drink />
-      <div>
-        <button
-          type="button"
-          style={ { position: 'fixed', bottom: '0' } }
-          onClick={ () => startRecipe() }
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-        </button>
-      </div>
+      <StartRecipe id={ id } history={ history } />
     </div>
   );
 }
@@ -112,14 +98,14 @@ function FoodDetails(props) {
 FoodDetails.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 };
 
