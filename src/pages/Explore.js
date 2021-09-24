@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Input from '../components/buttons';
 import HeaderNoSearch from '../components/HeaderNoSearch';
+import Footer from '../components/Footer';
 
 function Explorar(props) {
   const { history } = props;
@@ -22,6 +23,7 @@ function Explorar(props) {
         type="button"
         onClick={ changeRoute }
       />
+      <Footer />
     </div>
   );
 }
