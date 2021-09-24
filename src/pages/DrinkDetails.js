@@ -100,6 +100,7 @@ function DrinkDetails(props) {
       <div>
         <button
           type="button"
+          style={ { position: 'fixed', bottom: '0' } }
           onClick={ () => startRecipe() }
           data-testid="start-recipe-btn"
         >
