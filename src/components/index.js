@@ -1,4 +1,3 @@
-export { default as buttonInput } from './buttonInput';
 export { default as CarrouselRecomendations } from './CarrouselRecomendations';
 export { default as FavoriteButton } from './FavoriteButton';
 export { default as ShareButton } from './ShareButton';
