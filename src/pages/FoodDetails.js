@@ -1,10 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable no-useless-escape */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading, StartRecipe } from '../components';
-
-// import Context from '../contextAPI/Context';
+import { FavoriteButton, CarrouselRecomendations,
+  ShareButton, Loading, StartRecipe } from '../components';
 
 function FoodDetails(props) {
   const { match: { params: { id } }, location, history } = props;
