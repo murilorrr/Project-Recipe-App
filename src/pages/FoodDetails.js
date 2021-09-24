@@ -10,7 +10,7 @@ function FoodDetails(props) {
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
-  const [recomendation, setRecomendation] = useState([]);
+  const [recomendation, setRecomendation] = useState([{}]);
   const [item, setItem] = useState([]);
 
   const fetchById = async (idLocation) => {

@@ -8,7 +8,7 @@ function ShareButton(props) {
 
   const onclick = () => {
     copy(pathname);
-    alert('link copiado');
+    global.alert('link copiado');
   };
   return (
     <button
