@@ -1,6 +1,6 @@
 export { default as DrinkDetails } from './DrinkDetails';
 export { default as Drinks } from './Drinks';
-export { default as Explore } from './Explore';
+export { default as Explorar } from './Explore';
 export { default as ExploreDrink } from './ExploreDrink';
 export { default as ExploreDrinkIngred } from './ExploreDrinkIngred';
 export { default as ExploreFood } from './ExploreFood';

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import Input from '../components/loginInput';
-import Button from '../components/buttonInput';
+import TextInput from '../components/textInputs';
+import Input from '../components/buttons';
 import { saveToken, saveEmail } from '../localStorage/localStorageSaves';
 
 function Login(props) {
@@ -41,20 +41,20 @@ function Login(props) {
 
   return (
     <div>
-      <Input
+      <TextInput
         name="email"
         value={ Email }
-        type="text"
+        onChange={ handleChange }
+      />
+      <TextInput
+        name="password"
+        value={ password }
         onChange={ handleChange }
       />
       <Input
-        name="password"
-        value={ password }
+        name="Entrar"
+        value={ lockInput }
         type="password"
-        onChange={ handleChange }
-      />
-      <Button
-        disabled={ lockInput }
         onClick={ onClick }
       />
     </div>);
