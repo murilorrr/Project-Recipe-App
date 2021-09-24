@@ -13,7 +13,7 @@ function ComidasDetails(props) {
   const [recomendation, setRecomendation] = useState([]);
   const [item, setItem] = useState({});
 
-  const link = item.strYoutube.split(/v=/i);
+  // const link = item.strYoutube.split(/v=/i);
   const [favoriteHeart, setFavoriteHeart] = useState(false);
 
   const fetchById = async (param, idLocation) => {
@@ -39,7 +39,7 @@ function ComidasDetails(props) {
   useEffect(() => {
     fetchById(isFood, id);
     fetchFoodOrDrinkRecomendations(isFood);
-  }, [isFood, id]);
+  }, []);
 
   const startRecipe = () => {
     console.log('clicou');
@@ -96,7 +96,7 @@ function ComidasDetails(props) {
         </p>
       </div>
       <div className="video">
-        <iframe width="748" height="421" src={ `https://www.youtube.com/embed/${link[1]}` } title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        {/* <iframe width="748" height="421" src={ `https://www.youtube.com/embed/${link[1]}` } title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> */}
       </div>
       <h3>Recomendadas</h3>
       <CarrouselRecomendations recomendation={ recomendation } />
