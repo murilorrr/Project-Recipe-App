@@ -1,21 +1,15 @@
-import NotFound from './NotFound';
-import Comidas from './Comidas';
-import Bebidas from './Bebidas';
-import BebidasDetails from './BebidasDetails';
-import ComidasDetails from './ComidasDetails';
-import Explorar from './Explore';
-import Login from './Login';
-import RecipeFoods from './RecipeFoods';
-import ExplorarComidasOuBebidas from './ExploreFoodOrDrink';
-
-export {
-  NotFound,
-  Comidas,
-  Bebidas,
-  Login,
-  BebidasDetails,
-  ComidasDetails,
-  RecipeFoods,
-  Explorar,
-  ExplorarComidasOuBebidas,
-};
+export { default as DrinkDetails } from './DrinkDetails';
+export { default as Drinks } from './Drinks';
+export { default as Explorar } from './Explore';
+export { default as ExploreDrink } from './ExploreDrink';
+export { default as ExploreDrinkIngred } from './ExploreDrinkIngred';
+export { default as ExploreFood } from './ExploreFood';
+export { default as ExploreFoodIngred } from './ExploreFoodIngred';
+export { default as FavoriteRecipes } from './FavoriteRecipes';
+export { default as FoodDetails } from './FoodDetails';
+export { default as Foods } from './Foods';
+export { default as Login } from './Login';
+export { default as NotFound } from './NotFound';
+export { default as OriginFood } from './OriginFood';
+export { default as Profile } from './Profile';
+export { default as RecipesMade } from './RecipesMade';

@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Redirect, generatePath } from 'react-router'
+import { generatePath } from 'react-router'
 import Input from '../components/buttons';
+import { useHistory } from "react-router-dom";
 
-function ExplorarComidasOuBebidas(props) {
-  const { history } = props;
+function ExploreFoodsOrDrinks(props) {
+  const history = useHistory()
 
   const getCorrectFetch = (param, name) => {
     let getUrl;
@@ -63,10 +64,10 @@ function ExplorarComidasOuBebidas(props) {
   );
 }
 
-ExplorarComidasOuBebidas.propTypes = {
+ExploreFoodsOrDrinks.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
 }.isRequired;
 
-export default ExplorarComidasOuBebidas;
+export default ExploreFoodsOrDrinks;
