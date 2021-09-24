@@ -16,13 +16,11 @@ function DrinkDetails(props) {
   const fetchById = async (idLocation) => {
     const response = (await (await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).drinks;
     setItem(response);
-    console.log('Response by ID');
   };
 
   const fetchFoodOrDrinkRecomendations = async () => {
     const response = (await (await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')).json()).meals;
     setRecomendation(response);
-    console.log('Response for recomendations');
   };
 
   useEffect(() => {
@@ -35,7 +33,7 @@ function DrinkDetails(props) {
 
   const startRecipe = () => {
     console.log('clicou');
-    return history.push(`/bebidas/${id}/progress`);
+    return history.push(`/bebidas/${id}/in-progress`);
   };
 
   const getValuesInObject = (obj, value) => {
@@ -49,7 +47,6 @@ function DrinkDetails(props) {
   };
 
   if (item.length === 0) return (<Loading />);
-  console.log(item);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
   const ingredients = getValuesInObject(item[0], 'strIngredient');

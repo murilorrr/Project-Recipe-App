@@ -16,13 +16,11 @@ function FoodDetails(props) {
   const fetchById = async (idLocation) => {
     const response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).meals;
     setItem(response);
-    console.log('Response by ID');
   };
 
   const fetchFoodOrDrinkRecomendations = async () => {
     const response = (await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')).json()).drinks;
     setRecomendation(response);
-    console.log('Response for recomendations');
   };
 
   useEffect(() => {
@@ -35,7 +33,7 @@ function FoodDetails(props) {
 
   const startRecipe = () => {
     console.log('clicou');
-    return history.push(`/comidas/${id}/progress`);
+    return history.push(`/comidas/${id}/in-progress`);
   };
 
   const getValuesInObject = (obj, value) => {
@@ -49,13 +47,11 @@ function FoodDetails(props) {
   };
 
   if (item.length === 0) return (<Loading />);
-  console.log(item);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
   const ingredients = getValuesInObject(item[0], 'strIngredient');
   const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
   const link = (strYoutube.split(/v=/i));
-  console.log(link[1]);
 
   return (
     <div>
@@ -95,13 +91,14 @@ function FoodDetails(props) {
         </p>
       </div>
       <div className="video">
-        <iframe data-testid="video" width="748" height="421" src="https://www.youtube.com/embed/rp8Slv4INLk}" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        <iframe data-testid="video" width="748" height="421" src={ `https://www.youtube.com/embed/${link[1]}` } title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
       </div>
       <h3>Recomendadas</h3>
-      <CarrouselRecomendations recomendation={ recomendation } />
+      <CarrouselRecomendations recomendation={ recomendation } drink />
       <div>
         <button
           type="button"
+          style={ { position: 'fixed', bottom: '0' } }
           onClick={ () => startRecipe() }
           data-testid="start-recipe-btn"
         >

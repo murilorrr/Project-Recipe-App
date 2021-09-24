@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function CarrouselRecomendations(props) {
-  const { recomendation: listofObjects } = props;
+  const { recomendation: listofObjects, drink } = props;
   const maxLength = 6;
-  if (listofObjects.strDrinkThumb) {
+  if (drink) {
     return (
       <div
         style={ { display: 'flex',
@@ -57,7 +57,7 @@ function CarrouselRecomendations(props) {
             >
               <img alt={ strMeal } width="100px" src={ strMealThumb } />
               <h4>{strCategory}</h4>
-              <h3>{strMeal}</h3>
+              <h3 data-testid={ `${index}-recomendation-title` }>{strMeal}</h3>
             </div>
           ) : null
         ))
@@ -68,6 +68,11 @@ function CarrouselRecomendations(props) {
 
 CarrouselRecomendations.propTypes = {
   recomendation: PropTypes.objectOf().isRequired,
+  drink: PropTypes.bool,
+};
+
+CarrouselRecomendations.defaultProps = {
+  drink: false,
 };
 
 export default CarrouselRecomendations;
