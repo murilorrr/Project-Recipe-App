@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { generatePath } from 'react-router'
+import { generatePath } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import Input from '../components/buttons';
-import { useHistory } from "react-router-dom";
 
-function ExploreFoodsOrDrinks(props) {
-  const history = useHistory()
+function ExploreFoodsOrDrinks() {
+  const history = useHistory();
 
   const getCorrectFetch = (param, name) => {
     let getUrl;
@@ -25,17 +25,17 @@ function ExploreFoodsOrDrinks(props) {
   const generatePathFactory = (response, type) => {
     const obj1 = Object.keys(response)[0];
     const obj2 = (response[obj1])[0];
-    const obj3 = (Object.keys(obj2)[0])
+    const obj3 = (Object.keys(obj2)[0]);
     const path = generatePath(`/${type}/:id/`, { id: obj2[obj3] });
     return path;
-  }
+  };
 
   const randonFetch = async (param, param1) => {
     const [type] = param1;
     const randomFetch = await fetch(`https://www.${param}.com/api/json/v1/1/random.php`);
     const response = await randomFetch.json();
-    const path = generatePathFactory(response, type)
-    history.replace(path)
+    const path = generatePathFactory(response, type);
+    history.replace(path);
   };
 
   const changeRoute = (foodOrDrink, name) => {
