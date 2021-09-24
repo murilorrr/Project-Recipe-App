@@ -7,17 +7,22 @@ import { Bebidas,
   ComidasDetails,
   Login,
   NotFound,
-  RecipeFoods } from './pages';
+  RecipeFoods,
+  ExplorarComidasOuBebidas,
+  Explorar } from './pages';
 
 function App() {
   return (
     <Switch>
       <Route path="/comidas/:id" component={ ComidasDetails } />
       <Route path="/bebidas/:id" component={ BebidasDetails } />
+      <Route path="/explorar/comidas" component={ ExplorarComidasOuBebidas } />
+      <Route path="/explorar/bebidas" component={ ExplorarComidasOuBebidas } />
+      <Route path="/explorar" component={ Explorar } />
       <Route path="/comidas" component={ RecipeFoods } />
       <Route path="/bebidas" component={ Bebidas } />
-      <Route path="*" component={ NotFound } />
       <Route exact path="/" component={ Login } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }
