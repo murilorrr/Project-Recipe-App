@@ -5,7 +5,7 @@ import './App.css';
 import {
   DrinkDetails,
   Drinks,
-  Explore,
+  Explorar,
   ExploreDrink,
   ExploreDrinkIngred,
   ExploreFood,
@@ -38,7 +38,7 @@ function App() {
       />
       <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
-      <Route exact path="/explorar" component={ Explore } />
+      <Route exact path="/explorar" component={ Explorar } />
       <Route exact path="/perfil" component={ Profile } />
       <Route exact path="/comidas/:id" component={ FoodDetails } />
       <Route exact path="/bebidas/:id" component={ DrinkDetails } />
