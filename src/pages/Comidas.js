@@ -1,8 +1,9 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
 function Comidas() {
   return (
-    <div>In Development</div>
+    <Footer />
   );
 }
 

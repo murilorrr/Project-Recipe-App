@@ -16,8 +16,8 @@ function App() {
       <Route path="/bebidas/:id" component={ BebidasDetails } />
       <Route path="/comidas" component={ RecipeFoods } />
       <Route path="/bebidas" component={ Bebidas } />
-      <Route path="*" component={ NotFound } />
       <Route exact path="/" component={ Login } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }
