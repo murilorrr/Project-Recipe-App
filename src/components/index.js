@@ -8,3 +8,4 @@ export { default as loginInput } from './loginInput';
 export { default as MiniCard } from './MiniCard';
 export { default as SearchBarHeader } from './SearchBarHeader';
 export { default as Loading } from './Loading';
+export { default as StartRecipe } from './StartRecipe';

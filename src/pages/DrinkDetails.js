@@ -2,12 +2,12 @@
 /* eslint-disable no-useless-escape */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading } from '../components';
+import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading, StartRecipe } from '../components';
 
 // import Context from '../contextAPI/Context';
 
 function DrinkDetails(props) {
-  const { history, match: { params: { id } } } = props;
+  const { match: { params: { id } } } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [recomendation, setRecomendation] = useState([]);
@@ -30,11 +30,6 @@ function DrinkDetails(props) {
     };
     fetchAndSet();
   }, [id]);
-
-  const startRecipe = () => {
-    console.log('clicou');
-    return history.push(`/bebidas/${id}/in-progress`);
-  };
 
   const getValuesInObject = (obj, value) => {
     const lista = [];
@@ -94,27 +89,12 @@ function DrinkDetails(props) {
       </div>
       <h3>Recomendados</h3>
       <CarrouselRecomendations recomendation={ recomendation } />
-      <div>
-        <button
-          type="button"
-          style={ { position: 'fixed', bottom: '0' } }
-          onClick={ () => startRecipe() }
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-        </button>
-      </div>
+      <StartRecipe id={ id } />
     </div>
   );
 }
 
 DrinkDetails.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
