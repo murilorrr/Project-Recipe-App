@@ -1,10 +1,10 @@
 import React from 'react';
 import Footer from '../components/Footer';
 
-function Bebidas() {
+function DrinkDetails() {
   return (
     <Footer />
   );
 }
 
-export default Bebidas;
+export default DrinkDetails;
