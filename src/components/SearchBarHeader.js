@@ -5,7 +5,6 @@ import loadingIcon from '../images/searchLoanding.svg';
 
 const optionsDefault = {
   checkRadio: '',
-  input: 'a',
   pageName: '',
   listThecocktailOrThemeal: [],
   loading: true,
@@ -31,6 +30,9 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
       loading: true },
   );
 
+  if (!themealdb.meals) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
   return themealdb;
 };
 
@@ -38,13 +40,18 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
   const themealdbEndPoint = {
-    ingredient_search: `https:/www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`,
+    ingredient_search: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`,
     first_letter_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${input}`,
   };
 
   const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  await setOptions(
+  if (!thecocktaildb.drinks) {
+    return global.alert(
+      'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+    );
+  }
+  setOptions(
     { ...options,
       listThecocktailOrThemeal:
       thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [],
@@ -61,10 +68,13 @@ export default function SearchBarHeader() {
   const [options, setOptions] = useState({ ...optionsDefault, pageName });
 
   const handleClick = () => {
-    const { checkRadio, input } = options;
+    const { checkRadio } = options;
+    const input = document.getElementById('search-input').value;
     setOptions({ ...options, loading: false });
+
     if (input.length > 1 && checkRadio === 'first_letter_search') {
-      return global.alert('Digite Apenas uma Lentra!!!');
+      setOptions({ ...options, loading: true });
+      return global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
 
     if (pageName === '/comidas') {
@@ -76,8 +86,18 @@ export default function SearchBarHeader() {
     }
   };
 
+  const IsIdMealOrDrink = () => options.listThecocktailOrThemeal[0].idMeal
+  || options.listThecocktailOrThemeal[0].idDrink;
   return (
     <>
+      <div>
+        <input
+          data-testid="search-input"
+          id="search-input"
+          type="text"
+          placeholder="digite aqui"
+        />
+      </div>
       <label htmlFor="ingredient-search-radio">
         <input
           type="radio"
@@ -116,7 +136,7 @@ export default function SearchBarHeader() {
         Buscar
       </button>
       {options.listThecocktailOrThemeal.length === 1
-        ? <Redirect to={ `/${options.listThecocktailOrThemeal[0].idMeal}` } />
+        ? <Redirect to={ `${p}/${IsIdMealOrDrink()}` } />
         : options.listThecocktailOrThemeal
           .map((item, i) => (<MiniCard key={ i } args={ { ...item, i, p } } />))}
       <div>{options.loading || <img src={ loadingIcon } alt="loading icone" />}</div>

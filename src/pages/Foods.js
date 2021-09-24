@@ -1,12 +1,10 @@
 import React from 'react';
-import HeaderFood from '../components/HeaderFood';
-import SearchBarHeader from '../components/SearchBarHeader';
+import HeaderSearch from '../components/HeaderSearch';
 
 function Foods() {
   return (
     <div>
-      <HeaderFood />
-      <SearchBarHeader />
+      <HeaderSearch word="Comidas" />
     </div>
   );
 }

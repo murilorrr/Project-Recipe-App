@@ -6,19 +6,18 @@ export default function MiniCard({ args }) {
   const { i: index = '', p } = args;
   return (
     <Link to={ `${p}/${args.idMeal || args.idDrink}` }>
-      <section data-testid={ `${index}-recipe-card` }>
-        <section>
+      <section>
+        <section data-testid={ `${index}-recipe-card` }>
           <img
             Style="width:250px"
             src={ args.strMealThumb || args.strDrinkThumb }
             alt={ args.strMeal }
-            data-testid={ `${args.index}-card-img` }
+            data-testid={ `${index}-card-img` }
           />
           <h3
-            data-testid={ `${args.index}-card-name` }
+            data-testid={ `${index}-card-name` }
           >
             {args.strMeal || args.strDrink }
-
           </h3>
         </section>
       </section>
