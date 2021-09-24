@@ -14,6 +14,7 @@ function FavoriteButton(props) {
     <button
       type="button"
       style={ style }
+      data-testid="favorite-btn"
       onClick={ () => setFavoriteHeart(!favoriteHeartState) }
     >
       ICON

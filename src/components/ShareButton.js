@@ -2,7 +2,10 @@ import React from 'react';
 
 function ShareButton() {
   return (
-    <button type="button">
+    <button
+      data-testid="share-btn"
+      type="button"
+    >
       Share
     </button>
   );

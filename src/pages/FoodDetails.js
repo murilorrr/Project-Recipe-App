@@ -2,48 +2,40 @@
 /* eslint-disable no-useless-escape */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton, CarrouselRecomendations, ShareButton } from '../components';
+import { FavoriteButton, CarrouselRecomendations, ShareButton, Loading } from '../components';
 
 // import Context from '../contextAPI/Context';
 
 function FoodDetails(props) {
-  const { history: { location: { pathname } }, history, match: { params: { id } } } = props;
-  const isFood = pathname.includes('comidas');
+  const { history, match: { params: { id } } } = props;
 
-  const [recomendation, setRecomendation] = useState([]);
-  const [item, setItem] = useState({});
-
-  // const link = item.strYoutube.split(/v=/i);
   const [favoriteHeart, setFavoriteHeart] = useState(false);
+  const [recomendation, setRecomendation] = useState([]);
+  const [item, setItem] = useState([]);
 
-  const fetchById = async (param, idLocation) => {
-    let response;
-    if (param) {
-      response = (await (await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).drinks;
-    } else {
-      response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).meals;
-    }
+  const fetchById = async (idLocation) => {
+    const response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).meals;
     setItem(response);
+    console.log('Response by ID');
   };
 
-  const fetchFoodOrDrinkRecomendations = async (param) => {
-    let response;
-    if (param) {
-      response = (await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')).json()).drinks;
-    } else {
-      response = (await (await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')).json()).meals;
-    }
+  const fetchFoodOrDrinkRecomendations = async () => {
+    const response = (await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')).json()).drinks;
     setRecomendation(response);
+    console.log('Response for recomendations');
   };
 
   useEffect(() => {
-    fetchById(isFood, id);
-    fetchFoodOrDrinkRecomendations(isFood);
-  }, []);
+    const fetchAndSet = async () => {
+      await fetchById(id);
+      await fetchFoodOrDrinkRecomendations();
+    };
+    fetchAndSet();
+  }, [id]);
 
   const startRecipe = () => {
     console.log('clicou');
-    return history.push('/comidas/1/progress');
+    return history.push(`/comidas/${id}/progress`);
   };
 
   const getValuesInObject = (obj, value) => {
@@ -55,21 +47,28 @@ function FoodDetails(props) {
     });
     return lista;
   };
-  const ingredients = getValuesInObject(item, 'strIngredient');
-  const ingredientsMeansure = getValuesInObject(item, 'strMeasure');
+
+  if (item.length === 0) return (<Loading />);
+  console.log(item);
+  const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
+
+  const ingredients = getValuesInObject(item[0], 'strIngredient');
+  const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
+  const link = (strYoutube.split(/v=/i));
+  console.log(link[1]);
 
   return (
     <div>
       <div className="Image-Meal">
-        {/* <img data-testid="recipe-photo" src={ item.strMealThumb } alt="recipe" /> REFATORAR PARA DRINK */}
+        <img width="200px" data-testid="recipe-photo" src={ strMealThumb } alt="recipe" />
       </div>
       <div className="info-share-favorites">
         <div className="info">
           <h1 data-testid="recipe-title" className="title">
-            {/* {item.strMeal}REFATORAR PARA DRINK */}
+            {strMeal}
           </h1>
           <h2 data-testid="recipe-category" className="category">
-            {item.strCategory}
+            {strCategory}
           </h2>
         </div>
       </div>
@@ -83,7 +82,7 @@ function FoodDetails(props) {
       <div className="ingredients">
         <ul>
           {ingredients.map((ingredient, index) => (
-            <li key={ ingredient } data-testid="">
+            <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
               <span>{ingredient}</span>
               <span>{ingredientsMeansure[index]}</span>
             </li>
@@ -92,11 +91,11 @@ function FoodDetails(props) {
       </div>
       <div className="instructions">
         <p data-testid="instructions">
-          {item.strInstructions}
+          {strInstructions}
         </p>
       </div>
       <div className="video">
-        {/* <iframe width="748" height="421" src={ `https://www.youtube.com/embed/${link[1]}` } title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> */}
+        <iframe data-testid="video" width="748" height="421" src="https://www.youtube.com/embed/rp8Slv4INLk}" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
       </div>
       <h3>Recomendadas</h3>
       <CarrouselRecomendations recomendation={ recomendation } />
