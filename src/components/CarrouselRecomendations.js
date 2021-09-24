@@ -6,13 +6,21 @@ function CarrouselRecomendations(props) {
   const maxLength = 6;
   if (listofObjects.strDrinkThumb) {
     return (
-      <div style={ { display: 'flex' } } className="carousel-recomentations">
+      <div
+        style={ { display: 'flex',
+          overflowX: 'scroll' } }
+        className="carousel-recomentations"
+      >
         {
           listofObjects.map(({
             strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
             index < maxLength ? (
               <div
-                style={ { borderRadius: '5px', backgroundColor: 'grey', margin: '4px' } }
+                style={ {
+                  borderRadius: '5px',
+                  backgroundColor: 'grey',
+                  margin: '4px',
+                  minWidth: '50vw' } }
                 key={ strDrink }
                 data-testid={ `${index}-recomendation-card` }
                 id={ idDrink }
@@ -28,13 +36,21 @@ function CarrouselRecomendations(props) {
     );
   }
   return (
-    <div style={ { display: 'flex' } } className="carousel-recomentations">
+    <div
+      style={ { display: 'flex',
+        overflowX: 'scroll' } }
+      className="carousel-recomentations"
+    >
       {
         listofObjects.map(({
           strMeal, strMealThumb, strCategory, idMeal }, index) => (
           index < maxLength ? (
             <div
-              style={ { borderRadius: '5px', backgroundColor: 'grey', margin: '4px' } }
+              style={ {
+                borderRadius: '5px',
+                backgroundColor: 'grey',
+                margin: '4px',
+                minWidth: '50%' } }
               key={ strMeal }
               data-testid={ `${index}-recomendation-card` }
               id={ idMeal }
