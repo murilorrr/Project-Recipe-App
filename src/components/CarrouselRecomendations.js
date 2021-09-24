@@ -68,7 +68,7 @@ function CarrouselRecomendations(props) {
 
 CarrouselRecomendations.propTypes = {
   recomendation: PropTypes.arrayOf(
-    PropTypes.objectOf(),
+    PropTypes.object,
   ).isRequired,
   drink: PropTypes.bool,
 };
