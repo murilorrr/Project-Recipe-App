@@ -1,12 +1,12 @@
 import React from 'react';
 import HeaderDrink from '../components/HeaderSearch';
 
-function Drinks() {
+function OriginFood() {
   return (
     <div>
-      <HeaderDrink word="Bebidas" />
+      <HeaderDrink word="Explorar Origem" />
     </div>
   );
 }
 
-export default Drinks;
+export default OriginFood;

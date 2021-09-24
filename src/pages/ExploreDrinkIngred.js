@@ -1,12 +1,12 @@
 import React from 'react';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
-function Profile() {
+function ExploreDrinkIngred() {
   return (
     <div>
-      <HeaderNoSearch word="Perfil" />
+      <HeaderNoSearch word="Explorar Ingredientes" />
     </div>
   );
 }
 
-export default Profile;
+export default ExploreDrinkIngred;

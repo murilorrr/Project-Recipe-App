@@ -6,7 +6,7 @@ import { FavoriteButton, CarrouselRecomendations, ShareButton } from '../compone
 
 // import Context from '../contextAPI/Context';
 
-function ComidasDetails(props) {
+function FoodDetails(props) {
   const { history: { location: { pathname } }, history, match: { params: { id } } } = props;
   const isFood = pathname.includes('comidas');
 
@@ -113,7 +113,7 @@ function ComidasDetails(props) {
   );
 }
 
-ComidasDetails.propTypes = {
+FoodDetails.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     location: PropTypes.shape({
@@ -127,4 +127,4 @@ ComidasDetails.propTypes = {
   }).isRequired,
 };
 
-export default ComidasDetails;
+export default FoodDetails;
