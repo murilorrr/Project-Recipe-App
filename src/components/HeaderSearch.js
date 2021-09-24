@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBarHeader from './SearchBarHeader';
 
 function HeaderSearch(props) {
   const { word } = props;
@@ -31,7 +32,7 @@ function HeaderSearch(props) {
       </button>
       {
         searchButton
-          ? <input data-testid="search-input" type="text" placeholder="digite aqui" />
+          ? <SearchBarHeader />
           : null
       }
     </header>
