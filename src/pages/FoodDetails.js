@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FavoriteButton, CarrouselRecomendations,
   ShareButton, Loading, StartRecipe } from '../components';
+import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
+import Ingredients from '../components/ComponentsRefeições/Ingredients';
+import Instruction from '../components/ComponentsRefeições/Instruction';
+import Video from '../components/ComponentsRefeições/Video';
 
 function FoodDetails(props) {
   const { match: { params: { id } }, location, history } = props;
@@ -28,62 +32,27 @@ function FoodDetails(props) {
     fetchAndSet();
   }, [id]);
 
-  const getValuesInObject = (obj, value) => {
-    const lista = [];
-    Object.keys(obj).forEach((key) => {
-      if (key.includes(value) && obj[key] !== '' && obj[key] !== null) {
-        lista.push(obj[key]);
-      }
-    });
-    return lista;
-  };
-
   if (item.length === 0) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
-  const ingredients = getValuesInObject(item[0], 'strIngredient');
-  const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
-  const link = (strYoutube.split(/v=/i));
 
   return (
     <div>
-      <div className="Image-Meal">
-        <img width="200px" data-testid="recipe-photo" src={ strMealThumb } alt="recipe" />
-      </div>
-      <div className="info-share-favorites">
-        <div className="info">
-          <h1 data-testid="recipe-title" className="title">
-            {strMeal}
-          </h1>
-          <h2 data-testid="recipe-category" className="category">
-            {strCategory}
-          </h2>
-        </div>
-      </div>
+      <HeaderRecipes strMeal={strMeal} strMealThumb={strMealThumb} strCategory={strCategory} />
       <div className="options">
         <ShareButton location={ location } />
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
+          item={ item }
         />
       </div>
-      <div className="ingredients">
-        <ul>
-          {ingredients.map((ingredient, index) => (
-            <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-              <span>{ingredient}</span>
-              <span>{ingredientsMeansure[index]}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Ingredients item={item} />
       <div className="instructions">
-        <p data-testid="instructions">
-          {strInstructions}
-        </p>
+        <Instruction strInstructions={strInstructions} />
       </div>
       <div className="video">
-        <iframe data-testid="video" width="748" height="421" src={ `https://www.youtube.com/embed/${link[1]}` } title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        <Video strYoutube={strYoutube}/>
       </div>
       <h3>Recomendadas</h3>
       <CarrouselRecomendations recomendation={ recomendation } drink />

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function FavoriteButton(props) {
-  const { setFavoriteHeart, favoriteHeartState } = props;
+  const { setFavoriteHeart, favoriteHeartState, item } = props;
+  console.log(item[0]);
   const style = {};
   if (favoriteHeartState) {
     style.backgroundColor = 'red';
@@ -10,12 +11,35 @@ function FavoriteButton(props) {
     style.backgroundColor = 'grey';
   }
 
+  const onClick = () => {
+    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    const favoritar = () => {
+      const resultFilter = localStorageItems
+        .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(resultFilter));
+      setFavoriteHeart(!favoriteHeartState);
+    }
+
+    const desfavoritar = () => {
+      localStorageItems.push(...item);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageItems));
+      setFavoriteHeart(!favoriteHeartState);
+    }
+
+    if (favoriteHeartState) {
+      favoritar();
+    } else {
+      desfavoritar();
+    }
+  }
+
   return (
     <button
       type="button"
       style={ style }
       data-testid="favorite-btn"
-      onClick={ () => setFavoriteHeart(!favoriteHeartState) }
+      onClick={ onClick }
     >
       Favorite
 
