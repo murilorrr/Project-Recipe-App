@@ -43,12 +43,12 @@ function FoodDetails(props) {
         subtitle={ strCategory }
       />
       <div className="options">
-        <ShareButton location={ location } />
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
           item={ item }
         />
+        <ShareButton location={ location } />
       </div>
       <Ingredients item={ item } />
       <div className="instructions">
