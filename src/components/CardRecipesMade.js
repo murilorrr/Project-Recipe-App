@@ -12,7 +12,7 @@ function CardRecipesMade({ args }) {
         <img
           className="card-recipes-made-thumb"
           src={ args.strMealThumb || args.strDrinkThumb }
-          alt=""
+          alt={ args.strMeal || args.strDrink }
           data-testid={ `${index}-horizontal-image` }
         />
       </div>
@@ -27,7 +27,7 @@ function CardRecipesMade({ args }) {
           data-testid={ `${index}-horizontal-name` }
           className="card-recipes-made-title"
         >
-          {args.strMeal || args.strDrink }
+          { args.strMeal || args.strDrink }
 
         </div>
         <div
@@ -38,10 +38,10 @@ function CardRecipesMade({ args }) {
 
         </div>
         {args.strTags.split(',')
-          .map((tagName) => (
+          .map((tagName, i) => (
             <span
-              key={ index }
-              data-testid={ `${index}-${tagName}-horizontal-tag` }
+              key={ i }
+              data-testid={ `${i}-${tagName}-horizontal-tag` }
               className="card-recipes-made-tags"
             >
               {tagName}
@@ -61,7 +61,7 @@ function CardRecipesMade({ args }) {
 
 CardRecipesMade.propTypes = {
   args: PropTypes.shape({
-    index: PropTypes.string,
+    index: PropTypes.number,
     pageName: PropTypes.string,
     strCategory: PropTypes.string,
     strDrink: PropTypes.string,

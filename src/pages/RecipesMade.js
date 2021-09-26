@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CardRecipesMade } from '../components';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
@@ -114,18 +114,33 @@ const drink = {
   dateModified: '2017-09-02 18:37:54',
 
 };
+
+const listaDeReceitasFeitas = [meal, drink, meal, drink, meal, drink];
+
+const filterFood = (value, FoodType) => {
+  const list = Object.keys(value);
+  if (list.includes(FoodType)) return true;
+  if (FoodType === 'all') return true;
+  return false;
+};
+
 function RecipesMade() {
+  const [FoodType, setFilterFood] = useState('idDrink');
   return (
     <div>
-      <HeaderNoSearch word="Receitas Feits" />
+      <HeaderNoSearch word="Receitas Feitas" />
       <div>
         <button type="button" data-testid="filter-by-all-btn">All</button>
         <button type="button" data-testid="filter-by-food-btn">Foods</button>
         <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
       </div>
       <div>
-        <CardRecipesMade args={ { ...meal } } />
-        <CardRecipesMade args={ { ...drink } } />
+        {listaDeReceitasFeitas
+          .filter((item) => filterFood(item, FoodType))
+          .map((receita, index) => (<CardRecipesMade
+            key={ receita.idDrink || receita.idMeal }
+            args={ { ...receita, index } }
+          />))}
       </div>
     </div>
   );
