@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import shareicon from '../images/shareIcon.svg';
 import './CardRecipesMade.css';
 
 function CardRecipesMade({ args }) {
   const { index } = args;
+  const pageName = args.idMeal ? '/comidas' : '/bebidas';
   return (
     <div className="card-recipes-made-container">
       <div>
-        <img
-          className="card-recipes-made-thumb"
-          src={ args.strMealThumb || args.strDrinkThumb }
-          alt={ args.strMeal || args.strDrink }
-          data-testid={ `${index}-horizontal-image` }
-        />
+        <Link to={ `${pageName}/${args.idMeal || args.idDrink}` }>
+          <img
+            className="card-recipes-made-thumb"
+            src={ args.strMealThumb || args.strDrinkThumb }
+            alt={ args.strMeal || args.strDrink }
+            data-testid={ `${index}-horizontal-image` }
+          />
+        </Link>
       </div>
       <div>
         <div
@@ -26,8 +31,9 @@ function CardRecipesMade({ args }) {
           data-testid={ `${index}-horizontal-name` }
           className="card-recipes-made-title"
         >
-          { args.strMeal || args.strDrink }
-
+          <Link to={ `${pageName}/${args.idMeal || args.idDrink}` }>
+            { args.strMeal || args.strDrink }
+          </Link>
         </div>
         <div
           data-testid={ `${index}-horizontal-done-date` }
@@ -60,6 +66,8 @@ function CardRecipesMade({ args }) {
 
 CardRecipesMade.propTypes = {
   args: PropTypes.shape({
+    idDrink: PropTypes.string,
+    idMeal: PropTypes.string,
     index: PropTypes.number,
     pageName: PropTypes.string,
     strCategory: PropTypes.string,
