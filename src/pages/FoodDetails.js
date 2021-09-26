@@ -42,7 +42,7 @@ function FoodDetails(props) {
         img={ strMealThumb }
         subtitle={ strCategory }
       />
-      <div className="options">
+      <div className="options" style={ { display: 'flex' } }>
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }

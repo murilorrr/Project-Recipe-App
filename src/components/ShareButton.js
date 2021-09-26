@@ -8,8 +8,10 @@ function ShareButton(props) {
   const [feedback, setFeedback] = useState(false);
 
   const onclick = () => {
-    copy(pathname);
+    copy(`http://localhost:3000${pathname}`);
     setFeedback(!feedback);
+    const timeout = 1000;
+    setTimeout(() => setFeedback(false), timeout);
   };
   return (
     <>

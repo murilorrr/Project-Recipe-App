@@ -41,7 +41,7 @@ function DrinkDetails(props) {
         img={ strDrinkThumb }
         subtitle={ strAlcoholic }
       />
-      <div className="options">
+      <div className="options" style={ { display: 'flex' } }>
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
