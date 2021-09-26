@@ -4,8 +4,7 @@ import shareicon from '../images/shareIcon.svg';
 import './CardRecipesMade.css';
 
 function CardRecipesMade({ args }) {
-  const { index, pageName } = args;
-  console.log(pageName);
+  const { index } = args;
   return (
     <div className="card-recipes-made-container">
       <div>

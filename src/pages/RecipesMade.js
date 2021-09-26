@@ -115,28 +115,51 @@ const drink = {
 
 };
 
-const listaDeReceitasFeitas = [meal, drink, meal, drink, meal, drink];
+const listaDeReceitasFeitas = [meal, drink];
 
-const filterFood = (value, FoodType) => {
-  const list = Object.keys(value);
+// Essa função serve para filtar a lista de receitas por drink, meal ou se e all
+const filterFood = (receita, FoodType) => {
+  const list = Object.keys(receita);
   if (list.includes(FoodType)) return true;
-  if (FoodType === 'all') return true;
+  if (FoodType === 'All') return true;
   return false;
 };
 
 function RecipesMade() {
-  const [FoodType, setFilterFood] = useState('idDrink');
+  const [FoodType, setFilterFood] = useState('All');
+
   return (
     <div>
       <HeaderNoSearch word="Receitas Feitas" />
       <div>
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Foods</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          onClick={ (e) => setFilterFood(e.target.value) }
+          type="button"
+          value="All"
+          data-testid="filter-by-all-btn"
+        >
+          All
+        </button>
+        <button
+          onClick={ (e) => setFilterFood(e.target.value) }
+          type="button"
+          value="idMeal"
+          data-testid="filter-by-food-btn"
+        >
+          Foods
+        </button>
+        <button
+          onClick={ (e) => setFilterFood(e.target.value) }
+          type="button"
+          value="idDrink"
+          data-testid="filter-by-drink-btn"
+        >
+          Drinks
+        </button>
       </div>
       <div>
         {listaDeReceitasFeitas
-          .filter((item) => filterFood(item, FoodType))
+          .filter((receita) => filterFood(receita, FoodType))
           .map((receita, index) => (<CardRecipesMade
             key={ receita.idDrink || receita.idMeal }
             args={ { ...receita, index } }
