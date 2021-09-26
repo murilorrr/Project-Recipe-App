@@ -28,23 +28,12 @@ export default function MiniCard({ args }) {
 MiniCard.propTypes = {
   args: PropTypes.shape({
     i: PropTypes.number.isRequired,
-    p: PropTypes.string.isRequired,
+    page: PropTypes.string.isRequired,
     idMeal: PropTypes.string,
     idDrink: PropTypes.string,
     strMealThumb: PropTypes.string,
     strDrinkThumb: PropTypes.string,
     strMeal: PropTypes.string,
     strDrink: PropTypes.string,
-  }),
-};
-
-MiniCard.defaultProps = {
-  args: {
-    idDrink: '',
-    idMeal: '',
-    strMealThumb: '',
-    strDrinkThumb: '',
-    strMeal: '',
-    strDrink: '',
-  },
+  }).isRequired,
 };
