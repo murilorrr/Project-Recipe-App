@@ -8,6 +8,6 @@ export function saveEmail(email) {
 }
 
 export function initialRecipesFavorites() {
-  const FavoriteRecipes = '[]';
+  const FavoriteRecipes = [];
   localStorage.setItem('favoriteRecipes', JSON.stringify(FavoriteRecipes));
 }

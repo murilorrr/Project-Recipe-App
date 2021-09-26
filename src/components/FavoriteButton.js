@@ -13,23 +13,23 @@ function FavoriteButton(props) {
   const onClick = () => {
     const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    const favoritar = () => {
+    const desfavoritar = () => {
       const resultFilter = localStorageItems
         .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
       localStorage.setItem('favoriteRecipes', JSON.stringify(resultFilter));
       setFavoriteHeart(!favoriteHeartState);
     };
 
-    const desfavoritar = () => {
+    const favoritar = () => {
       localStorageItems.push(...item);
       localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageItems));
       setFavoriteHeart(!favoriteHeartState);
     };
 
     if (favoriteHeartState) {
-      favoritar();
-    } else {
       desfavoritar();
+    } else {
+      favoritar();
     }
   };
 
