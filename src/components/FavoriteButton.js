@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function FavoriteButton(props) {
   const { setFavoriteHeart, favoriteHeartState, item } = props;
-  console.log(item[0]);
   const style = {};
   if (favoriteHeartState) {
     style.backgroundColor = 'red';
@@ -19,20 +18,20 @@ function FavoriteButton(props) {
         .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
       localStorage.setItem('favoriteRecipes', JSON.stringify(resultFilter));
       setFavoriteHeart(!favoriteHeartState);
-    }
+    };
 
     const desfavoritar = () => {
       localStorageItems.push(...item);
       localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageItems));
       setFavoriteHeart(!favoriteHeartState);
-    }
+    };
 
     if (favoriteHeartState) {
       favoritar();
     } else {
       desfavoritar();
     }
-  }
+  };
 
   return (
     <button
@@ -50,6 +49,9 @@ function FavoriteButton(props) {
 FavoriteButton.propTypes = {
   setFavoriteHeart: PropTypes.func.isRequired,
   favoriteHeartState: PropTypes.bool.isRequired,
+  item: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
 };
 
 export default FavoriteButton;

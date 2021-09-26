@@ -9,7 +9,7 @@ export default function MiniCard({ args }) {
       <section>
         <section data-testid={ `${index}-recipe-card` }>
           <img
-            Style="width:250px"
+            style={ { width: '250px' } }
             src={ args.strMealThumb || args.strDrinkThumb }
             alt={ args.strMeal }
             data-testid={ `${index}-card-img` }
@@ -26,5 +26,25 @@ export default function MiniCard({ args }) {
 }
 
 MiniCard.propTypes = {
-  args: PropTypes.objectOf().isRequired,
+  args: PropTypes.shape({
+    i: PropTypes.number.isRequired,
+    p: PropTypes.string.isRequired,
+    idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
+    strMealThumb: PropTypes.string,
+    strDrinkThumb: PropTypes.string,
+    strMeal: PropTypes.string,
+    strDrink: PropTypes.string,
+  }),
+};
+
+MiniCard.defaultProps = {
+  args: {
+    idDrink: '',
+    idMeal: '',
+    strMealThumb: '',
+    strDrinkThumb: '',
+    strMeal: '',
+    strDrink: '',
+  },
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FavoriteButton, CarrouselRecomendations, ShareButton,
   Loading, StartRecipe } from '../components';
+import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 
 function DrinkDetails(props) {
   const { match: { params: { id } }, location, history } = props;
@@ -46,24 +47,17 @@ function DrinkDetails(props) {
 
   return (
     <div>
-      <div className="Image-Meal">
-        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="recipe" />
-      </div>
-      <div className="info-share-favorites">
-        <div className="info">
-          <h1 data-testid="recipe-title" className="title">
-            {strDrink}
-          </h1>
-          <h2 data-testid="recipe-category" className="category">
-            {strAlcoholic}
-          </h2>
-        </div>
-      </div>
+      <HeaderRecipes
+        title={ strDrink }
+        img={ strDrinkThumb }
+        subtitle={ strAlcoholic }
+      />
       <div className="options">
         <ShareButton location={ location } />
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
+          item={ item }
         />
       </div>
       <div className="ingredients">

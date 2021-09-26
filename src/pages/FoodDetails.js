@@ -35,10 +35,13 @@ function FoodDetails(props) {
   if (item.length === 0) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
-
   return (
     <div>
-      <HeaderRecipes strMeal={strMeal} strMealThumb={strMealThumb} strCategory={strCategory} />
+      <HeaderRecipes
+        title={ strMeal }
+        img={ strMealThumb }
+        subtitle={ strCategory }
+      />
       <div className="options">
         <ShareButton location={ location } />
         <FavoriteButton
@@ -47,12 +50,12 @@ function FoodDetails(props) {
           item={ item }
         />
       </div>
-      <Ingredients item={item} />
+      <Ingredients item={ item } />
       <div className="instructions">
-        <Instruction strInstructions={strInstructions} />
+        <Instruction strInstructions={ strInstructions } />
       </div>
       <div className="video">
-        <Video strYoutube={strYoutube}/>
+        <Video strYoutube={ strYoutube } />
       </div>
       <h3>Recomendadas</h3>
       <CarrouselRecomendations recomendation={ recomendation } drink />
