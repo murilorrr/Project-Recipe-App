@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { CardRecipesMade } from '../components';
-import HeaderNoSearch from '../components/HeaderNoSearch';
+import { CardRecipesMade, HeaderNoSearch } from '../components';
 
 const listaDeReceitasFeitas = [
   {
