@@ -25,6 +25,7 @@ function FoodDetails(props) {
   };
 
   useEffect(() => {
+    console.log('Food Details');
     const fetchAndSet = async () => {
       await fetchById(id);
       await fetchFoodOrDrinkRecomendations();
@@ -37,7 +38,7 @@ function FoodDetails(props) {
       .getItem('inProgressRecipes') === null) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
     }
-  }, [id]);
+  }, [id, recipeInProgress]);
 
   if (item.length === 0) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
