@@ -37,9 +37,9 @@ function FoodDetails(props) {
       .getItem('inProgressRecipes') === null) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
     }
-  }, [id]);
+  }, [id, recipeInProgress]);
 
-  if (item.length === 0) return (<Loading />);
+  if (item.length === 0 || item === null) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
   return (
