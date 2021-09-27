@@ -9,8 +9,6 @@ import Video from '../components/ComponentsRefeições/Video';
 
 function FoodDetails(props) {
   const { match: { params: { id } }, location, history } = props;
-
-  const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [recomendation, setRecomendation] = useState([{}]);
   const [item, setItem] = useState([]);
 
@@ -30,6 +28,9 @@ function FoodDetails(props) {
       await fetchFoodOrDrinkRecomendations();
     };
     fetchAndSet();
+
+    if (localStorage
+      .getItem('favoriteRecipes') !== []) localStorage.setItem('favoriteRecipes', '[]');
   }, [id]);
 
   if (item.length === 0) return (<Loading />);
@@ -44,8 +45,6 @@ function FoodDetails(props) {
       />
       <div className="options" style={ { display: 'flex' } }>
         <FavoriteButton
-          favoriteHeartState={ favoriteHeart }
-          setFavoriteHeart={ setFavoriteHeart }
           item={ item }
         />
         <ShareButton location={ location } />
