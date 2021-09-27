@@ -1,0 +1,17 @@
+.card-recipes-made-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.card-recipes-made-thumb {
+  width: 100px;
+}
+
+.card-recipes-made-share {
+  width: 25px;
+}
+
+.card-recipes-made-tags {
+  margin-right: 5px;
+}

@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import TextInput from '../components/textInputs';
 import Input from '../components/buttons';
-import { saveToken, saveEmail } from '../localStorage/localStorageSaves';
+import { saveToken, saveEmail, initialRecipesFavorites,
+} from '../localStorage/localStorageSaves';
 
 function Login(props) {
   const [Email, setEmail] = useState('');
@@ -34,6 +35,7 @@ function Login(props) {
 
     saveToken('mealsToken');
     saveToken('cocktailsToken');
+    initialRecipesFavorites();
     saveEmail(Email);
 
     history.push('/comidas');
@@ -63,7 +65,7 @@ function Login(props) {
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
-  }),
-}.isRequired;
+  }).isRequired,
+};
 
 export default Login;

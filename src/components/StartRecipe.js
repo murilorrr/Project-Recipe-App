@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 function StartRecipe(props) {
   const { history, id, history: { location: { pathname } } } = props;
+
   const startRecipe = () => {
     console.log('clicou');
     if (pathname.includes('comidas')) return history.push(`/comidas/${id}/in-progress`);

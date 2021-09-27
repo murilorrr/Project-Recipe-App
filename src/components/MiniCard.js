@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../CSS/minicar.css';
 
 export default function MiniCard({ args }) {
-  const { i: index = '', p } = args;
+  const { i: index = '', page } = args;
   return (
-    <Link to={ `${p}/${args.idMeal || args.idDrink}` }>
-      <section>
+    <Link to={ `${page}/${args.idMeal || args.idDrink}` }>
+      <section className="mini-card-food-container">
         <section data-testid={ `${index}-recipe-card` }>
           <img
-            Style="width:250px"
+            style={ { width: '250px' } }
             src={ args.strMealThumb || args.strDrinkThumb }
             alt={ args.strMeal }
             data-testid={ `${index}-card-img` }
@@ -26,5 +27,14 @@ export default function MiniCard({ args }) {
 }
 
 MiniCard.propTypes = {
-  args: PropTypes.objectOf().isRequired,
+  args: PropTypes.shape({
+    i: PropTypes.number.isRequired,
+    page: PropTypes.string.isRequired,
+    idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
+    strMealThumb: PropTypes.string,
+    strDrinkThumb: PropTypes.string,
+    strMeal: PropTypes.string,
+    strDrink: PropTypes.string,
+  }).isRequired,
 };
