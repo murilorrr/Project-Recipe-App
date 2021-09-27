@@ -1,18 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../contextAPI/Context';
 
 function StartRecipe(props) {
   const { history, id, history: { location: { pathname } } } = props;
 
-  const startRecipe = () => {
-    console.log('clicou');
+  const [WasInLocalStorage, SetIfWasInLocalStorage] = useState(false);
+  // uso do context com a chave de receitas em progresso predefinida
+  const { recipeInProgress, setInProgress } = useContext(Context);
+
+  const startRecipe = async () => {
+    console.log(id);
+    // setar um novo recipeInProgress
+    // colocar a receita no local Storage na chave InProgressRecipes
+    // depende do pathname
+    if (pathname.includes('comidas')) {
+      await setInProgress({ ...recipeInProgress, ...recipeInProgress.meals[id] = [] });
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify(recipeInProgress));
+    } else {
+      await setInProgress({ ...recipeInProgress,
+        ...recipeInProgress.cocktails[id] = [] });
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify(recipeInProgress));
+    }
+    if (pathname.includes('comidas')) return history.push(`/comidas/${id}/in-progress`);
+    return history.push(`/bebidas/${id}/in-progress`);
+  };
+
+  const continuousRecipe = () => {
+    // Apenas encaminha para a pagina correta
     if (pathname.includes('comidas')) return history.push(`/comidas/${id}/in-progress`);
     return history.push(`/bebidas/${id}/in-progress`);
   };
 
   const style = { position: 'fixed',
     bottom: '0',
-    width: '300px' };
+    width: '300px',
+  };
+
+  const assertLocalStore = () => {
+    const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
+    const resultFilter = Object.keys(RecipesInLocal)
+      .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));
+    console.log(Object.keys(RecipesInLocal.meals));
+    console.log(resultFilter, 'log do map');
+    resultFilter.forEach((el) => {
+      if (el === true) SetIfWasInLocalStorage(true);
+    });
+  };
+
+  useEffect(() => {
+    // Se a receita ja foi feita, nao deve aparecer iniciar receita
+    // codigo
+    // deve verificar se a receita ja foi iniciada antes, se sim, o texto do botao de start deve ser
+    // continuar receita, senao Iniciar receita
+    assertLocalStore();
+  }, [WasInLocalStorage]);
+  if (WasInLocalStorage) {
+    return (
+      <div className="StartButton">
+        <button
+          type="button"
+          style={ style }
+          onClick={ () => continuousRecipe() }
+          data-testid="start-recipe-btn"
+        >
+          Continuar Receita
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="StartButton">
@@ -28,12 +87,14 @@ function StartRecipe(props) {
   );
 }
 
+// history, id, history: { location: { pathname } } }
+
 StartRecipe.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func,
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }),
+    push: PropTypes.func.isRequired,
   }).isRequired,
   id: PropTypes.string.isRequired,
 };
