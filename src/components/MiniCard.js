@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../CSS/minicar.css';
 
 export default function MiniCard({ args }) {
   const { i: index = '', page } = args;
   return (
     <Link to={ `${page}/${args.idMeal || args.idDrink}` }>
-      <section>
+      <section className="mini-card-food-container">
         <section data-testid={ `${index}-recipe-card` }>
           <img
             style={ { width: '250px' } }
