@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { node } from 'prop-types';
 import Context from './Context';
 
 function appProvider({ children }) {
+  const [listItem, setListItem] = useState([]);
   //
   // FUNCOES E USO ACIMA
   //
@@ -13,6 +14,8 @@ function appProvider({ children }) {
 
   const contextValue = {
     requestAPI,
+    listItem,
+    setListItem,
   };
 
   return (
