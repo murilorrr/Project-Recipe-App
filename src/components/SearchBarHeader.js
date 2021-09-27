@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import MiniCard from './MiniCard';
 import loadingIcon from '../images/searchLoanding.svg';
+import Context from '../contextAPI/Context';
 
 const optionsDefault = {
   checkRadio: '',
@@ -14,7 +15,9 @@ const MAX_INDEX = 12;
 
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
-const themealdbFetch = async (checkRadio, input, options, setOptions) => {
+const themealdbFetch = async (params) => {
+  const { checkRadio, input, options, setOptions, setListItem } = params;
+  console.log(checkRadio, input, options, setOptions);
   const themealdbEndPoint = {
     ingredient_search: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`,
@@ -29,6 +32,7 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
       themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : [],
       loading: true },
   );
+  setListItem(themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : []);
 
   if (!themealdb.meals) {
     global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -38,7 +42,8 @@ const themealdbFetch = async (checkRadio, input, options, setOptions) => {
 
 // Fetch para as Bebidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
-const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
+const thecocktaildbFetch = async (params) => {
+  const { checkRadio, input, options, setOptions, setListItem } = params;
   const themealdbEndPoint = {
     ingredient_search: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`,
@@ -57,13 +62,14 @@ const thecocktaildbFetch = async (checkRadio, input, options, setOptions) => {
       thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [],
       loading: true },
   );
+  setListItem(thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : []);
   return thecocktaildb;
 };
 
 export default function SearchBarHeader() {
   // Pega a Url e assim sei qual e a pagina que estou.
   const pageName = useHistory().location.pathname;
-  const p = pageName;
+  const { setListItem } = useContext(Context);
 
   const [options, setOptions] = useState({ ...optionsDefault, pageName });
 
@@ -78,16 +84,14 @@ export default function SearchBarHeader() {
     }
 
     if (pageName === '/comidas') {
-      return themealdbFetch(checkRadio, input, options, setOptions);
+      return themealdbFetch({ checkRadio, input, options, setOptions, setListItem });
     }
 
     if (pageName === '/bebidas') {
-      return thecocktaildbFetch(checkRadio, input, options, setOptions);
+      return thecocktaildbFetch({ checkRadio, input, options, setOptions, setListItem });
     }
   };
 
-  const IsIdMealOrDrink = () => options.listThecocktailOrThemeal[0].idMeal
-  || options.listThecocktailOrThemeal[0].idDrink;
   return (
     <>
       <div>
@@ -135,11 +139,6 @@ export default function SearchBarHeader() {
       <button type="button" data-testid="exec-search-btn" onClick={ handleClick }>
         Buscar
       </button>
-      {options.listThecocktailOrThemeal.length === 1
-        ? <Redirect to={ `${p}/${IsIdMealOrDrink()}` } />
-        : options.listThecocktailOrThemeal
-          .map((item, i) => (<MiniCard key={ i } args={ { ...item, i, p } } />))}
-      <div>{options.loading || <img src={ loadingIcon } alt="loading icone" />}</div>
     </>
   );
 }
