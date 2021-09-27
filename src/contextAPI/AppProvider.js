@@ -4,6 +4,10 @@ import Context from './Context';
 
 function AppProvider({ children }) {
   const [heartState, setHeartState] = useState(false);
+  const [listItem, setListItem] = useState([]);
+  //
+  // FUNCOES E USO ACIMA
+  //
   const requestAPI = (id) => {
     console.log('request realizada');
     return id;
@@ -21,6 +25,8 @@ function AppProvider({ children }) {
     setHeartState,
     recipeInProgress,
     setInProgress,
+    listItem,
+    setListItem,
   };
 
   return (
