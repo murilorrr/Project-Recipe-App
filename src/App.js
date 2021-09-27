@@ -5,7 +5,7 @@ import './App.css';
 import {
   DrinkDetails,
   Drinks,
-  Explorar,
+  Explore,
   ExploreDrink,
   ExploreDrinkIngred,
   ExploreFood,
@@ -38,16 +38,17 @@ function App() {
       />
       <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
-      <Route exact path="/explorar" component={ Explorar } />
+      <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/perfil" component={ Profile } />
       <Route exact path="/comidas/:id" component={ FoodDetails } />
       <Route exact path="/bebidas/:id" component={ DrinkDetails } />
       <Route exact path="/comidas" component={ Foods } />
       <Route exact path="/bebidas" component={ Drinks } />
+      <Route exact path="/receitas-feitas" component={ RecipesMade } />
+
       <Route exact path="/" component={ Login } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );
 }
-
 export default App;
