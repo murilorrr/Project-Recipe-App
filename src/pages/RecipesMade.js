@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { CardRecipesMade, HeaderNoSearch } from '../components';
 
 const listaDeReceitasFeitas = [
@@ -39,6 +40,8 @@ const filterFood = (receita, FoodType) => {
 
 function RecipesMade() {
   const [FoodType, setFilterFood] = useState('All');
+  const { location } = useHistory();
+  console.log(location);
 
   return (
     <div>
@@ -74,7 +77,7 @@ function RecipesMade() {
           .filter((receita) => filterFood(receita, FoodType))
           .map((receita, index) => (<CardRecipesMade
             key={ receita.id }
-            args={ { ...receita, index } }
+            args={ { ...receita, index, location } }
           />))}
       </div>
     </div>
