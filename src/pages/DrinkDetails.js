@@ -23,12 +23,6 @@ function DrinkDetails(props) {
     setRecomendation(response);
   };
 
-  const SetOnLocalStorageAndOnState = (favoriteHeart) => {
-    setFavoriteHeart(favoriteHeart)
-    console.log('1')
-    // console.log(localStorage.setItem('favoriteItems', '1'))
-  }
-
   useEffect(() => {
     const fetchAndSet = async () => {
       await fetchById(id);
@@ -50,12 +44,8 @@ function DrinkDetails(props) {
       <div className="options" style={ { display: 'flex' } }>
         <FavoriteButton
           favoriteHeartState={ favoriteHeart }
-<<<<<<< HEAD
-          setFavoriteHeart={ SetOnLocalStorageAndOnState }
-=======
           setFavoriteHeart={ setFavoriteHeart }
           item={ item }
->>>>>>> main-group-28-dev
         />
         <ShareButton location={ location } />
       </div>
