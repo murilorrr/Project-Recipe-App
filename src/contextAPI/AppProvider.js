@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { node } from 'prop-types';
 import Context from './Context';
 
-function appProvider({ children }) {
+function AppProvider({ children }) {
   const [listItem, setListItem] = useState([]);
   //
   // FUNCOES E USO ACIMA
@@ -25,8 +25,8 @@ function appProvider({ children }) {
   );
 }
 
-appProvider.propTypes = {
+AppProvider.propTypes = {
   children: node.isRequired,
 };
 
-export default appProvider;
+export default AppProvider;
