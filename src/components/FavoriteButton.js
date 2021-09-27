@@ -46,8 +46,6 @@ function FavoriteButton(props) {
       setHeartState(!heartState);
     };
 
-    console.log(item);
-
     const favoritar = () => {
       localStorageItems.push(retornaComidaOuDrink());
       localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageItems));

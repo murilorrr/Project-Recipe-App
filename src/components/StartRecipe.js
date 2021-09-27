@@ -10,7 +10,6 @@ function StartRecipe(props) {
   const { recipeInProgress, setInProgress } = useContext(Context);
 
   const startRecipe = async () => {
-    console.log(id);
     // setar um novo recipeInProgress
     // colocar a receita no local Storage na chave InProgressRecipes
     // depende do pathname
@@ -44,8 +43,6 @@ function StartRecipe(props) {
     if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
     const resultFilter = Object.keys(RecipesInLocal)
       .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));
-    console.log(Object.keys(RecipesInLocal.meals));
-    console.log(resultFilter, 'log do map');
     resultFilter.forEach((el) => {
       if (el === true) SetIfWasInLocalStorage(true);
     });
