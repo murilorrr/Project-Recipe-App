@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import shareicon from '../images/shareIcon.svg';
 import './CardRecipesMade.css';
+import ShareIcon from './ShareIcon';
 
 // id: '52771',
 //     type: 'comida',
@@ -65,11 +64,9 @@ function CardRecipesMade({ args }) {
           </span>))}
       </div>
       <div>
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          className="card-recipes-made-share"
-          src={ shareicon }
-          alt="Icone de compartilhar"
+        <ShareIcon
+          pathname={ `${pageName}/${args.id}` }
+          dataTestid={ `${index}-horizontal-share-btn` }
         />
       </div>
     </div>
