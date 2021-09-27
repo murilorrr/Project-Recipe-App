@@ -3,9 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function MiniCard({ args }) {
-  const { i: index = '', p } = args;
+  const { i: index = '', page } = args;
   return (
-    <Link to={ `${p}/${args.idMeal || args.idDrink}` }>
+    <Link to={ `${page}/${args.idMeal || args.idDrink}` }>
       <section>
         <section data-testid={ `${index}-recipe-card` }>
           <img
@@ -28,23 +28,12 @@ export default function MiniCard({ args }) {
 MiniCard.propTypes = {
   args: PropTypes.shape({
     i: PropTypes.number.isRequired,
-    p: PropTypes.string.isRequired,
+    page: PropTypes.string.isRequired,
     idMeal: PropTypes.string,
     idDrink: PropTypes.string,
     strMealThumb: PropTypes.string,
     strDrinkThumb: PropTypes.string,
     strMeal: PropTypes.string,
     strDrink: PropTypes.string,
-  }),
-};
-
-MiniCard.defaultProps = {
-  args: {
-    idDrink: '',
-    idMeal: '',
-    strMealThumb: '',
-    strDrinkThumb: '',
-    strMeal: '',
-    strDrink: '',
-  },
+  }).isRequired,
 };

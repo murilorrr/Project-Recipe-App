@@ -44,10 +44,11 @@ function App() {
       <Route exact path="/bebidas/:id" component={ DrinkDetails } />
       <Route exact path="/comidas" component={ Foods } />
       <Route exact path="/bebidas" component={ Drinks } />
+      <Route exact path="/receitas-feitas" component={ RecipesMade } />
+
       <Route exact path="/" component={ Login } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );
 }
-
 export default App;
