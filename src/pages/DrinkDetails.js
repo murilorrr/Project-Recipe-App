@@ -49,7 +49,7 @@ function DrinkDetails(props) {
         />
         <ShareButton location={ location } />
       </div>
-      <Ingredients item={ item } />
+      <Ingredients item={ item } dataTestId="ingredient-name-and-measure" />
       <div className="instructions">
         <Instruction strInstructions={ strInstructions } />
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ingredients({ item }) {
+function ingredients({ item, dataTestId }) {
   const getValuesInObject = (obj, value) => {
     const lista = [];
     Object.keys(obj).forEach((key) => {
@@ -17,7 +17,10 @@ function ingredients({ item }) {
     <div className="ingredients">
       <ul>
         {ingredientsList.map((ingredient, index) => (
-          <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
+          <li
+            key={ ingredient }
+            data-testid={ `${index}-${dataTestId}` }
+          >
             <span>{ingredient}</span>
             <span>{ingredientsMeansure[index]}</span>
           </li>
