@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
-import MiniCard from './MiniCard';
-import loadingIcon from '../images/searchLoanding.svg';
+import { useHistory } from 'react-router-dom';
 import Context from '../contextAPI/Context';
 
 const optionsDefault = {

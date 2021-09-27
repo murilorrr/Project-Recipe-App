@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import HeaderSearch from '../components/HeaderSearch';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
+import HeaderSearch from '../components/HeaderSearch';
 import MiniCard from '../components/MiniCard';
+import Context from '../contextAPI/Context';
 
 function Drinks() {
-  const [listItem, setListItem] = useState([]);
+  const { push } = useHistory();
+  const { listItem, setListItem } = useContext(Context);
+
   const page = '/bebidas';
   const MAX_INDEX = 12;
 
@@ -16,7 +20,11 @@ function Drinks() {
       setListItem(data.drinks.slice(0, MAX_INDEX));
     };
     foodFetch();
-  }, []);
+  }, [setListItem]);
+  if (listItem.length === 1) {
+    const id = listItem[0].idDrink;
+    push(`${page}/${id}`);
+  }
 
   if (listItem.length === 0) return null;
   return (
