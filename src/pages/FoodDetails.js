@@ -40,7 +40,7 @@ function FoodDetails(props) {
     }
   }, [id, recipeInProgress]);
 
-  if (item.length === 0) return (<Loading />);
+  if (item.length === 0 || item === null) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
   return (
