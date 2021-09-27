@@ -7,10 +7,7 @@ function AppProvider({ children }) {
   //
   // FUNCOES E USO ACIMA
   //
-  const requestAPI = (id) => {
-    console.log('request realizada');
-    return id;
-  };
+  const requestAPI = (id) => id;
 
   const contextValue = {
     requestAPI,

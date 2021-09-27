@@ -5,7 +5,6 @@ function StartRecipe(props) {
   const { history, id, history: { location: { pathname } } } = props;
 
   const startRecipe = () => {
-    console.log('clicou');
     if (pathname.includes('comidas')) return history.push(`/comidas/${id}/in-progress`);
     return history.push(`/bebidas/${id}/in-progress`);
   };
