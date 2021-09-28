@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ingredients({ item, dataTestId }) {
+function ingredients({ item, dataTestId, check }) {
   const getValuesInObject = (obj, value) => {
     const lista = [];
     Object.keys(obj).forEach((key) => {
@@ -21,6 +21,11 @@ function ingredients({ item, dataTestId }) {
             key={ ingredient }
             data-testid={ `${index}-${dataTestId}` }
           >
+            {
+              check
+                ? <input type="checkbox" />
+                : null
+            }
             <span>{ingredient}</span>
             <span>{ingredientsMeansure[index]}</span>
           </li>

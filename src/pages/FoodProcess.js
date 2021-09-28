@@ -44,7 +44,7 @@ function FoodProcess(props) {
       </div>
       <div className="ingredientes">
         <h3>Ingredientes</h3>
-        <Ingredients item={ item } dataTestId="-ingredient-step" />
+        <Ingredients item={ item } dataTestId="-ingredient-step" check />
       </div>
       <div className="instructions">
         <h3>Instruções</h3>
