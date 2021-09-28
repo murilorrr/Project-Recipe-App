@@ -1,0 +1,55 @@
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
+import Context from '../contextAPI/Context';
+
+const whatUrl = (pageUrl) => {
+  const pathname = '/explorar/comidas/ingredientes';
+  if (pageUrl === pathname) {
+    return ['https://www.themealdb.com/images/ingredients',
+      'https://www.themealdb.com/api/json/v1/1/filter.php?i=',
+    ];
+  }
+  return ['https://www.thecocktaildb.com/images/ingredients',
+    'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=',
+  ];
+};
+
+const fetchIgrendDrink = async (URL, setListItem) => {
+  const request = await fetch(URL);
+  const result = await request.json();
+  setListItem(result.meals || result.drinks);
+  return result.meals || result.drinks;
+};
+
+function CardExploreFoodDrinkIngred({ index, Ingredient }) {
+  const { setListItem } = useContext(Context);
+  const { push } = useHistory();
+  const pageUrl = useHistory().location.pathname;
+  const [urlImageBase, urlFect] = whatUrl(pageUrl);
+
+  const handleclick = (Ingred) => {
+    fetchIgrendDrink(`${urlFect}${Ingred}`, setListItem);
+    push(`/${pageUrl.split('/')[2]}`);
+  };
+  return (
+    <div className="card-explore-food-ingred" data-testid={ `${index}-ingredient-card` }>
+      <img
+        onClick={ () => handleclick(Ingredient) }
+        aria-hidden="true"
+        Style="width: 250px"
+        src={ `${urlImageBase}/${Ingredient}-Small.png` }
+        alt={ `Foto de uma ingrediente chamando ${Ingredient}` }
+        data-testid={ `${index}-card-img` }
+      />
+      <p data-testid={ `${index}-card-name` }>{ Ingredient }</p>
+    </div>
+  );
+}
+
+CardExploreFoodDrinkIngred.propTypes = {
+  index: PropTypes.string.isRequired,
+  Ingredient: PropTypes.string.isRequired,
+};
+
+export default CardExploreFoodDrinkIngred;
