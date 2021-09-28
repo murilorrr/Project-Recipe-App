@@ -60,7 +60,6 @@ function FavoriteButton(props) {
   };
 
   useEffect(() => {
-    console.log('favorite Button');
     // Se já existir um elemento com o mesmo id desta pagina, coração começa true;
     const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const resultFilter = localStorageItems

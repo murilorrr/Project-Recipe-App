@@ -7,21 +7,20 @@ import Context from '../contextAPI/Context';
 
 function Foods() {
   const { push } = useHistory();
-  const { listItem, setListItem } = useContext(Context);
+  const { listItem, setListItem, baseUrlFood } = useContext(Context);
 
   const page = '/comidas';
   const MAX_INDEX = 12;
 
   useEffect(() => {
     const foodFetch = async () => {
-      const base = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      const request = await fetch(base);
+      const request = await fetch(baseUrlFood);
       const data = await request.json();
 
       setListItem(data.meals.slice(0, MAX_INDEX));
     };
     foodFetch();
-  }, [setListItem]);
+  }, [setListItem, baseUrlFood]);
 
   if (listItem.length === 1) {
     const id = listItem[0].idMeal;

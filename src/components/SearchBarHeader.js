@@ -15,7 +15,6 @@ const MAX_INDEX = 12;
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const themealdbFetch = async (params) => {
   const { checkRadio, input, options, setOptions, setListItem } = params;
-  console.log(checkRadio, input, options, setOptions);
   const themealdbEndPoint = {
     ingredient_search: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`,
