@@ -1,8 +1,9 @@
 // import React from 'react'
 
-async function Dofatch() {
-  const response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=list`)).json());
-  console.log(response)
+async function dofatch() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+  const data = await response.json();
+  return data;
 }
 
-export default Dofatch;
+export default dofatch;
