@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import Footer from '../components/Footer';
-import { CardExploreFoodIngred } from '../components';
+import { CardExploreFoodDrinkIngred } from '../components';
 
 const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const MAX_INDEX = 12;
@@ -19,14 +19,14 @@ function ExploreFoodIngred() {
   }, []);
 
   if (!listIngred) return null;
-  console.log(listIngred);
+
   return (
     <div>
       <HeaderNoSearch word="Explorar Ingredientes" />
-      {listIngred.map((item, index) => (<CardExploreFoodIngred
+      {listIngred.map((item, index) => (<CardExploreFoodDrinkIngred
         key={ index }
         index={ index }
-        strIngredient={ item.strIngredient }
+        Ingredient={ item.strIngredient }
       />))}
       <Footer />
     </div>

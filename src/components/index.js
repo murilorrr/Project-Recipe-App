@@ -11,4 +11,4 @@ export { default as SearchBarHeader } from './SearchBarHeader';
 export { default as ShareButton } from './ShareButton';
 export { default as StartRecipe } from './StartRecipe';
 export { default as textInputs } from './textInputs';
-export { default as CardExploreFoodIngred } from './CardExploreFoodIngred';
+export { default as CardExploreFoodDrinkIngred } from './CardExploreFoodDrinkIngred';
