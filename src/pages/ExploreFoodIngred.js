@@ -8,7 +8,6 @@ function ExploreFoodIngred() {
   return (
     <div>
       <HeaderNoSearch word="Explorar Ingredientes" />
-      {Dofatch()}
       <Footer />
     </div>
   );
