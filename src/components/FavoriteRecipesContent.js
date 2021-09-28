@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import CardFavoriteRecipe from './ComponentsRefeições/CardFavoriteRecipe';
+import Context from '../contextAPI/Context';
 
-function FavoriteRecipesContent() {
-  const [listRecipes, setListRecipes] = useState([]);
+function FavoriteRecipesContent(props) {
+  const { history, filterFood } = props;
+
+  const { favoriteList, setFavoriteList } = useContext(Context);
 
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (localStorageItems !== null) setListRecipes(localStorageItems);
-  }, []);
+    if (localStorageItems !== null) setFavoriteList(localStorageItems);
+  }, [setFavoriteList]);
 
   // const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
   // const resultFilter = localStorageItems
@@ -16,9 +20,21 @@ function FavoriteRecipesContent() {
 
   return (
     <div className="recipeContent">
-      {listRecipes.map((el) => <CardFavoriteRecipe key={ el } item={ el } />)}
+      {favoriteList.map((el) => (<CardFavoriteRecipe
+        history={ history }
+        key={ el.id }
+        item={ el }
+      />))}
     </div>
   );
 }
+
+FavoriteRecipesContent.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default FavoriteRecipesContent;

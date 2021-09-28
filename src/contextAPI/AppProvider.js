@@ -8,19 +8,18 @@ function AppProvider({ children }) {
   //
   // FUNCOES E USO ACIMA
   //
-  const requestAPI = (id) => {
-    console.log('request realizada');
-    return id;
-  };
 
   const [recipeInProgress, setInProgress] = useState({ cocktails: {}, meals: {} });
+
+  const [favoriteList, setFavoriteList] = useState([]);
 
   //
   // FUNCOES E USO ACIMA
   //
 
   const contextValue = {
-    requestAPI,
+    setFavoriteList,
+    favoriteList,
     heartState,
     setHeartState,
     recipeInProgress,

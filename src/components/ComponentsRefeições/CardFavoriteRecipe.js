@@ -1,25 +1,46 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Context from '../../contextAPI/Context';
-import FavoriteButton from '../FavoriteButton';
+import { useHistory } from 'react-router';
+import FavoriteButtonFavoriteRecipes from './FavoriteButtonFavoriteRecipes';
+import ShareButton from '../ShareButton';
 
-function CardFavoriteRecipe({ item }) {
-  const { setHeartState } = useContext(Context);
-  // obj item
-  //   alcoholicOrNot: ""
-  // area: "Canadian"
-  // category: "Dessert"
-  // id: "52929"
-  // image: "https://www.themealdb.com/images/media/meals/txsupu1511815755.jpg"
-  // name: "Timbits"
+function CardFavoriteRecipe(props) {
+  const { item } = props;
+  const history = useHistory();
+  const { type, area, category, id, name, image, alcoholicOrNot } = item;
+
   useEffect(() => {
-    setHeartState(true);
   }, []);
+
+  const onclick = () => {
+    if (type === 'comida') {
+      history.push(`/comidas/${id}`);
+    }
+    history.push(`/bebidas/${id}`);
+  };
 
   return (
     <div>
-      <FavoriteButton item={ item } />
-      s
+      <div className="imageCard-favorites">
+        <img
+          aria-hidden="true"
+          onClick={ onclick }
+          width="200px"
+          alt={ name }
+          src={ image }
+        />
+      </div>
+      <div>
+        <p>
+          {`${area} ${category} ${alcoholicOrNot}`}
+        </p>
+        <p>
+          {name}
+        </p>
+        <FavoriteButtonFavoriteRecipes item={ item } />
+        <ShareButton location={ history.location } id={ id } type={ type } />
+      </div>
+
     </div>
   );
 }
@@ -32,6 +53,7 @@ CardFavoriteRecipe.propTypes = {
     id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
+    type: PropTypes.string,
   }).isRequired,
 };
 
