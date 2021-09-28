@@ -41,7 +41,6 @@ const filterFood = (receita, FoodType) => {
 function RecipesMade() {
   const [FoodType, setFilterFood] = useState('All');
   const { location } = useHistory();
-  console.log(location);
 
   return (
     <div>
