@@ -5,7 +5,8 @@ import Context from './Context';
 function AppProvider({ children }) {
   const [heartState, setHeartState] = useState(false);
   const [listItem, setListItem] = useState([]);
-  const [baseUrl, setBaseUrl] = useState('');
+  const [baseUrlFood, setBaseUrlFood] = useState('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const [baseUrlDrink, setBaseUrlDrink] = useState('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   //
   // FUNCOES E USO ACIMA
   //
@@ -25,8 +26,10 @@ function AppProvider({ children }) {
     setInProgress,
     listItem,
     setListItem,
-    baseUrl,
-    setBaseUrl,
+    baseUrlFood,
+    setBaseUrlFood,
+    baseUrlDrink,
+    setBaseUrlDrink,
   };
 
   return (
