@@ -54,7 +54,7 @@ function StartRecipe(props) {
     // deve verificar se a receita ja foi iniciada antes, se sim, o texto do botao de start deve ser
     // continuar receita, senao Iniciar receita
     assertLocalStore();
-  }, [WasInLocalStorage]);
+  }, [WasInLocalStorage, assertLocalStore]);
   if (WasInLocalStorage) {
     return (
       <div className="StartButton">
