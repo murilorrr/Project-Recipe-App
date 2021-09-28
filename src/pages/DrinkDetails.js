@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FavoriteButton, CarrouselRecomendations, ShareButton,
   Loading, StartRecipe } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
+import Context from '../contextAPI/Context';
 
 function DrinkDetails(props) {
   const { match: { params: { id } }, location, history } = props;
-
-  const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [recomendation, setRecomendation] = useState([]);
   const [item, setItem] = useState([]);
+  const { recipeInProgress } = useContext(Context);
 
   const fetchById = async (idLocation) => {
     const response = (await (await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).drinks;
@@ -24,12 +24,19 @@ function DrinkDetails(props) {
   };
 
   useEffect(() => {
+    console.log('Drinks Details');
     const fetchAndSet = async () => {
       await fetchById(id);
       await fetchFoodOrDrinkRecomendations();
     };
     fetchAndSet();
-  }, [id]);
+    if (localStorage
+      .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
+    if (localStorage
+      .getItem('inProgressRecipes') === null) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+    }
+  }, [id, recipeInProgress]);
 
   if (item.length === 0) return (<Loading />);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
@@ -42,11 +49,7 @@ function DrinkDetails(props) {
         subtitle={ strAlcoholic }
       />
       <div className="options" style={ { display: 'flex' } }>
-        <FavoriteButton
-          favoriteHeartState={ favoriteHeart }
-          setFavoriteHeart={ setFavoriteHeart }
-          item={ item }
-        />
+        <FavoriteButton item={ item } history={ history } />
         <ShareButton location={ location } />
       </div>
       <Ingredients item={ item } />
