@@ -15,23 +15,24 @@ const whatUrl = (pageUrl) => {
   ];
 };
 
-const fetchIgrendDrink = async (URL, setListItem) => {
-  const request = await fetch(URL);
-  const result = await request.json();
-  setListItem(result.meals || result.drinks);
-  return result.meals || result.drinks;
+const switchBaseUrl = async (URL, setBaseUrlFood, setBaseUrlDrink, pgFoodOdDrink) => {
+  // Atualiza a url que aparece os cards no food ou drink
+  if (pgFoodOdDrink === 'comidas') setBaseUrlFood(URL);
+  if (pgFoodOdDrink === 'bebidas') setBaseUrlDrink(URL);
 };
 
 function CardExploreFoodDrinkIngred({ index, Ingredient }) {
-  const { setListItem } = useContext(Context);
+  const { setBaseUrlFood, setBaseUrlDrink } = useContext(Context);
   const { push } = useHistory();
   const pageUrl = useHistory().location.pathname;
   const [urlImageBase, urlFect] = whatUrl(pageUrl);
 
   const handleclick = (Ingred) => {
-    fetchIgrendDrink(`${urlFect}${Ingred}`, setListItem);
-    push(`/${pageUrl.split('/')[2]}`);
+    const pgFoodOdDrink = pageUrl.split('/')[2];
+    switchBaseUrl(`${urlFect}${Ingred}`, setBaseUrlFood, setBaseUrlDrink, pgFoodOdDrink);
+    push(`/${pgFoodOdDrink}`);
   };
+
   return (
     <div className="card-explore-food-ingred" data-testid={ `${index}-ingredient-card` }>
       <img
