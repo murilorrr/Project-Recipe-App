@@ -13,7 +13,6 @@ function ExploreFoodIngred() {
       const request = await fetch(URL);
       const result = await request.json();
       setlistIngred(result.meals.slice(0, MAX_INDEX));
-      console.log('request');
     };
     fectIngred();
   }, []);

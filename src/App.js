@@ -23,7 +23,6 @@ import {
 function App() {
   return (
     <Switch>
-      <Route exact path="/receitas-feitas" component={ RecipesMade } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/explorar/comidas/area" component={ OriginFood } />
       <Route

@@ -4,6 +4,7 @@ import Context from './Context';
 
 function AppProvider({ children }) {
   const [listItem, setListItem] = useState([]);
+  const [baseUrl, setBaseUrl] = useState('');
   //
   // FUNCOES E USO ACIMA
   //
@@ -13,6 +14,8 @@ function AppProvider({ children }) {
     requestAPI,
     listItem,
     setListItem,
+    baseUrl,
+    setBaseUrl,
   };
 
   return (
