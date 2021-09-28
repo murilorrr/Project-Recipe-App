@@ -4,6 +4,7 @@ import Context from './Context';
 
 function AppProvider({ children }) {
   const [listItem, setListItem] = useState([]);
+
   //
   // FUNCOES E USO ACIMA
   //
