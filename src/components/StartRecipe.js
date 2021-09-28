@@ -38,23 +38,19 @@ function StartRecipe(props) {
     width: '300px',
   };
 
-  const assertLocalStore = () => {
-    const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
-    const resultFilter = Object.keys(RecipesInLocal)
-      .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));
-    resultFilter.forEach((el) => {
-      if (el === true) SetIfWasInLocalStorage(true);
-    });
-  };
-
   useEffect(() => {
-    // Se a receita ja foi feita, nao deve aparecer iniciar receita
-    // codigo
-    // deve verificar se a receita ja foi iniciada antes, se sim, o texto do botao de start deve ser
-    // continuar receita, senao Iniciar receita
+    const assertLocalStore = () => {
+      const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
+      const resultFilter = Object.keys(RecipesInLocal)
+        .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));
+      resultFilter.forEach((el) => {
+        if (el === true) SetIfWasInLocalStorage(true);
+      });
+    };
     assertLocalStore();
-  }, [WasInLocalStorage, assertLocalStore]);
+  }, [id, setInProgress]);
+
   if (WasInLocalStorage) {
     return (
       <div className="StartButton">

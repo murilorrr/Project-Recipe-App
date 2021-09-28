@@ -24,6 +24,7 @@ function DrinkDetails(props) {
   };
 
   useEffect(() => {
+    console.log('Drinks Details');
     const fetchAndSet = async () => {
       await fetchById(id);
       await fetchFoodOrDrinkRecomendations();
