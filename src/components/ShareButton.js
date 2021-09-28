@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import shareicon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -20,7 +21,10 @@ function ShareButton(props) {
         data-testid="share-btn"
         type="button"
       >
-        Share
+        <img
+          src={ shareicon }
+          alt="Icone de compartilhar"
+        />
       </button>
       {feedback ? <div>Link copiado!</div> : null}
     </>
