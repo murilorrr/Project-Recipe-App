@@ -8,6 +8,16 @@ function FavoriteRecipesContent(props) {
 
   const { favoriteList, setFavoriteList } = useContext(Context);
 
+  const filter = (array) => {
+    if (filterFood === 'All') return array;
+    if (filterFood === 'comida') {
+      return array.filter((el) => el.type === 'comida');
+    }
+    if (filterFood === 'bebida') {
+      return array.filter((el) => el.type === 'bebida');
+    }
+  };
+
   useEffect(() => {
     const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (localStorageItems !== null) setFavoriteList(localStorageItems);
@@ -20,11 +30,12 @@ function FavoriteRecipesContent(props) {
 
   return (
     <div className="recipeContent">
-      {favoriteList.map((el) => (<CardFavoriteRecipe
-        history={ history }
-        key={ el.id }
-        item={ el }
-      />))}
+      {filter(favoriteList)
+        .map((el) => (<CardFavoriteRecipe
+          history={ history }
+          key={ el.id }
+          item={ el }
+        />))}
     </div>
   );
 }
@@ -35,6 +46,7 @@ FavoriteRecipesContent.propTypes = {
       pathname: PropTypes.string,
     }),
   }).isRequired,
+  filterFood: PropTypes.string.isRequired,
 };
 
 export default FavoriteRecipesContent;

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function FilterRecipes({setFilterFood}) {
+function FilterRecipes({ setFilterFood }) {
   // const filterFood = (receita, FoodType) => {
   //   const list = Object.values(receita);
   //   if (list.includes(FoodType)) return true;
@@ -37,5 +38,9 @@ function FilterRecipes({setFilterFood}) {
     </div>
   );
 }
+
+FilterRecipes.propTypes = {
+  setFilterFood: PropTypes.func.isRequired,
+};
 
 export default FilterRecipes;
