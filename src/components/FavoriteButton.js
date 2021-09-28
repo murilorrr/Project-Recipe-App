@@ -5,7 +5,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Context from '../contextAPI/Context';
 
 function FavoriteButton(props) {
-  const { item, history: { location: { pathname } } } = props;
+  const { item, history: { location: { pathname = 'details' } } } = props;
   const { heartState, setHeartState } = useContext(Context);
 
   const retornaComidaOuDrink = () => {
@@ -95,7 +95,15 @@ FavoriteButton.propTypes = {
       pathname: PropTypes.string,
     }),
     push: PropTypes.func.isRequired,
-  }).isRequired,
+  }),
+};
+
+FavoriteButton.defaultProps = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: true,
+    }),
+  }),
 };
 
 export default FavoriteButton;
