@@ -93,6 +93,14 @@ function FavoriteButton(props) {
     }
   };
 
+  useEffect(() => {
+    // Se já existir um elemento com o mesmo id desta pagina, coração começa true;
+    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const resultFilter = localStorageItems
+      .some((element) => Object.values(element)[0] === Object.values(item[0])[0]);
+    if (resultFilter === true) setHeartState(true);
+  }, [setHeartState, item]);
+
   return (
     <button
       type="button"

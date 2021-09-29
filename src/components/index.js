@@ -12,3 +12,4 @@ export { default as ShareButton } from './ShareButton';
 export { default as StartRecipe } from './StartRecipe';
 export { default as textInputs } from './textInputs';
 export { default as CardExploreFoodDrinkIngred } from './CardExploreFoodDrinkIngred';
+export { default as CategoryButton } from './CategoryButton';
