@@ -5,9 +5,15 @@ import Context from './Context';
 function AppProvider({ children }) {
   const [heartState, setHeartState] = useState(false);
   const [listItem, setListItem] = useState([]);
+  const [baseUrlFood, setBaseUrlFood] = useState('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const [baseUrlDrink, setBaseUrlDrink] = useState('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   //
   // FUNCOES E USO ACIMA
   //
+<<<<<<< HEAD
+=======
+  const requestAPI = (id) => id;
+>>>>>>> main-group-28-lucas
 
   const [recipeInProgress, setInProgress] = useState({ cocktails: {}, meals: {} });
 
@@ -26,6 +32,10 @@ function AppProvider({ children }) {
     setInProgress,
     listItem,
     setListItem,
+    baseUrlFood,
+    setBaseUrlFood,
+    baseUrlDrink,
+    setBaseUrlDrink,
   };
 
   return (

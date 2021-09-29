@@ -4,19 +4,6 @@ import { Link } from 'react-router-dom';
 import './CardRecipesMade.css';
 import ShareIcon from './ShareIcon';
 
-// id: '52771',
-//     type: 'comida',
-//     area: 'Italian',
-//     category: 'Vegetarian',
-//     alcoholicOrNot: '',
-//     name: 'Spicy Arrabiata Penne',
-//     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-//     doneDate: '23/06/2020',
-//     tags: [
-//       'Pasta',
-//       'Curry',
-//     ]
-
 function CardRecipesMade({ args }) {
   const { index } = args;
   const pageName = args.type === 'comida' ? '/comidas' : '/bebidas';
