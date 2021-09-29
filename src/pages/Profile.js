@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import Footer from '../components/Footer';
 
-const { email } = JSON.parse(localStorage.getItem('user'));
+const { email } = JSON.parse(localStorage.getItem('user')) || [];
 function Profile() {
   return (
     <div>
