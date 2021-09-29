@@ -9,7 +9,7 @@ function OriginFood() {
   const history = useHistory();
 
   const [byArea, setByArea] = useState([]);
-  const [selectArea, setSelectArea] = useState('');
+  const [selectArea, setSelectArea] = useState([]);
   const [byAreaResults, setByAreaResults] = useState([]);
   const MAX_INDEX = 12;
 
@@ -22,11 +22,10 @@ function OriginFood() {
 
   useEffect(() => {
     const fectIngred = async () => {
+      await AllFetch();
       const request = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
       const result = await request.json();
       setByArea(result.meals);
-
-      await AllFetch();
     };
     fectIngred();
   }, []);
@@ -38,9 +37,14 @@ function OriginFood() {
 
       const request = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectArea}`);
       const result = await request.json();
+<<<<<<< HEAD
       if (!result.meals.legth) {
         setByAreaResults(result.meals.splice(1, MAX_INDEX));
       } else { setByAreaResults([]); }
+=======
+      if (!result.meals) return null;
+      setByAreaResults(result.meals.splice(0, MAX_INDEX));
+>>>>>>> 28f43f2c23bb3b8e5ef843527c6c34e93cb08d35
     };
 
     fectIngredSearch();
@@ -75,6 +79,7 @@ function OriginFood() {
             name={ obj.strMeal }
             img={ obj.strMealThumb }
             onClick={ changeRoute }
+            index={ index }
             key={ index }
             index={ index }
           />
