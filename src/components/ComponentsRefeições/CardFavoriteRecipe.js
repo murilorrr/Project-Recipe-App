@@ -45,6 +45,8 @@ function CardFavoriteRecipe(props) {
         aria-hidden="true"
       >
         { name }
+      </div>
+      <div className="options-button">
         <FavoriteButtonFavoriteRecipes
           item={ item }
           dataTest={ `${index}-horizontal-favorite-btn` }
