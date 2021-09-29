@@ -9,6 +9,7 @@ function IngredientsCard({ id, name, img, onClick, index }) {
       data-testid={ `${index}-recipe-card` }
       onClick={ () => onClick(id) }
     >
+      {id}
       <img
         aria-hidden="true"
         style={ { width: '200px' } }
