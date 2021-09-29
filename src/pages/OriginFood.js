@@ -9,7 +9,7 @@ function OriginFood() {
   const history = useHistory();
 
   const [byArea, setByArea] = useState([]);
-  const [selectArea, setSelectArea] = useState([]);
+  const [selectArea, setSelectArea] = useState('');
   const [byAreaResults, setByAreaResults] = useState([]);
   const MAX_INDEX = 12;
 
@@ -32,19 +32,12 @@ function OriginFood() {
 
   useEffect(() => {
     const fectIngredSearch = async () => {
-      setByAreaResults([]);
       if (selectArea === 'All') return AllFetch();
 
       const request = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectArea}`);
       const result = await request.json();
-<<<<<<< HEAD
-      if (!result.meals.legth) {
-        setByAreaResults(result.meals.splice(1, MAX_INDEX));
-      } else { setByAreaResults([]); }
-=======
       if (!result.meals) return null;
       setByAreaResults(result.meals.splice(0, MAX_INDEX));
->>>>>>> 28f43f2c23bb3b8e5ef843527c6c34e93cb08d35
     };
 
     fectIngredSearch();
@@ -54,8 +47,8 @@ function OriginFood() {
     setSelectArea(value);
   };
 
-  const changeRoute = (id) => {
-    const path = generatePath('/comidas/:id', { id });
+  const changeRoute = (idElement) => {
+    const path = generatePath('/comidas/:id', { id: idElement });
     history.replace(path);
   };
 
@@ -81,7 +74,6 @@ function OriginFood() {
             onClick={ changeRoute }
             index={ index }
             key={ index }
-            index={ index }
           />
         ))}
       </main>

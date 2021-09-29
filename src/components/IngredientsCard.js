@@ -3,17 +3,21 @@ import React from 'react';
 
 function IngredientsCard({ id, name, img, onClick, index }) {
   return (
-    <div className="card-explore-food-ingred" data-testid={ `${index}-recipe-card` }>
+    <button
+      type="button"
+      className="card-explore-food-ingred"
+      data-testid={ `${index}-recipe-card` }
+      onClick={ () => onClick(id) }
+    >
       <img
-        onClick={ () => onClick(id) }
         aria-hidden="true"
-        Style="width: 200px"
+        style={ { width: '200px' } }
         src={ img }
         alt={ `Foto de uma ingrediente chamando ${name}` }
         data-testid={ `${index}-card-img` }
       />
       <p data-testid={ `${index}-card-name` }>{ name }</p>
-    </div>
+    </button>
   );
 }
 
