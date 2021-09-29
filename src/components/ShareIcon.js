@@ -1,6 +1,8 @@
+import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import copy from 'clipboard-copy';
+
 import shareicon from '../images/shareIcon.svg';
 
 function ShareIcon({ dataTestid, pathname }) {
