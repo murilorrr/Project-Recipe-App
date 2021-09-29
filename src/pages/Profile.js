@@ -7,7 +7,12 @@ function Profile() {
   return (
     <div>
       <HeaderNoSearch word="Perfil" />
-      <h3>{ email }</h3>
+      <div>
+        <h3 data-testid="profile-email">{ email }</h3>
+        <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
+        <button type="button" data-testid="profile-favorite-btn">Receitas Favoritas</button>
+        <button type="button" data-testid="profile-logout-btn">Sair</button>
+      </div>
       <Footer />
     </div>
   );
