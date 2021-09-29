@@ -26,7 +26,7 @@ function ExploreFoodsOrDrinks() {
     const obj1 = Object.keys(response)[0];
     const obj2 = (response[obj1])[0];
     const obj3 = (Object.keys(obj2)[0]);
-    const path = generatePath(`/${type}/:id/`, { id: obj2[obj3] });
+    const path = generatePath(`/${type}/:id`, { id: obj2[obj3] });
     return path;
   };
 
