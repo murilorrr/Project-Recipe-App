@@ -39,7 +39,6 @@ function StartRecipe(props) {
   };
 
   useEffect(() => {
-    console.log('useeffect');
     const assertLocalStore = () => {
       const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (RecipesInLocal !== null) setInProgress(RecipesInLocal);

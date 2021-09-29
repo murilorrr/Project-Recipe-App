@@ -8,6 +8,40 @@ function FavoriteButton(props) {
   const { item, history: { location: { pathname } } } = props;
   const { heartState, setHeartState } = useContext(Context);
 
+  useEffect(() => {
+    setHeartState(false);
+    // Se já existir um elemento com o mesmo id desta pagina, coração começa true;
+    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const resultFilter = localStorageItems
+      .some((element) => Object.values(element)[0] === Object.values(item[0])[0]);
+    console.log(resultFilter);
+    if (resultFilter === true) setHeartState(true);
+  }, [setHeartState, item]);
+
+  if (pathname.includes('/receitas-favoritas')) {
+    const desfavoritar = () => {
+      const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const resultFilter = localStorageItems
+        .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(resultFilter));
+      setHeartState(!heartState);
+    };
+    return (
+      <button
+        type="button"
+        data-testid="favorite-btn"
+        onClick={ desfavoritar }
+        src={ heartState ? 'blackHeartIcon' : 'whiteHeartIcon' }
+      >
+        <img
+          width="30px"
+          alt="favorite button"
+          src={ heartState ? blackHeartIcon : whiteHeartIcon }
+        />
+      </button>
+    );
+  }
+
   const retornaComidaOuDrink = () => {
     let retorno;
     if (pathname.includes('bebidas')) {
@@ -58,15 +92,6 @@ function FavoriteButton(props) {
       favoritar();
     }
   };
-
-  useEffect(() => {
-    console.log('favorite Button');
-    // Se já existir um elemento com o mesmo id desta pagina, coração começa true;
-    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const resultFilter = localStorageItems
-      .some((element) => Object.values(element)[0] === Object.values(item[0])[0]);
-    if (resultFilter === true) setHeartState(true);
-  }, [setHeartState, item]);
 
   return (
     <button
