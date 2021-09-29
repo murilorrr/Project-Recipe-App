@@ -31,10 +31,11 @@ function FavoriteRecipesContent(props) {
   return (
     <div className="recipeContent">
       {filter(favoriteList)
-        .map((el) => (<CardFavoriteRecipe
+        .map((el, index) => (<CardFavoriteRecipe
           history={ history }
           key={ el.id }
           item={ el }
+          index={ index }
         />))}
     </div>
   );

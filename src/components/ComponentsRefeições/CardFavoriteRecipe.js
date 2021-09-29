@@ -5,7 +5,7 @@ import FavoriteButtonFavoriteRecipes from './FavoriteButtonFavoriteRecipes';
 import ShareButton from '../ShareButton';
 
 function CardFavoriteRecipe(props) {
-  const { item } = props;
+  const { item, index } = props;
   const history = useHistory();
   const { type, area, category, id, name, image, alcoholicOrNot } = item;
 
@@ -25,6 +25,7 @@ function CardFavoriteRecipe(props) {
         <img
           aria-hidden="true"
           onClick={ onclick }
+          data-testid={ `${index}-horizontal-image` }
           width="200px"
           alt={ name }
           src={ image }
@@ -38,7 +39,7 @@ function CardFavoriteRecipe(props) {
           {name}
         </p>
         <FavoriteButtonFavoriteRecipes item={ item } />
-        <ShareButton location={ history.location } id={ id } type={ type } />
+        <ShareButton location={ history.location } id={ id } type={ type } dataTest={`${index}`} />
       </div>
 
     </div>
@@ -55,6 +56,7 @@ CardFavoriteRecipe.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default CardFavoriteRecipe;
