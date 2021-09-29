@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function IngredientsCard({ id, name, img, onClick, index }) {
@@ -15,5 +16,15 @@ function IngredientsCard({ id, name, img, onClick, index }) {
     </div>
   );
 }
+
+const { number, string, func } = PropTypes;
+
+IngredientsCard.propTypes = {
+  id: number,
+  img: string,
+  index: number,
+  name: string,
+  onClick: func,
+}.isRequired;
 
 export default IngredientsCard;
