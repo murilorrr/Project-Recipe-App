@@ -21,10 +21,11 @@ function CarrouselRecomendations(props) {
                   backgroundColor: 'grey',
                   margin: '4px',
                   minWidth: '50vw' } }
-                key={ strDrink }
+                key={ idDrink }
                 data-testid={ `${index}-recomendation-card` }
                 id={ idDrink }
               >
+                {idDrink}
                 <img alt={ strDrink } width="100px" src={ strDrinkThumb } />
                 <h4>{strAlcoholic}</h4>
                 <h3 data-testid={ `${index}-recomendation-title` }>{strDrink}</h3>

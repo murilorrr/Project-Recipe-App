@@ -8,6 +8,8 @@ export function saveEmail(email) {
 }
 
 export function initialRecipesFavorites() {
-  const FavoriteRecipes = [];
-  localStorage.setItem('favoriteRecipes', JSON.stringify(FavoriteRecipes));
+  if (localStorage.getItem('favoriteRecipes') === null) {
+    const FavoriteRecipes = [];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(FavoriteRecipes));
+  }
 }
