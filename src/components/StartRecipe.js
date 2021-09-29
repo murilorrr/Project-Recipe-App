@@ -40,7 +40,7 @@ function StartRecipe(props) {
 
   useEffect(() => {
     const assertLocalStore = () => {
-      const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
       if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
       const resultFilter = Object.keys(RecipesInLocal)
         .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));

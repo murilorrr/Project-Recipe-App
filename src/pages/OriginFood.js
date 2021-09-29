@@ -18,19 +18,19 @@ function OriginFood() {
   }, []);
 
   useEffect(() => {
-      const fectIngredSearch = async () => {
-        const request = await fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${selectArea}`);
-        const result = await request.json();
-        console.log(result)
-        return setByAreaResults(result);
-      };
-   
-      fectIngredSearch()
+    const fectIngredSearch = async () => {
+      const request = await fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${selectArea}`);
+      const result = await request.json();
+      console.log(result);
+      return setByAreaResults(result);
+    };
+
+    fectIngredSearch();
   }, [selectArea]);
 
-  const onClick = ({ target: {value}}) => {
-    setSelectArea(value)
-  }
+  const onClick = ({ target: { value } }) => {
+    setSelectArea(value);
+  };
   return (
     <div>
       <HeaderDrink word="Explorar Origem" />
@@ -39,7 +39,7 @@ function OriginFood() {
           .map((obj) => (
             <option data-testid="${area}-option">
               {obj.strArea}
-            </option>)): null}
+            </option>)) : null}
       </select>
       <Footer />
     </div>

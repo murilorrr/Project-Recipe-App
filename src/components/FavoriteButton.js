@@ -4,6 +4,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Context from '../contextAPI/Context';
 
+const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
 function FavoriteButton(props) {
   const { item, history: { location: { pathname } } } = props;
   const { heartState, setHeartState } = useContext(Context);
@@ -11,7 +13,6 @@ function FavoriteButton(props) {
   useEffect(() => {
     setHeartState(false);
     // Se já existir um elemento com o mesmo id desta pagina, coração começa true;
-    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const resultFilter = localStorageItems
       .some((element) => Object.values(element)[0] === Object.values(item[0])[0]);
     console.log(resultFilter);
@@ -20,7 +21,6 @@ function FavoriteButton(props) {
 
   if (pathname.includes('/receitas-favoritas')) {
     const desfavoritar = () => {
-      const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const resultFilter = localStorageItems
         .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
       localStorage.setItem('favoriteRecipes', JSON.stringify(resultFilter));
@@ -71,8 +71,6 @@ function FavoriteButton(props) {
   };
 
   const onClick = () => {
-    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
     const desfavoritar = () => {
       const resultFilter = localStorageItems
         .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
@@ -92,14 +90,6 @@ function FavoriteButton(props) {
       favoritar();
     }
   };
-
-  useEffect(() => {
-    // Se já existir um elemento com o mesmo id desta pagina, coração começa true;
-    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const resultFilter = localStorageItems
-      .some((element) => Object.values(element)[0] === Object.values(item[0])[0]);
-    if (resultFilter === true) setHeartState(true);
-  }, [setHeartState, item]);
 
   return (
     <button
