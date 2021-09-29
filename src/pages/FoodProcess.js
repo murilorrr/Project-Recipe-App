@@ -7,7 +7,7 @@ import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
 
 function FoodProcess(props) {
-  const { match: { params: { id } }, location } = props;
+  const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
@@ -39,6 +39,7 @@ function FoodProcess(props) {
           favoriteHeartState={ favoriteHeart }
           setFavoriteHeart={ setFavoriteHeart }
           item={ item }
+          history={ history }
         />
         <ShareButton location={ location } />
       </div>
