@@ -4,13 +4,15 @@ import { generatePath } from 'react-router';
 import HeaderDrink from '../components/HeaderSearch';
 import Footer from '../components/Footer';
 import IngredientsCard from '../components/IngredientsCard';
+import Loading from '../components/Loading';
 
 function OriginFood() {
   const history = useHistory();
 
   const [byArea, setByArea] = useState([]);
-  const [selectArea, setSelectArea] = useState('');
+  const [selectArea, setSelectArea] = useState('All');
   const [byAreaResults, setByAreaResults] = useState([]);
+  const [loading, setLoading] = useState(true);
   const MAX_INDEX = 12;
 
   const AllFetch = async () => {
@@ -26,6 +28,7 @@ function OriginFood() {
       const request = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
       const result = await request.json();
       setByArea(result.meals);
+      setLoading(false);
     };
     fectIngred();
   }, []);
@@ -38,10 +41,13 @@ function OriginFood() {
       const result = await request.json();
       if (!result.meals) return null;
       setByAreaResults(result.meals.splice(0, MAX_INDEX));
+      setLoading(false);
     };
 
     fectIngredSearch();
   }, [selectArea]);
+
+  if (loading) return <Loading />;
 
   const onClick = ({ target: { value } }) => {
     setSelectArea(value);
@@ -49,7 +55,7 @@ function OriginFood() {
 
   const changeRoute = (idElement) => {
     const path = generatePath('/comidas/:id', { id: idElement });
-    history.replace(path);
+    history.push(path);
   };
 
   return (
@@ -66,7 +72,7 @@ function OriginFood() {
             </option>))}
       </select>
       <main>
-        { byAreaResults.map((obj, index) => (
+        { loading ? <Loading /> : byAreaResults.map((obj, index) => (
           <IngredientsCard
             id={ obj.idMeal }
             name={ obj.strMeal }
