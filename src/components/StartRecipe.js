@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../contextAPI/Context';
 
+const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
+
 function StartRecipe(props) {
   const { history, id, history: { location: { pathname } } } = props;
 
@@ -40,7 +42,6 @@ function StartRecipe(props) {
 
   useEffect(() => {
     const assertLocalStore = () => {
-      const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
       const resultFilter = Object.keys(RecipesInLocal)
         .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));

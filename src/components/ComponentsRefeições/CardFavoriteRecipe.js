@@ -15,8 +15,9 @@ function CardFavoriteRecipe(props) {
   const onclick = () => {
     if (type === 'comida') {
       history.push(`/comidas/${id}`);
+    } else {
+      history.push(`/bebidas/${id}`);
     }
-    history.push(`/bebidas/${id}`);
   };
 
   return (
@@ -31,15 +32,29 @@ function CardFavoriteRecipe(props) {
           src={ image }
         />
       </div>
-      <div>
-        <p>
-          {`${area} ${category} ${alcoholicOrNot}`}
-        </p>
-        <p>
-          {name}
-        </p>
-        <FavoriteButtonFavoriteRecipes item={ item } />
-        <ShareButton location={ history.location } id={ id } type={ type } dataTest={`${index}`} />
+      <div
+        data-testid={ `${index}-horizontal-top-text` }
+        className="card-recipes-favorite-category"
+      >
+        {`${area} - ${category} - ${alcoholicOrNot}` }
+      </div>
+      <div
+        data-testid={ `${index}-horizontal-name` }
+        className="card-recipes-favorite-title"
+        onClick={ onclick }
+        aria-hidden="true"
+      >
+        { name }
+        <FavoriteButtonFavoriteRecipes
+          item={ item }
+          dataTest={ `${index}-horizontal-favorite-btn` }
+        />
+        <ShareButton
+          location={ history.location }
+          id={ id }
+          type={ type }
+          dataTest={ `${index}-horizontal-share-btn` }
+        />
       </div>
 
     </div>

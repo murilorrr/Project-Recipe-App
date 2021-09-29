@@ -23,6 +23,7 @@ function ShareButton(props) {
           onClick={ onclick }
           data-testid={ dataTest }
           type="button"
+          src={ shareicon }
         >
           <img
             src={ shareicon }
@@ -45,7 +46,7 @@ function ShareButton(props) {
     <>
       <button
         onClick={ onclick }
-        data-testid="share-btn"
+        data-testid={ dataTest }
         type="button"
       >
         <img
@@ -65,11 +66,13 @@ ShareButton.propTypes = {
   }).isRequired,
   id: PropTypes.string,
   type: PropTypes.string,
+  dataTest: PropTypes.string,
 };
 
 ShareButton.defaultProps = {
   id: null,
   type: null,
+  dataTest: 'share-btn',
 };
 
 export default ShareButton;
