@@ -33,11 +33,12 @@ function OriginFood() {
 
   useEffect(() => {
     const fectIngredSearch = async () => {
+      setByAreaResults([]);
       if (selectArea === 'All') return AllFetch();
 
       const request = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectArea}`);
       const result = await request.json();
-      if (result.meals) {
+      if (!result.meals.legth) {
         setByAreaResults(result.meals.splice(1, MAX_INDEX));
       } else { setByAreaResults([]); }
     };
@@ -75,6 +76,7 @@ function OriginFood() {
             img={ obj.strMealThumb }
             onClick={ changeRoute }
             key={ index }
+            index={ index }
           />
         ))}
       </main>
