@@ -7,14 +7,6 @@ import IngredientsCard from '../components/IngredientsCard';
 import Loading from '../components/Loading';
 
 function OriginFood() {
-<<<<<<< HEAD
-  const [byArea, setByArea] = useState([]);
-  const [selectArea, setSelectArea] = useState('list');
-  const [byAreaResults, setByAreaResults] = useState();
-  const MAX_INDEX = 12;
-
-  console.log(byAreaResults, MAX_INDEX);
-=======
   const history = useHistory();
 
   const [byArea, setByArea] = useState([]);
@@ -30,7 +22,6 @@ function OriginFood() {
     setByAreaResults(data.meals.slice(0, MAX_INDEX));
   };
 
->>>>>>> origin/main-group-28-dev
   useEffect(() => {
     const fectIngred = async () => {
       await AllFetch();
