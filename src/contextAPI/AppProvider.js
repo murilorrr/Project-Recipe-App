@@ -12,12 +12,7 @@ function AppProvider({ children }) {
   //
 
   const [recipeInProgress, setInProgress] = useState({ cocktails: {}, meals: {} });
-
   const [favoriteList, setFavoriteList] = useState([]);
-
-  //
-  // FUNCOES E USO ACIMA
-  //
 
   const contextValue = {
     setFavoriteList,

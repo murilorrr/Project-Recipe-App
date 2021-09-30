@@ -9,7 +9,7 @@ function ShareIcon({ dataTestid, pathname }) {
 
   const onclick = () => {
     setFeedback(true);
-    const timeout = 300;
+    const timeout = 2000;
     copy(`http://localhost:3000${pathname}`);
     setTimeout(() => setFeedback(false), timeout);
   };
