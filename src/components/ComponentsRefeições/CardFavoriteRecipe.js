@@ -5,7 +5,7 @@ import FavoriteButtonFavoriteRecipes from './FavoriteButtonFavoriteRecipes';
 import ShareButton from '../ShareButton';
 
 function CardFavoriteRecipe(props) {
-  const { item } = props;
+  const { item, index } = props;
   const history = useHistory();
   const { type, area, category, id, name, image, alcoholicOrNot } = item;
 
@@ -15,8 +15,9 @@ function CardFavoriteRecipe(props) {
   const onclick = () => {
     if (type === 'comida') {
       history.push(`/comidas/${id}`);
+    } else {
+      history.push(`/bebidas/${id}`);
     }
-    history.push(`/bebidas/${id}`);
   };
 
   return (
@@ -25,20 +26,37 @@ function CardFavoriteRecipe(props) {
         <img
           aria-hidden="true"
           onClick={ onclick }
+          data-testid={ `${index}-horizontal-image` }
           width="200px"
           alt={ name }
           src={ image }
         />
       </div>
-      <div>
-        <p>
-          {`${area} ${category} ${alcoholicOrNot}`}
-        </p>
-        <p>
-          {name}
-        </p>
-        <FavoriteButtonFavoriteRecipes item={ item } />
-        <ShareButton location={ history.location } id={ id } type={ type } />
+      <div
+        data-testid={ `${index}-horizontal-top-text` }
+        className="card-recipes-favorite-category"
+      >
+        {`${area} - ${category} - ${alcoholicOrNot}` }
+      </div>
+      <div
+        data-testid={ `${index}-horizontal-name` }
+        className="card-recipes-favorite-title"
+        onClick={ onclick }
+        aria-hidden="true"
+      >
+        { name }
+      </div>
+      <div className="options-button">
+        <FavoriteButtonFavoriteRecipes
+          item={ item }
+          dataTest={ `${index}-horizontal-favorite-btn` }
+        />
+        <ShareButton
+          location={ history.location }
+          id={ id }
+          type={ type }
+          dataTest={ `${index}-horizontal-share-btn` }
+        />
       </div>
 
     </div>
@@ -55,6 +73,7 @@ CardFavoriteRecipe.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default CardFavoriteRecipe;
