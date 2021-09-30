@@ -6,15 +6,17 @@ import Context from '../contextAPI/Context';
 const MAX_LENGHT = 5;
 
 function CategoryButton() {
+  // Aqui é o estado do componente.
+  const [state, setState] = useState([]);
+  const [button, setbutton] = useState('');
   const { setBaseUrlFood, setBaseUrlDrink } = useContext(Context);
   const page = useHistory().location.pathname;
+
   let baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
   if (page === '/comidas') {
     baseUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   }
-  console.log(page);
-  // Aqui é o estado do componente.
-  const [state, setState] = useState([]);
+
   // Aqui é o equivalente ao componenteDidMount.
   useEffect(() => {
     // Quando estamos utilizando o useEffect, precisamos fazer o async/await dentro da função e não nela.
@@ -36,14 +38,33 @@ function CategoryButton() {
 
   const onClick = (event) => {
     // botões feitos; clicar no botão deve fazer a req da categoria.
-    const base = 'www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail';
-    const category = event.target.innerText.replaceAll(' ', '_');
-    setBaseUrlDrink(base + category);
+    if (page === '/comidas') {
+      const base = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+      const category = event.target.innerText;
+      if (button === category || category === 'All') {
+        setBaseUrlFood('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        setbutton('All');
+      } else {
+        setBaseUrlFood(base + category);
+        setbutton(category);
+      }
+    }
+    if (page === '/bebidas') {
+      const base = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+      const category = event.target.innerText;
+      if (button === category || category === 'All') {
+        setbutton('All');
+        setBaseUrlDrink('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      } else {
+        setBaseUrlDrink(base + category);
+        setbutton(category);
+      }
+    }
   };
 
   return (
     <div>
-      <button type="button">
+      <button type="button" onClick={ onClick } data-testid="All-category-filter">
         All
       </button>
       {state.map((item, index) => (

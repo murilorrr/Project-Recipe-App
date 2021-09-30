@@ -21,12 +21,14 @@ function Drinks() {
     };
     foodFetch();
   }, [setListItem, baseUrlDrink]);
+
+  if (listItem.length === 0) return null;
+
   if (listItem.length === 1) {
     const id = listItem[0].idDrink;
     push(`${page}/${id}`);
   }
 
-  if (listItem.length === 0) return null;
   return (
     <div>
       <HeaderSearch word="Bebidas" />
