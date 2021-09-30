@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import HeaderSearch from '../components/HeaderSearch';
+import CategoryButton from '../components/CategoryButton';
 import MiniCard from '../components/MiniCard';
 import Context from '../contextAPI/Context';
 
@@ -29,6 +30,7 @@ function Drinks() {
   return (
     <div>
       <HeaderSearch word="Bebidas" />
+      <CategoryButton />
       <div>
         {listItem.map((item, i) => (
           <MiniCard key={ i } args={ { i, ...item, page } } />))}
