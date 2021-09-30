@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import Context from '../contextAPI/Context';
 
 // Magic number que o lint vai pedir.
 const MAX_LENGHT = 5;
 
 function CategoryButton() {
+  const { setBaseUrlFood, setBaseUrlDrink } = useContext(Context);
   const page = useHistory().location.pathname;
   let baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
   if (page === '/comidas') {
@@ -32,6 +34,13 @@ function CategoryButton() {
     fetchApi();
   }, [baseUrl, page]); // O parâmetro "[]" é o default para que o código não entre em loop.
 
+  const onClick = (event) => {
+    // botões feitos; clicar no botão deve fazer a req da categoria.
+    const base = 'www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail';
+    const category = event.target.innerText.replaceAll(' ', '_');
+    setBaseUrlDrink(base + category);
+  };
+
   return (
     <div>
       <button type="button">
@@ -42,6 +51,7 @@ function CategoryButton() {
           type="button"
           key={ index }
           data-testid={ `${item.strCategory}-category-filter` }
+          onClick={ onClick }
         >
           {item.strCategory}
         </button>))}
