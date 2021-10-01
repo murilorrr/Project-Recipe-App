@@ -5,17 +5,20 @@ import Context from '../contextAPI/Context';
 // Magic number que o lint vai pedir.
 const MAX_LENGHT = 5;
 
+const whatBaseUrl = (pathname) => {
+  if (pathname === '/comidas') {
+    return 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  }
+  return 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+};
+
 function CategoryButton() {
   // Aqui é o estado do componente.
   const [state, setState] = useState([]);
   const [button, setbutton] = useState('');
   const { setBaseUrlFood, setBaseUrlDrink } = useContext(Context);
   const page = useHistory().location.pathname;
-
-  let baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-  if (page === '/comidas') {
-    baseUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-  }
+  const baseUrl = whatBaseUrl(page);
 
   // Aqui é o equivalente ao componenteDidMount.
   useEffect(() => {
@@ -61,7 +64,6 @@ function CategoryButton() {
       }
     }
   };
-
   return (
     <div>
       <button type="button" onClick={ onClick } data-testid="All-category-filter">
