@@ -5,7 +5,7 @@ function TextInput({ name, onChange, value }) {
     <label
       htmlFor={ name }
     >
-      { name }
+      { name === 'password' ? 'Senha' : name }
       <input
         type={ name }
         name={ name }

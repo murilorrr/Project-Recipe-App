@@ -4,6 +4,8 @@ import TextInput from '../components/textInputs';
 import Input from '../components/buttons';
 import { saveToken, saveEmail, initialRecipesFavorites,
 } from '../localStorage/localStorageSaves';
+import '../CSS/Login.css';
+import imageLogin from '../images/imageLogin.png';
 
 function Login(props) {
   const [Email, setEmail] = useState('');
@@ -42,7 +44,8 @@ function Login(props) {
   };
 
   return (
-    <div>
+    <div className="Form-Login-content">
+      <img alt="login" width="200px" className="Image-Login" src={ imageLogin } />
       <TextInput
         name="email"
         value={ Email }

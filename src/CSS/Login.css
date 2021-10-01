@@ -1,0 +1,57 @@
+.Form-Login-content {
+  align-items: center;
+  background-image: url('https://boaforma.abril.com.br/wp-content/uploads/sites/2/2020/05/7-receitas-veganas-saud%C3%A1veis-para-fortalecer-a-imunidade.jpg?quality=90&strip=info&resize=680,453');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #c4e7f7;
+}
+
+html {
+  min-height: 100vh;
+}
+
+#email-input, #password-input {
+  box-shadow: 5px 5px 15px 5px #000000;
+  display: block;
+  font-size: x-large;
+  opacity: 0.5;
+}
+
+#email-input:focus, #password-input:focus {
+  box-shadow: 5px 5px 15px 5px #000000;
+  display: block;
+  font-size: x-large;
+  opacity: 0.7;
+  outline-style: solid;
+  outline-color: #219c69;
+  outline-width: 0.1em;
+}
+
+button:disabled {
+  background: #F34F74;
+  color: white;
+  opacity: 0.6;
+}
+
+[data-testid="login-submit-btn"] {
+  background: #2ab87d;
+  border-radius: 5px;
+  margin-top: 3%;
+  padding: 0.75em;
+  transition: 0.5s;
+  opacity: 0.9;
+}
+
+.Image-Login {
+  margin-top: 25%;
+}
+
+form {
+  border: 1px solid #F34F74;
+}
