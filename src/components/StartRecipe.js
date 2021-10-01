@@ -2,12 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../contextAPI/Context';
 
+const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
+
 function StartRecipe(props) {
   const { history, id, history: { location: { pathname } } } = props;
 
   const [WasInLocalStorage, SetIfWasInLocalStorage] = useState(false);
   // uso do context com a chave de receitas em progresso predefinida
   const { recipeInProgress, setInProgress } = useContext(Context);
+  console.log(recipeInProgress);
 
   const startRecipe = async () => {
     // setar um novo recipeInProgress
@@ -17,13 +20,12 @@ function StartRecipe(props) {
       await setInProgress({ ...recipeInProgress, ...recipeInProgress.meals[id] = [] });
       localStorage.setItem('inProgressRecipes', JSON
         .stringify(recipeInProgress));
-    } else {
-      await setInProgress({ ...recipeInProgress,
-        ...recipeInProgress.cocktails[id] = [] });
-      localStorage.setItem('inProgressRecipes', JSON
-        .stringify(recipeInProgress));
+      return history.push(`/comidas/${id}/in-progress`);
     }
-    if (pathname.includes('comidas')) return history.push(`/comidas/${id}/in-progress`);
+    await setInProgress({ ...recipeInProgress,
+      ...recipeInProgress.cocktails[id] = [] });
+    localStorage.setItem('inProgressRecipes', JSON
+      .stringify(recipeInProgress));
     return history.push(`/bebidas/${id}/in-progress`);
   };
 
@@ -40,8 +42,6 @@ function StartRecipe(props) {
 
   useEffect(() => {
     const assertLocalStore = () => {
-      const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      if (RecipesInLocal !== null) setInProgress(RecipesInLocal);
       const resultFilter = Object.keys(RecipesInLocal)
         .map((element) => Object.keys(RecipesInLocal[element]).some((el) => el === id));
       resultFilter.forEach((el) => {

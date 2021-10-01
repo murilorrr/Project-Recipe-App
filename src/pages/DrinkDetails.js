@@ -13,10 +13,12 @@ function DrinkDetails(props) {
   const [item, setItem] = useState([]);
   const { recipeInProgress } = useContext(Context);
 
-  const fetchById = async (idLocation) => {
-    const response = (await (await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).drinks;
-    setItem(response);
-  };
+  if (localStorage
+    .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
+  if (localStorage
+    .getItem('inProgressRecipes') === null) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+  }
 
   const fetchFoodOrDrinkRecomendations = async () => {
     const response = (await (await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')).json()).meals;
@@ -25,18 +27,21 @@ function DrinkDetails(props) {
 
   useEffect(() => {
     const fetchAndSet = async () => {
-      await fetchById(id);
       await fetchFoodOrDrinkRecomendations();
     };
     fetchAndSet();
-    if (localStorage
-      .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
-    if (localStorage
-      .getItem('inProgressRecipes') === null) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
-    }
-  }, [id, recipeInProgress]);
+  }, []);
 
+  useEffect(() => {
+    const fetchBy = async () => {
+      const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const data = await request.json();
+      console.log(data.drinks.find((i) => i.idDrink === id));
+      setItem([data.drinks.find((i) => i.idDrink === id)]);
+    };
+    fetchBy();
+  }, [id]);
+  console.log(item);
   if (item.length === 0) return (<Loading />);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 

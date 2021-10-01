@@ -15,7 +15,7 @@ function ExploreFoodIngred() {
       setlistIngred(result.meals.slice(0, MAX_INDEX));
     };
     fectIngred();
-  }, []);
+  }, [listIngred]);
 
   if (!listIngred) return null;
 

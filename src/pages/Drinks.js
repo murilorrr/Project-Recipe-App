@@ -17,7 +17,6 @@ function Drinks() {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       }
       setListItem(data.drinks.slice(0, MAX_INDEX));
-      console.log(data);
     };
     foodFetch();
   }, [setListItem, baseUrlDrink]);
