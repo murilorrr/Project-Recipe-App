@@ -1,6 +1,7 @@
 import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
 import shareicon from '../images/shareIcon.svg';
 
 function ShareIcon({ dataTestid, pathname }) {
@@ -8,7 +9,7 @@ function ShareIcon({ dataTestid, pathname }) {
 
   const onclick = () => {
     setFeedback(true);
-    const timeout = 300;
+    const timeout = 2000;
     copy(`http://localhost:3000${pathname}`);
     setTimeout(() => setFeedback(false), timeout);
   };

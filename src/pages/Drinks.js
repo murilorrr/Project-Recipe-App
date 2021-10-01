@@ -7,20 +7,19 @@ import Context from '../contextAPI/Context';
 
 function Drinks() {
   const { push } = useHistory();
-  const { listItem, setListItem } = useContext(Context);
+  const { listItem, setListItem, baseUrlDrink } = useContext(Context);
 
   const page = '/bebidas';
   const MAX_INDEX = 12;
 
   useEffect(() => {
     const foodFetch = async () => {
-      const base = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-      const request = await fetch(base);
+      const request = await fetch(baseUrlDrink);
       const data = await request.json();
       setListItem(data.drinks.slice(0, MAX_INDEX));
     };
     foodFetch();
-  }, [setListItem]);
+  }, [setListItem, baseUrlDrink]);
   if (listItem.length === 1) {
     const id = listItem[0].idDrink;
     push(`${page}/${id}`);
