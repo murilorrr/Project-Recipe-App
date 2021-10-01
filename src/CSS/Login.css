@@ -19,14 +19,12 @@ html {
 #email-input, #password-input {
   box-shadow: 5px 5px 15px 5px #000000;
   display: block;
-  font-size: x-large;
+  font-size: 20px;
+  padding: 0.25em 1em;
   opacity: 0.5;
 }
 
 #email-input:focus, #password-input:focus {
-  box-shadow: 5px 5px 15px 5px #000000;
-  display: block;
-  font-size: x-large;
   opacity: 0.7;
   outline-style: solid;
   outline-color: #219c69;
