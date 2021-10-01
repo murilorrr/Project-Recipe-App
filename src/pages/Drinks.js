@@ -13,8 +13,10 @@ function Drinks() {
     const foodFetch = async () => {
       const request = await fetch(baseUrlDrink);
       const data = await request.json();
+      console.log(baseUrlDrink);
       if (!data.drinks) {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        return;
       }
       setListItem(data.drinks.slice(0, MAX_INDEX));
     };

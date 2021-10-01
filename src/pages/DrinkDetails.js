@@ -36,8 +36,9 @@ function DrinkDetails(props) {
     const fetchBy = async () => {
       const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
       const data = await request.json();
-      console.log(data.drinks.find((i) => i.idDrink === id));
-      setItem([data.drinks.find((i) => i.idDrink === id)]);
+      if (!data) {
+        setItem([data.drinks.find((i) => i.idDrink === id)]);
+      }
     };
     fetchBy();
   }, [id]);
