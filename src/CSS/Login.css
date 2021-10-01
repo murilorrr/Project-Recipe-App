@@ -37,6 +37,16 @@ button:disabled {
   background: #F34F74;
   color: white;
   opacity: 0.6;
+  animation: exemplo 3s infinite;
+}
+
+@keyframes exemplo {
+  0% {transform: translateX(2%)}
+  25% {transform: translateX(-2%)}
+  50% {transform: translateX(2%)}
+  75% {transform: translateX(-2%)}
+  100% {transform: translateX(2%)}
+
 }
 
 [data-testid="login-submit-btn"] {
