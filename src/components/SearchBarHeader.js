@@ -44,6 +44,10 @@ export default function SearchBarHeader() {
     const { checkRadio } = options;
     const input = document.getElementById('search-input').value;
 
+    if (checkRadio === 'first_letter_search' && input.length > 1) {
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+
     if (pathname === '/comidas') {
       return themealdbFetch(checkRadio, input, setBaseUrlFood);
     }
@@ -81,7 +85,7 @@ export default function SearchBarHeader() {
           name="radio"
           data-testid="name-search-radio"
           value="name_search"
-          onChange={ (e) => setOptions({ ...options, checkRadio: e.target.value }) }
+          onChange={ (e) => setOptions({ checkRadio: e.target.value }) }
 
         />
         Nome
@@ -93,7 +97,7 @@ export default function SearchBarHeader() {
           name="radio"
           data-testid="first-letter-search-radio"
           value="first_letter_search"
-          onChange={ (e) => setOptions({ ...options, checkRadio: e.target.value }) }
+          onChange={ (e) => setOptions({ checkRadio: e.target.value }) }
         />
         Primeira letra
       </label>

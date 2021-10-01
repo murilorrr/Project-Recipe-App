@@ -14,6 +14,9 @@ function Foods() {
     const foodFetch = async () => {
       const request = await fetch(baseUrlFood);
       const data = await request.json();
+      if (!data.meals) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      }
       setListItem(data.meals.slice(0, MAX_INDEX));
     };
     foodFetch();
@@ -21,7 +24,7 @@ function Foods() {
 
   if (listItem.length === 0) return null;
 
-  if (listItem.length === 1 && baseUrlFood !== 'https://www.themealdb.com/api/json/v1/1/list.php?c=list') {
+  if (listItem.length === 1) {
     const id = listItem[0].idMeal;
     push(`${page}/${id}`);
   }

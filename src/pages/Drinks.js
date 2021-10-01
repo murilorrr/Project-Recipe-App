@@ -17,6 +17,9 @@ function Drinks() {
     const foodFetch = async () => {
       const request = await fetch(baseUrlDrink);
       const data = await request.json();
+      if (!data.drinks) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      }
       setListItem(data.drinks.slice(0, MAX_INDEX));
     };
     foodFetch();
@@ -24,7 +27,7 @@ function Drinks() {
 
   if (listItem.length === 0) return null;
 
-  if (listItem.length === 1 && baseUrlDrink !== 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list') {
+  if (listItem.length === 1) {
     const id = listItem[0].idDrink;
     push(`${page}/${id}`);
   }
