@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Context from '../contextAPI/Context';
 
 // Fetch para as comidas
@@ -36,18 +36,19 @@ const thecocktaildbFetch = async (checkRadio, input, setBaseUrlDrink) => {
 export default function SearchBarHeader() {
   const [options, setOptions] = useState();
   // Pega a Url e assim sei qual e a pagina que estou.
-  const pageName = useHistory().location.pathname;
+  const { pathname } = useLocation();
+  console.log(pathname);
   const { setBaseUrlFood, setBaseUrlDrink } = useContext(Context);
 
   const handleClick = () => {
     const { checkRadio } = options;
     const input = document.getElementById('search-input').value;
 
-    if (pageName === '/comidas') {
+    if (pathname === '/comidas') {
       return themealdbFetch(checkRadio, input, setBaseUrlFood);
     }
 
-    if (pageName === '/bebidas') {
+    if (pathname === '/bebidas') {
       return thecocktaildbFetch(checkRadio, input, setBaseUrlDrink);
     }
   };
