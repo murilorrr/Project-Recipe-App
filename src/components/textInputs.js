@@ -3,10 +3,10 @@ import React from 'react';
 function TextInput({ name, onChange, value }) {
   const inputText = (testId) => (
     <label
-      htmlFor={ name }
+      htmlFor="form-control"
     >
-      { name === 'password' ? 'Senha' : name }
       <input
+        placeholder={ name === 'password' ? 'Senha' : 'Email' }
         type={ name }
         name={ name }
         id={ testId }
