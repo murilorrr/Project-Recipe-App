@@ -1,0 +1,55 @@
+header {
+  background-color: #2F8E8E;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+header div {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+[data-testid="search-input"] {
+  width: 100%;
+  display: block;
+  opacity: 0.7;
+  outline-style: solid;
+  outline-color: #212222;
+  outline-width: 0.1em;
+  padding: 5px;
+}
+
+[data-testid="exec-search-btn"] {
+  display: block;
+  background: #fff;
+  border: 0px solid #212222;
+  border-radius: 5px;
+  padding: 0.25em .75em;
+  transition: 0.5s;
+  opacity: 0.9;
+  outline-style: double;
+  outline-color: #212222;
+}
+
+label {
+  margin-right: 4px;
+  margin-top: 4p
+}
+
+[data-testid="profile-top-btn" ] {
+  background-color: #2F8E8E;
+}
+
+[data-testid="page-title"] {
+  margin: 0;
+}
+
+[type="submit" ] {
+  background-color: #2F8E8E;
+}

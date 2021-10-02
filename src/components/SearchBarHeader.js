@@ -90,15 +90,13 @@ export default function SearchBarHeader() {
   };
 
   return (
-    <>
-      <div>
-        <input
-          data-testid="search-input"
-          id="search-input"
-          type="text"
-          placeholder="digite aqui"
-        />
-      </div>
+    <div className="Input-Buttons">
+      <input
+        data-testid="search-input"
+        id="search-input"
+        type="text"
+        placeholder="digite aqui"
+      />
       <label htmlFor="ingredient-search-radio">
         <input
           type="radio"
@@ -136,6 +134,6 @@ export default function SearchBarHeader() {
       <button type="button" data-testid="exec-search-btn" onClick={ handleClick }>
         Buscar
       </button>
-    </>
+    </div>
   );
 }
