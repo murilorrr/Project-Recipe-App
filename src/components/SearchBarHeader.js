@@ -10,7 +10,9 @@ const optionsDefault = {
 };
 
 const MAX_INDEX = 12;
-
+const alertGlobal = () => {
+  global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+};
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const themealdbFetch = async (params) => {
@@ -30,7 +32,7 @@ const themealdbFetch = async (params) => {
       loading: true },
   );
   if (!themealdb.meals) {
-    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    alertGlobal();
     return;
   }
   setListItem(themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : []);
@@ -53,9 +55,7 @@ const thecocktaildbFetch = async (params) => {
     const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
     console.log('thecocktaildb', thecocktaildb);
     if (!thecocktaildb.drinks) {
-      return global.alert(
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
-      );
+      return alertGlobal();
     }
     setOptions(
       { ...options,
@@ -66,9 +66,7 @@ const thecocktaildbFetch = async (params) => {
     setListItem(thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : []);
     return thecocktaildb;
   } catch (e) {
-    global.alert(
-      'Sinto muito, não encontramos nenhuma receita para esses filtros.',
-    );
+    alertGlobal();
   }
 };
 
