@@ -30,7 +30,7 @@ function Foods() {
   return (
     <div>
       <HeaderSearch word="Comidas" />
-      <div>
+      <div className="content">
         {listItem.map((item, i) => (
           <MiniCard key={ i } args={ { i, ...item, page } } />))}
       </div>

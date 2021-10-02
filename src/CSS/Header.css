@@ -25,6 +25,11 @@ header div {
   padding: 5px;
 }
 
+.Input-Buttons {
+  position: absolute;
+  top: 54px;
+  background: #2F8E8E;}
+
 [data-testid="exec-search-btn"] {
   display: block;
   background: #fff;

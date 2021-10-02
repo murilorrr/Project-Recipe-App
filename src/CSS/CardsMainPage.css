@@ -1,0 +1,34 @@
+.mini-card-food-container {
+  margin: 15px 10px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.mini-card-food-container section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 1px 3px 12px 3px #535353;
+}
+
+.mini-card-food-container img {
+  width: 100%;
+  height: 200px;
+  margin: auto;
+  border-radius: 20px 20px 0 0;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.content {
+  margin-bottom: 60px;
+}
