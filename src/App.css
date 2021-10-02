@@ -7,6 +7,10 @@ body {
   background-position-y: -45px;
 }
 
+button {
+  background: content-box;
+}
+
 body::before {
   content: 's';
   position: fixed;
