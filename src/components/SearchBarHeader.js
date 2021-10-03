@@ -10,7 +10,9 @@ const optionsDefault = {
 };
 
 const MAX_INDEX = 12;
-
+const alertGlobal = () => {
+  global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+};
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const themealdbFetch = async (params) => {
@@ -29,11 +31,12 @@ const themealdbFetch = async (params) => {
       themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : [],
       loading: true },
   );
+  if (!themealdb.meals) {
+    alertGlobal();
+    return;
+  }
   setListItem(themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : []);
 
-  if (!themealdb.meals) {
-    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-  }
   return themealdb;
 };
 
@@ -41,26 +44,30 @@ const themealdbFetch = async (params) => {
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const thecocktaildbFetch = async (params) => {
   const { checkRadio, input, options, setOptions, setListItem } = params;
+
   const themealdbEndPoint = {
     ingredient_search: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`,
     first_letter_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${input}`,
   };
-
-  const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-  if (!thecocktaildb.drinks) {
-    return global.alert(
-      'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+  console.log('themealdbEndPoint[checkRadio]', themealdbEndPoint[checkRadio]);
+  try {
+    const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
+    console.log('thecocktaildb', thecocktaildb);
+    if (!thecocktaildb.drinks) {
+      return alertGlobal();
+    }
+    setOptions(
+      { ...options,
+        listThecocktailOrThemeal:
+          thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [],
+        loading: true },
     );
+    setListItem(thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : []);
+    return thecocktaildb;
+  } catch (e) {
+    alertGlobal();
   }
-  setOptions(
-    { ...options,
-      listThecocktailOrThemeal:
-      thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [],
-      loading: true },
-  );
-  setListItem(thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : []);
-  return thecocktaildb;
 };
 
 export default function SearchBarHeader() {
