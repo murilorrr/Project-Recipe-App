@@ -34,15 +34,13 @@ function DrinkDetails(props) {
 
   useEffect(() => {
     const fetchBy = async () => {
-      const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
       const data = await request.json();
-      if (!data) {
-        setItem([data.drinks.find((i) => i.idDrink === id)]);
-      }
+      setItem(data.drinks);
     };
     fetchBy();
   }, [id]);
-  console.log(item);
+
   if (item.length === 0) return (<Loading />);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
