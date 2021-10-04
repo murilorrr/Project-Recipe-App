@@ -8,52 +8,55 @@
   flex-direction: column;
   justify-content: flex-start;
   min-height: 100vh;
+  text-shadow: 1px 1px 0 #c4e7f7;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #c4e7f7;
 }
 
 html {
   min-height: 100vh;
 }
 
-#email-input, #password-input {
-  box-shadow: 5px 5px 15px 5px #000000;
+.email-input, .password-input {
+  box-shadow: 5px 5px 15px 5px black;
   display: block;
   font-size: 20px;
-  padding: 0.25em 1em;
   opacity: 0.5;
+  padding: 0.25em 1em;
 }
 
-#email-input:focus, #password-input:focus {
+.email-input:focus, .password-input:focus {
   opacity: 0.7;
-  outline-style: solid;
-  outline-color: #219c69;
-  outline-width: 0.1em;
+  outline: 0.1em solid #2ab87d;
 }
 
 button:disabled {
-  background: #F34F74;
+  animation: exemplo 3s infinite;
+  background: #f34f74;
   color: white;
   opacity: 0.6;
-  animation: exemplo 3s infinite;
 }
 
 @keyframes exemplo {
-  0% {transform: translateX(2%)}
-  25% {transform: translateX(-2%)}
-  50% {transform: translateX(2%)}
-  75% {transform: translateX(-2%)}
-  100% {transform: translateX(2%)}
+
+  0% { transform: translateX(2%);}
+
+  25% { transform: translateX(-2%);}
+
+  50% { transform: translateX(2%);}
+
+  75% { transform: translateX(-2%);}
+
+  100% { transform: translateX(2%);}
 
 }
 
-[data-testid="login-submit-btn"] {
+[ data-testid = 'login-submit-btn' ] {
   background: #2ab87d;
   border-radius: 5px;
   margin-top: 3%;
+  opacity: 0.9;
   padding: 0.75em 1.25em;
   transition: 0.5s;
-  opacity: 0.9;
 }
 
 .Image-Login {
@@ -61,5 +64,5 @@ button:disabled {
 }
 
 form {
-  border: 1px solid #F34F74;
+  border: 1px solid #f34f74;
 }

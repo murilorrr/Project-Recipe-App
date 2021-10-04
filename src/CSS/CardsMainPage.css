@@ -1,23 +1,23 @@
 .mini-card-food-container {
-  margin: 15px 10px;
-  border-radius: 20px;
   background-color: white;
+  border-radius: 20px;
+  margin: 15px 10px;
 }
 
 .mini-card-food-container section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   border-radius: 20px;
   box-shadow: 1px 3px 12px 3px #535353;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .mini-card-food-container img {
-  width: 100%;
+  border-radius: 20px 20px 0 0;
   height: 200px;
   margin: auto;
-  border-radius: 20px 20px 0 0;
+  width: 100%;
 }
 
 a {
@@ -25,8 +25,8 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
   color: black;
+  text-decoration: none;
 }
 
 .content {
@@ -34,19 +34,19 @@ a:hover {
 }
 
 .filters {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .filters button {
-  width: 30%;
+  background: currentColor;
+  background-color: #d9952f;
+  border-radius: 20px;
+  margin: 4px auto;
   overflow: hidden;
   overflow-wrap: break-word;
-  margin: 4px auto;
-  border-radius: 20px;
-  background: currentColor;
-  background-color: #D9952F;
   padding: 5px;
+  width: 30%;
 }

@@ -9,6 +9,7 @@ function TextInput({ name, onChange, value }) {
         placeholder={ name === 'password' ? 'Senha' : 'Email' }
         type={ name }
         name={ name }
+        className={ testId }
         id={ testId }
         data-testid={ testId }
         value={ value }

@@ -1,13 +1,13 @@
-[data-testid="footer"] {
+[ data-testid = 'footer' ] {
   align-items: center;
-  background-color: #2F8E8E;
+  background-color: #2f8e8e;
   bottom: 0;
   display: flex;
   height: 45px;
   justify-content: space-between;
+  padding: 10px;
   position: fixed;
   width: 340px;
-  padding: 10px;
 }
 
 .footer img {
