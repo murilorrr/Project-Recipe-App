@@ -19,7 +19,7 @@ function FavoriteRecipesContent(props) {
   };
 
   useEffect(() => {
-    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     if (localStorageItems !== null) setFavoriteList(localStorageItems);
   }, [setFavoriteList]);
 

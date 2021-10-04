@@ -49,7 +49,7 @@ function CardExploreFoodDrinkIngred({ index, Ingredient }) {
 }
 
 CardExploreFoodDrinkIngred.propTypes = {
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   Ingredient: PropTypes.string.isRequired,
 };
 
