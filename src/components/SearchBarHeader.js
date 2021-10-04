@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Context from '../contextAPI/Context';
 
 const optionsDefault = {
@@ -15,13 +15,13 @@ const alertGlobal = () => {
 };
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
-const themealdbFetch = (checkRadio, input, setBaseUrlFood) => {
+const themealdbFetch = async (params) => {
+  const { checkRadio, input, options, setOptions, setListItem } = params;
   const themealdbEndPoint = {
     ingredient_search: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`,
     first_letter_search: `https://www.themealdb.com/api/json/v1/1/search.php?f=${input}`,
   };
-  setBaseUrlFood(themealdbEndPoint[checkRadio]);
 
   const themealdb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
   // se themealdb for null retorna lista [].
@@ -71,26 +71,28 @@ const thecocktaildbFetch = async (params) => {
 };
 
 export default function SearchBarHeader() {
-  const [options, setOptions] = useState();
   // Pega a Url e assim sei qual e a pagina que estou.
-  const { pathname } = useLocation();
-  console.log(pathname);
-  const { setBaseUrlFood, setBaseUrlDrink } = useContext(Context);
+  const pageName = useHistory().location.pathname;
+  const { setListItem } = useContext(Context);
+
+  const [options, setOptions] = useState({ ...optionsDefault, pageName });
 
   const handleClick = () => {
     const { checkRadio } = options;
     const input = document.getElementById('search-input').value;
+    setOptions({ ...options, loading: false });
 
-    if (checkRadio === 'first_letter_search' && input.length > 1) {
-      global.alert('Sua busca deve conter somente 1 (um) caracter');
+    if (input.length > 1 && checkRadio === 'first_letter_search') {
+      setOptions({ ...options, loading: true });
+      return global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
 
-    if (pathname === '/comidas') {
-      return themealdbFetch(checkRadio, input, setBaseUrlFood);
+    if (pageName === '/comidas') {
+      return themealdbFetch({ checkRadio, input, options, setOptions, setListItem });
     }
 
-    if (pathname === '/bebidas') {
-      return thecocktaildbFetch(checkRadio, input, setBaseUrlDrink);
+    if (pageName === '/bebidas') {
+      return thecocktaildbFetch({ checkRadio, input, options, setOptions, setListItem });
     }
   };
 
@@ -111,7 +113,7 @@ export default function SearchBarHeader() {
           name="radio"
           data-testid="ingredient-search-radio"
           value="ingredient_search"
-          onChange={ (e) => setOptions({ checkRadio: e.target.value }) }
+          onChange={ (e) => setOptions({ ...options, checkRadio: e.target.value }) }
         />
         Ingrediente
       </label>
@@ -122,7 +124,7 @@ export default function SearchBarHeader() {
           name="radio"
           data-testid="name-search-radio"
           value="name_search"
-          onChange={ (e) => setOptions({ checkRadio: e.target.value }) }
+          onChange={ (e) => setOptions({ ...options, checkRadio: e.target.value }) }
 
         />
         Nome
@@ -134,7 +136,7 @@ export default function SearchBarHeader() {
           name="radio"
           data-testid="first-letter-search-radio"
           value="first_letter_search"
-          onChange={ (e) => setOptions({ checkRadio: e.target.value }) }
+          onChange={ (e) => setOptions({ ...options, checkRadio: e.target.value }) }
         />
         Primeira letra
       </label>
