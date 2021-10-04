@@ -2,6 +2,17 @@ import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Context from '../contextAPI/Context';
 
+const optionsDefault = {
+  checkRadio: '',
+  pageName: '',
+  listThecocktailOrThemeal: [],
+  loading: true,
+};
+
+const MAX_INDEX = 12;
+const alertGlobal = () => {
+  global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+};
 // Fetch para as comidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
 const themealdbFetch = (checkRadio, input, setBaseUrlFood) => {
@@ -12,25 +23,51 @@ const themealdbFetch = (checkRadio, input, setBaseUrlFood) => {
   };
   setBaseUrlFood(themealdbEndPoint[checkRadio]);
 
-  // if (!themealdb.meals) {
-  //   global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-  // }
+  const themealdb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
+  // se themealdb for null retorna lista [].
+  setOptions(
+    { ...options,
+      listThecocktailOrThemeal:
+      themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : [],
+      loading: true },
+  );
+  if (!themealdb.meals) {
+    alertGlobal();
+    return;
+  }
+  setListItem(themealdb.meals ? themealdb.meals.slice(0, MAX_INDEX) : []);
+
+  return themealdb;
 };
 
 // Fetch para as Bebidas
 // Vefirica qual radio foi selecionado e criar endpoint correto usando o input digitado.
-const thecocktaildbFetch = async (checkRadio, input, setBaseUrlDrink) => {
+const thecocktaildbFetch = async (params) => {
+  const { checkRadio, input, options, setOptions, setListItem } = params;
+
   const themealdbEndPoint = {
     ingredient_search: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`,
     name_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`,
     first_letter_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${input}`,
   };
-
-  setBaseUrlDrink(themealdbEndPoint[checkRadio]);
-
-  // return global.alert(
-  //   'Sinto muito, não encontramos nenhuma receita para esses filtros.',
-  // );
+  console.log('themealdbEndPoint[checkRadio]', themealdbEndPoint[checkRadio]);
+  try {
+    const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
+    console.log('thecocktaildb', thecocktaildb);
+    if (!thecocktaildb.drinks) {
+      return alertGlobal();
+    }
+    setOptions(
+      { ...options,
+        listThecocktailOrThemeal:
+          thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : [],
+        loading: true },
+    );
+    setListItem(thecocktaildb.drinks ? thecocktaildb.drinks.slice(0, MAX_INDEX) : []);
+    return thecocktaildb;
+  } catch (e) {
+    alertGlobal();
+  }
 };
 
 export default function SearchBarHeader() {
