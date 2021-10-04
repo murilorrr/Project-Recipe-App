@@ -21,7 +21,7 @@ function CarrouselRecomendations(props) {
                   backgroundColor: 'grey',
                   margin: '4px',
                   minWidth: '50vw' } }
-                key={ idDrink }
+                key={ index }
                 data-testid={ `${index}-recomendation-card` }
                 id={ idDrink }
               >

@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import Footer from '../components/Footer';
-import HeaderSearch from '../components/HeaderSearch';
-import MiniCard from '../components/MiniCard';
+import { CategoryButton, Footer, HeaderSearch, MiniCard } from '../components';
 import Context from '../contextAPI/Context';
 
 function Drinks() {
   const { push } = useHistory();
   const { listItem, setListItem, baseUrlDrink } = useContext(Context);
-
   const page = '/bebidas';
   const MAX_INDEX = 12;
 
@@ -16,19 +13,28 @@ function Drinks() {
     const foodFetch = async () => {
       const request = await fetch(baseUrlDrink);
       const data = await request.json();
+      console.log(baseUrlDrink);
+      if (!data.drinks) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        return;
+      }
       setListItem(data.drinks.slice(0, MAX_INDEX));
     };
     foodFetch();
   }, [setListItem, baseUrlDrink]);
-  if (listItem.length === 1) {
+
+  if (listItem.length === 0) return null;
+
+  if (!baseUrlDrink.includes('www.thecocktaildb.com/api/json/v1/1/filter.php?c')
+  && listItem.length === 1) {
     const id = listItem[0].idDrink;
     push(`${page}/${id}`);
   }
 
-  if (listItem.length === 0) return null;
   return (
-    <div>
+    <div className="content">
       <HeaderSearch word="Bebidas" />
+      <CategoryButton />
       <div>
         {listItem.map((item, i) => (
           <MiniCard key={ i } args={ { i, ...item, page } } />))}

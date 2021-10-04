@@ -32,3 +32,21 @@ a:hover {
 .content {
   margin-bottom: 60px;
 }
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  width: 30%;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  margin: 4px auto;
+  border-radius: 20px;
+  background: currentColor;
+  background-color: #D9952F;
+  padding: 5px;
+}

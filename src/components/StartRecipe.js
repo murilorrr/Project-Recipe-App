@@ -10,7 +10,6 @@ function StartRecipe(props) {
   const [WasInLocalStorage, SetIfWasInLocalStorage] = useState(false);
   // uso do context com a chave de receitas em progresso predefinida
   const { recipeInProgress, setInProgress } = useContext(Context);
-  console.log(recipeInProgress);
 
   const startRecipe = async () => {
     // setar um novo recipeInProgress
