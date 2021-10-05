@@ -33,7 +33,7 @@
 	margin-bottom: 50px;
 }
 
-.card-explore-food-ingred {
+.content-cards .card-explore-food-ingred {
 	height: 172px;
 	display: flex;
 	flex-direction: column;
@@ -46,7 +46,23 @@
   box-shadow: 1px 3px 12px 3px #535353;
 }
 
-.card-explore-food-ingred p{
+select {
+	min-width: 10rem;
+	text-align-last: center;
+	width: 320px;
+	padding: .5rem 0;
+	margin: 1.125rem 10px 0;
+	font-size: 1rem;
+	color: #212529;
+	text-align: left;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid black;
+	border-radius: .25rem;
+}
+
+.content-cards .card-explore-food-ingred p{
 	display: flex;
 	flex-grow: 1;
 	width: 100%;
@@ -57,5 +73,3 @@
 	background-color: #47BCC3;
 	text-align: center;
 }
-
-

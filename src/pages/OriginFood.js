@@ -62,16 +62,16 @@ function OriginFood() {
     <div>
       <HeaderDrink word="Explorar Origem" />
       <select data-testid="explore-by-area-dropdown" onClick={ (e) => onClick(e) }>
-        <option data-testid="All-option" key="00">
+        <option className="dropdown-item" data-testid="All-option" key="00">
           All
         </option>
         {byArea
           .map((obj, i) => (
-            <option data-testid={ `${obj.strArea}-option` } key={ i }>
+            <option className="dropdown-item" data-testid={ `${obj.strArea}-option` } key={ i }>
               {obj.strArea}
             </option>))}
       </select>
-      <main>
+      <div className="content">
         { loading ? <Loading /> : byAreaResults.map((obj, index) => (
           <IngredientsCard
             id={ obj.idMeal }
@@ -82,7 +82,7 @@ function OriginFood() {
             key={ index }
           />
         ))}
-      </main>
+      </div>
       <Footer />
     </div>
   );

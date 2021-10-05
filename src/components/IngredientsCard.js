@@ -3,21 +3,22 @@ import React from 'react';
 
 function IngredientsCard({ id, name, img, onClick, index }) {
   return (
-    <button
-      type="button"
-      className="card-explore-food-ingred"
-      data-testid={ `${index}-recipe-card` }
-      onClick={ () => onClick(id) }
-    >
-      <img
-        aria-hidden="true"
-        style={ { width: '200px' } }
-        src={ img }
-        alt={ `Foto de uma ingrediente chamando ${name}` }
-        data-testid={ `${index}-card-img` }
-      />
-      <p data-testid={ `${index}-card-name` }>{ name }</p>
-    </button>
+    <section className="mini-card-food-container card-content" >
+      <section
+        type="button"
+        className="card-explore-food-ingred"
+        data-testid={ `${index}-recipe-card` }
+        onClick={ () => onClick(id) }
+      >
+        <img
+          aria-hidden="true"
+          src={ img }
+          alt={ `Foto de uma ingrediente chamando ${name}` }
+          data-testid={ `${index}-card-img` }
+        />
+        <h3 data-testid={ `${index}-card-name` }>{ name }</h3>
+      </section>
+    </section>
   );
 }
 
