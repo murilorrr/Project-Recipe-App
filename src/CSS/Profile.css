@@ -1,41 +1,41 @@
 .profile-content {
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-} 
-[data-testid="profile-email"] {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	padding: 9px;
-	background-color: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+[ data-testid = 'profile-email' ] {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 9px;
+  width: 100%;
 }
 
 .profile-content .links {
-	margin-top: 50px;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 .profile-content .email {
-	width: 100%;
-	opacity: 0.7;
+  opacity: 0.8;
+  width: 100%;
 }
 
 .profile-content .links button {
-	width: 329px;
-	background: currentColor;
-	background-color: #D9952F;
-	margin: 10px 15px;
-	padding: 15px 50px;
-	border-radius: 5px;
-	color: wheat;
-	font-size: 25px;
-	font-family: Roboto;
-	line-height: 29.3px;
+  background: currentColor;
+  background-color: #d9952f;
+  border-radius: 5px;
+  color: wheat;
+  font-size: 25px;
+  line-height: 29.3px;
+  margin: 10px 15px;
+  padding: 15px 50px;
+  width: 329px;
 }

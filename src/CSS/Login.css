@@ -31,6 +31,7 @@ html {
 
 button:disabled {
   animation: exemplo 3s infinite;
+  animation-timing-function: ease-in-out;
   background: #f34f74;
   color: white;
   opacity: 0.6;

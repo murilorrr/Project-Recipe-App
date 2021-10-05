@@ -8,12 +8,12 @@ header {
 }
 
 header div {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 5px;
   width: 100%;
-  align-items: center;
 }
 
 [ data-testid = 'search-input' ] {
