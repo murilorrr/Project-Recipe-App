@@ -53,12 +53,16 @@ select {
   color: #212529;
   font-size: 1rem;
   list-style: none;
-  margin: 1.125rem 10px 0;
+  margin: 1.125rem 20px 0px;
   min-width: 10rem;
   padding: 0.5rem 0;
   text-align: left;
   text-align-last: center;
   width: 320px;
+}
+
+select:focus-visible {
+  outline: 0.1em solid #2ab87d;
 }
 
 .content-cards .card-explore-food-ingred p {

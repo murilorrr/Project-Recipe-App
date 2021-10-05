@@ -5,7 +5,7 @@ function HeaderRecipes({ subtitle, title, img }) {
   return (
     <>
       <div className="Image-Meal">
-        <img width="340px" data-testid="recipe-photo" src={ img } alt="recipe" />
+        <img width="360px" data-testid="recipe-photo" src={ img } alt="recipe" />
       </div>
       <div className="info-share-favorites">
         <div className="info">

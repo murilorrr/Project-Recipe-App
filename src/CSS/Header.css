@@ -29,18 +29,20 @@ header div {
   background: #2f8e8e;
   position: absolute;
   top: 54px;
+  width: 360px;
+  right: 0px;
 }
 
 [ data-testid = 'exec-search-btn' ] {
   background: white;
   border: 0 solid #212222;
+  width: 100px;
   border-radius: 5px;
   box-shadow: 1px 3px 12px 3px black;
   display: block;
   margin-bottom: 3px;
   opacity: 0.9;
   outline-color: #212222;
-  outline-style: double;
   padding: 0.25em 0.75em;
   transition: 0.5s;
 }

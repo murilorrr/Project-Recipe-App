@@ -22,11 +22,13 @@ function ExploreDrinkIngred() {
   return (
     <div>
       <HeaderNoSearch word="Explorar Ingredientes" />
-      {listIngred.map((item, index) => (<CardExploreFoodDrinkIngred
-        key={ index }
-        index={ index }
-        Ingredient={ item.strIngredient1 }
-      />))}
+      <div className="content-cards">
+        {listIngred.map((item, index) => (<CardExploreFoodDrinkIngred
+          key={ index }
+          index={ index }
+          Ingredient={ item.strIngredient1 }
+        />))}
+      </div>
       <Footer />
     </div>
   );

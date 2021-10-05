@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 function CarrouselRecomendations(props) {
   const { recomendation: listofObjects, drink } = props;
   const maxLength = 6;
+  const history = useHistory();
+
+  const onclick = (id) => {
+    if (!drink) {
+      return history.push(`/comidas/${id}`);
+    }
+    return history.push(`/bebidas/${id}`);
+  };
+
   if (drink) {
     return (
       <div
@@ -16,6 +26,8 @@ function CarrouselRecomendations(props) {
             strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
             index < maxLength ? (
               <div
+                onClick={ () => onclick(idDrink) }
+                aria-hidden="true"
                 style={ {
                   borderRadius: '5px',
                   backgroundColor: 'grey',
@@ -47,6 +59,8 @@ function CarrouselRecomendations(props) {
           strMeal, strMealThumb, strCategory, idMeal }, index) => (
           index < maxLength ? (
             <div
+              onClick={ () => onclick(idMeal) }
+              aria-hidden="true"
               style={ {
                 borderRadius: '5px',
                 backgroundColor: 'grey',
@@ -56,6 +70,7 @@ function CarrouselRecomendations(props) {
               data-testid={ `${index}-recomendation-card` }
               id={ idMeal }
             >
+              {idMeal}
               <img alt={ strMeal } width="100px" src={ strMealThumb } />
               <h4>{strCategory}</h4>
               <h3 data-testid={ `${index}-recomendation-title` }>{strMeal}</h3>
