@@ -48,6 +48,7 @@ function CarrouselRecomendations(props) {
       </div>
     );
   }
+
   return (
     <div
       style={ { display: 'flex',
