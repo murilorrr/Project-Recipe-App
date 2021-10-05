@@ -22,6 +22,10 @@ button {
   width: 95px;
 }
 
+header {
+  min-height: 59px;
+}
+
 @keyframes spin {
 
   0% { transform: rotate(0deg); }

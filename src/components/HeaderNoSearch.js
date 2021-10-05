@@ -7,16 +7,18 @@ function HeaderNoSearch(props) {
   const { word } = props;
   return (
     <header>
-      <Link to="/perfil">
-        <button type="button">
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="profile"
-          />
-        </button>
-      </Link>
-      <h2 data-testid="page-title">{word}</h2>
+      <div>
+        <Link to="/perfil">
+          <button type="button">
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="profile"
+            />
+          </button>
+        </Link>
+        <h2 data-testid="page-title">{word}</h2>
+      </div>
     </header>
   );
 }

@@ -2,9 +2,9 @@ header {
   align-items: center;
   background-color: #2f8e8e;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   padding: 5px;
+  text-align: center;
 }
 
 header div {
@@ -13,6 +13,7 @@ header div {
   justify-content: space-between;
   padding: 5px;
   width: 100%;
+  align-items: center;
 }
 
 [ data-testid = 'search-input' ] {
