@@ -6,12 +6,12 @@
 
 .mini-card-food-container section {
   align-items: center;
+  background-color: #17a9a9;
   border-radius: 20px;
   box-shadow: 1px 3px 12px 3px #535353;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #17a9a9;
 }
 
 .mini-card-food-container img {

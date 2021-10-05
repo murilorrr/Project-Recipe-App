@@ -14,7 +14,7 @@
   border-radius: 8px;
   box-shadow: 5px 5px 15px 2px black;
   margin: 25px 0;
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 1.1em 2.25em;
   text-shadow: 1px 1px 0 #c4e7f7;
   width: 80%;
@@ -53,7 +53,7 @@ select {
   color: #212529;
   font-size: 1rem;
   list-style: none;
-  margin: 1.125rem 20px 0px;
+  margin: 1.125rem 20px 0;
   min-width: 10rem;
   padding: 0.5rem 0;
   text-align: left;
