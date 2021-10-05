@@ -7,19 +7,55 @@
 }
 
 .explore-buttons button:nth-child(1) {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 .explore-buttons button {
-    align-self: center;
-    width: 80%;
-    padding: 1.1em 2.25em;
-    border-radius: 8px;
-    border: 1px solid seagreen;
-    background: currentColor;
-    background-color: white;
-    opacity: 0.8;
-    text-shadow: 1px 1px 0 #c4e7f7;
-    box-shadow: 5px 5px 15px 2px black;
-    margin: 25px 0;
+	align-self: center;
+	width: 80%;
+	padding: 1.1em 2.25em;
+	border-radius: 8px;
+	border: 1px solid seagreen;
+	background: currentColor;
+	background-color: white;
+	opacity: 0.8;
+	text-shadow: 1px 1px 0 #c4e7f7;
+	box-shadow: 5px 5px 15px 2px black;
+	margin: 25px 0;
 }
+
+.content-cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.card-explore-food-ingred {
+	height: 172px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+  width: 40%;
+	background-color: white;
+  border-radius: 5px;
+  margin: 15px 10px;
+  box-shadow: 1px 3px 12px 3px #535353;
+}
+
+.card-explore-food-ingred p{
+	display: flex;
+	flex-grow: 1;
+	width: 100%;
+	margin-bottom: 0;
+	justify-content: center;
+	align-items: center;
+	margin-top: inherit;
+	background-color: #47BCC3;
+	text-align: center;
+}
+
+

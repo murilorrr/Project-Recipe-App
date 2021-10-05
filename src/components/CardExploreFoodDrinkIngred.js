@@ -38,7 +38,6 @@ function CardExploreFoodDrinkIngred({ index, Ingredient }) {
       <img
         onClick={ () => handleclick(Ingredient) }
         aria-hidden="true"
-        Style="width: 250px"
         src={ `${urlImageBase}/${Ingredient}-Small.png` }
         alt={ `Foto de uma ingrediente chamando ${Ingredient}` }
         data-testid={ `${index}-card-img` }
