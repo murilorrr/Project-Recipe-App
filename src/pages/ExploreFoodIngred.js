@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import Footer from '../components/Footer';
-import { CardExploreFoodDrinkIngred } from '../components';
+import { CardExploreFoodDrinkIngred, Loading } from '../components';
 
 const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const MAX_INDEX = 12;
@@ -17,7 +17,7 @@ function ExploreFoodIngred() {
     fectIngred();
   }, [listIngred]);
 
-  if (!listIngred) return null;
+  if (!listIngred) return <Loading />;
 
   return (
     <div>

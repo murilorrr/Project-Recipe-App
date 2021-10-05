@@ -1,0 +1,25 @@
+.explore-buttons {
+  display: flex;
+  height: 78vh;
+  justify-content: flex-start;
+  align-content: center;
+  flex-direction: column;
+}
+
+.explore-buttons button:nth-child(1) {
+    margin-top: 50px;
+}
+
+.explore-buttons button {
+    align-self: center;
+    width: 80%;
+    padding: 1.1em 2.25em;
+    border-radius: 8px;
+    border: 1px solid seagreen;
+    background: currentColor;
+    background-color: white;
+    opacity: 0.8;
+    text-shadow: 1px 1px 0 #c4e7f7;
+    box-shadow: 5px 5px 15px 2px black;
+    margin: 25px 0;
+}

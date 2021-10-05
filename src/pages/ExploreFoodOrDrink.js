@@ -47,7 +47,7 @@ function ExploreFoodsOrDrinks() {
   };
 
   return (
-    <div>
+    <div className="explore-buttons">
       <Input
         name="surprise"
         onClick={ changeRoute }

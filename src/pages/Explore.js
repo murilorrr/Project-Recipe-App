@@ -3,6 +3,7 @@ import React from 'react';
 import Input from '../components/buttons';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import Footer from '../components/Footer';
+import '../CSS/Explore.css';
 
 function Explorar(props) {
   const { history } = props;
@@ -13,16 +14,18 @@ function Explorar(props) {
   return (
     <div>
       <HeaderNoSearch word="Explorar" />
-      <Input
-        name="drinks"
-        type="button"
-        onClick={ changeRoute }
-      />
-      <Input
-        name="food"
-        type="button"
-        onClick={ changeRoute }
-      />
+      <div className="explore-buttons">
+        <Input
+          name="drinks"
+          type="button"
+          onClick={ changeRoute }
+        />
+        <Input
+          name="food"
+          type="button"
+          onClick={ changeRoute }
+        />
+      </div>
       <Footer />
     </div>
   );
