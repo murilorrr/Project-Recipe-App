@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
-import Context from '../contextAPI/Context';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
   const { match: { params: { id } }, location, history } = props;
-  const { recipeInProgress } = useContext(Context);
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState(false);
@@ -18,7 +16,7 @@ function FoodProcess(props) {
     .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
   if (localStorage
     .getItem('inProgressRecipes') === null) {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: { [id]: [] } }));
   }
 
   useEffect(() => {
