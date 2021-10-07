@@ -15,10 +15,8 @@ function FoodProcess(props) {
 
   useEffect(() => {
     const fetchById = async () => {
-      const request = await fetch(`${baseUrl}${id}`);
-      const response = await request.json();
-      console.log('response', response);
-      setItem(response.meals);
+      const request = (await (await fetch(`${baseUrl}${id}`)).json());
+      setItem(request.meals);
     };
     fetchById();
   }, [id]);
