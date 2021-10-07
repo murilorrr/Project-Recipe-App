@@ -19,9 +19,21 @@ function Ingredients({ item, dataTestId, check }) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const { meals } = inProgressRecipes;
 
-    if (!meals[idPage].includes(ingredientPosition)) return false;
+    console.log(meals[idPage].includes(ingredientPosition));
+    if (meals[idPage].includes(ingredientPosition)) {
+      meals[idPage].splice(ingredientPosition, 1);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      return;
+    }
+
     meals[idPage].push(ingredientPosition);
-    localStorage.setItem('inProgressRecipes', inProgressRecipes);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    return true;
+  };
+
+  const handleClick = (event) => {
+    const { id } = event.target;
+    saveRecipe(id);
   };
 
   const ingredientsList = getValuesInObject(item[0], 'strIngredient');
@@ -36,7 +48,7 @@ function Ingredients({ item, dataTestId, check }) {
           >
             {
               check
-                ? <input type="checkbox" />
+                ? <input id={ index } type="checkbox" onClick={ handleClick } />
                 : null
             }
             <span>{ingredient}</span>
