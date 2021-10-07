@@ -6,25 +6,24 @@ import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
 
+const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
-  const [item, setItem] = useState([]);
-
-  const fetchById = async (idLocation) => {
-    const response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).meals;
-    setItem(response);
-  };
+  const [item, setItem] = useState(false);
 
   useEffect(() => {
-    const fetchAndSet = async () => {
-      await fetchById(id);
+    const fetchById = async () => {
+      const request = await fetch(`${baseUrl}${id}`);
+      const response = await request.json();
+      console.log('response', response);
+      setItem(response.meals);
     };
-    fetchAndSet();
+    fetchById();
   }, [id]);
 
-  if (item.length === 0) return (<Loading />);
+  if (!item) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
 
   return (
