@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton,
-  ShareButton, Loading } from '../components';
+import React, { useContext, useEffect, useState } from 'react';
+import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
+import Context from '../contextAPI/Context';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
   const { match: { params: { id } }, location, history } = props;
+  const { recipeInProgress } = useContext(Context);
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState(false);
+
+  if (localStorage
+    .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
+  if (localStorage
+    .getItem('inProgressRecipes') === null) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+  }
 
   useEffect(() => {
     const fetchById = async () => {
@@ -22,6 +30,7 @@ function FoodProcess(props) {
   }, [id]);
 
   if (!item) return (<Loading />);
+  console.log(item);
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
 
   return (
