@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 function Ingredients({ item, dataTestId, check }) {
   const { pathname } = useLocation();
+  const idPage = pathname.split('/')[2];
   const getValuesInObject = (obj, value) => {
     const lista = [];
     Object.keys(obj).forEach((key) => {
@@ -12,6 +13,15 @@ function Ingredients({ item, dataTestId, check }) {
       }
     });
     return lista;
+  };
+
+  const saveRecipe = (ingredientPosition) => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const { meals } = inProgressRecipes;
+
+    if (!meals[idPage].includes(ingredientPosition)) return false;
+    meals[idPage].push(ingredientPosition);
+    localStorage.setItem('inProgressRecipes', inProgressRecipes);
   };
 
   const ingredientsList = getValuesInObject(item[0], 'strIngredient');
