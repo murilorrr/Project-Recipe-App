@@ -3,20 +3,28 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 // finish-recipe-btn
 
+const getValuesInObject = (obj, value) => {
+  const lista = [];
+  Object.keys(obj).forEach((key) => {
+    if (key.includes(value) && obj[key] !== '' && obj[key] !== null) {
+      lista.push(obj[key]);
+    }
+  });
+  return lista;
+};
+
+const disableTrueOrFalse = (list1, list2) => {
+  if (!document.getElementById('finish-recipe-btn')) return;
+
+  if (list1.length === list2.length) {
+    document.getElementById('finish-recipe-btn').disabled = false;
+  }
+};
+
 function Ingredients({ item, dataTestId, check }) {
   const { pathname } = useLocation();
   const idPage = pathname.split('/')[2];
   const namePage = pathname.split('/')[1] === 'comidas' ? 'meals' : 'cocktails';
-
-  const getValuesInObject = (obj, value) => {
-    const lista = [];
-    Object.keys(obj).forEach((key) => {
-      if (key.includes(value) && obj[key] !== '' && obj[key] !== null) {
-        lista.push(obj[key]);
-      }
-    });
-    return lista;
-  };
 
   const ingredientsList = getValuesInObject(item[0], 'strIngredient');
   const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
@@ -30,24 +38,14 @@ function Ingredients({ item, dataTestId, check }) {
       ingredientList[idPage].splice(
         ingredientList[idPage].indexOf(ingredientPosition), 1,
       );
-
+      disableTrueOrFalse(ingredientList[idPage], ingredientsList);
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-      if (ingredientList[idPage].length === ingredientsList.length) {
-        document.getElementById('finish-recipe-btn').disabled = false;
-      } else {
-        document.getElementById('finish-recipe-btn').disabled = true;
-      }
-
       return;
     }
 
     ingredientList[idPage].push(ingredientPosition);
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    if (ingredientList[idPage].length === ingredientsList.length) {
-      document.getElementById('finish-recipe-btn').disabled = false;
-    } else {
-      document.getElementById('finish-recipe-btn').disabled = true;
-    }
+    disableTrueOrFalse(ingredientList[idPage], ingredientsList);
     return true;
   };
 
@@ -62,7 +60,7 @@ function Ingredients({ item, dataTestId, check }) {
       if (!document.getElementById(index)) return null;
       document.getElementById(index).setAttribute('checked', 'on');
     });
-
+    disableTrueOrFalse(ingredientList[idPage], ingredientsList);
     return true;
   };
 
