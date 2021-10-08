@@ -7,6 +7,7 @@ import Instruction from '../components/ComponentsRefeições/Instruction';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
+  const [disable, setDisable] = useState(false);
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
@@ -16,7 +17,9 @@ function FoodProcess(props) {
     .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
   if (localStorage
     .getItem('inProgressRecipes') === null) {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: { [id]: [] } }));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: {}, meals: { [id]: [] },
+    }));
   }
 
   useEffect(() => {
@@ -28,7 +31,6 @@ function FoodProcess(props) {
   }, [id]);
 
   if (!item) return (<Loading />);
-  console.log(item);
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
 
   return (
@@ -45,18 +47,26 @@ function FoodProcess(props) {
           item={ item }
           history={ history }
         />
-        <ShareButton location={ location } />
+        <ShareButton location={ location } inProcess="true" />
       </div>
       <div className="ingredientes">
         <h3>Ingredientes</h3>
-        <Ingredients item={ item } dataTestId="-ingredient-step" check />
+        <Ingredients item={ item } dataTestId="ingredient-step" check />
       </div>
       <div className="instructions">
         <h3>Instruções</h3>
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div>
-        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+        <button
+          id="finish-recipe-btn"
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled
+        >
+          Finalizar Receita
+
+        </button>
       </div>
     </div>
   );

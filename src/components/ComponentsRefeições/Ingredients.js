@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+// finish-recipe-btn
 
 function Ingredients({ item, dataTestId, check }) {
   const { pathname } = useLocation();
   const idPage = pathname.split('/')[2];
-
-  useEffect(() => {
-    handleCheked();
-  });
+  const namePage = pathname.split('/')[1] === 'comidas' ? 'meals' : 'cocktails';
 
   const getValuesInObject = (obj, value) => {
     const lista = [];
@@ -19,18 +17,21 @@ function Ingredients({ item, dataTestId, check }) {
     });
     return lista;
   };
-
   const saveRecipe = (ingredientPosition) => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const { meals } = inProgressRecipes;
 
-    if (meals[idPage].includes(ingredientPosition)) {
-      meals[idPage].splice(meals[idPage].indexOf(ingredientPosition), 1);
+    const ingredientList = inProgressRecipes[namePage];
+
+    if (ingredientList[idPage].includes(ingredientPosition)) {
+      ingredientList[idPage].splice(
+        ingredientList[idPage].indexOf(ingredientPosition), 1,
+      );
+
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
       return;
     }
 
-    meals[idPage].push(ingredientPosition);
+    ingredientList[idPage].push(ingredientPosition);
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     return true;
   };
@@ -38,16 +39,21 @@ function Ingredients({ item, dataTestId, check }) {
   const handleCheked = () => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!inProgressRecipes) return null;
+    const ingredientList = inProgressRecipes[namePage];
 
-    const { meals } = inProgressRecipes;
-    if (!Object.keys(meals).length) return;
+    if (!Object.keys(ingredientList).length) return null;
 
-    meals[idPage].forEach((index) => {
-      document.getElementById(index).checked = 'on';
+    ingredientList[idPage].forEach((index) => {
+      if (!document.getElementById(index)) return null;
+      document.getElementById(index).setAttribute('checked', 'on');
     });
 
     return true;
   };
+
+  useEffect(() => {
+    handleCheked();
+  });
 
   const handleClick = (event) => {
     const { id } = event.target;
@@ -56,7 +62,6 @@ function Ingredients({ item, dataTestId, check }) {
 
   const ingredientsList = getValuesInObject(item[0], 'strIngredient');
   const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
-  console.log(item);
 
   return (
     <div className="ingredients">

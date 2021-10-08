@@ -5,8 +5,37 @@ import shareicon from '../images/shareIcon.svg';
 const copy = require('clipboard-copy');
 
 function ShareButton(props) {
-  const { location: { pathname }, id, type, dataTest } = props;
+  const { location: { pathname }, id, type, dataTest, inProcess } = props;
   const [feedback, setFeedback] = useState(false);
+
+  if (inProcess) {
+    console.log(inProcess);
+    const onclick = () => {
+      copy(`http://localhost:3000${pathname.split('/in-progress')[0]}`);
+      setFeedback(!feedback);
+      const timeout = 1000;
+      setTimeout(() => setFeedback(false), timeout);
+    };
+
+    // "share-btn" datatestid
+    return (
+      <>
+        <button
+          onClick={ onclick }
+          data-testid={ dataTest }
+          type="button"
+          src={ shareicon }
+        >
+          <img
+            src={ shareicon }
+            alt="Icone de compartilhar"
+          />
+        </button>
+        {feedback ? <div style={ { position: 'relative' } }>Link copiado!</div> : null}
+      </>
+
+    );
+  }
 
   if (id && type) {
     const onclick = () => {
@@ -67,6 +96,7 @@ ShareButton.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   dataTest: PropTypes.string,
+  inProcess: PropTypes.bool.isRequired,
 };
 
 ShareButton.defaultProps = {

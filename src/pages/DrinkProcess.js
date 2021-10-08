@@ -6,25 +6,31 @@ import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
 
+const baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 function DrinkProcess(props) {
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
 
-  const fetchById = async (idLocation) => {
-    const response = (await (await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).drinks;
-    setItem(response);
-  };
+  if (localStorage
+    .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
+  if (localStorage
+    .getItem('inProgressRecipes') === null) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: { [id]: [] }, meals: { },
+    }));
+  }
 
   useEffect(() => {
-    const fetchAndSet = async () => {
-      await fetchById(id);
+    const fetchById = async () => {
+      const request = (await (await fetch(`${baseUrl}${id}`)).json());
+      setItem(request.drinks);
     };
-    fetchAndSet();
+    fetchById();
   }, [id]);
 
-  if (item.length === 0) return (<Loading />);
+  if (!item.length) return (<Loading />);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
   return (
@@ -41,18 +47,26 @@ function DrinkProcess(props) {
           item={ item }
           history={ history }
         />
-        <ShareButton location={ location } />
+        <ShareButton location={ location } inProcess="true" />
       </div>
       <div className="ingredientes">
         <h3>Ingredientes</h3>
-        <Ingredients item={ item } dataTestId="-ingredient-step" check />
+        <Ingredients item={ item } dataTestId="ingredient-step" check />
       </div>
       <div className="instructions">
         <h3>Instruções</h3>
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div>
-        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+        <button
+          id="finish-recipe-btn"
+          disabled
+          type="button"
+          data-testid="finish-recipe-btn"
+        >
+          Finalizar Receita
+
+        </button>
       </div>
     </div>
   );
