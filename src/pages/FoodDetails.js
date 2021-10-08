@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton, CarrouselRecomendations,
-  ShareButton, Loading, StartRecipe } from '../components';
+import React, { useEffect, useState } from 'react';
+import { CarrouselRecomendations, FavoriteButton, Loading, ShareButton,
+  StartRecipe } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
 import Video from '../components/ComponentsRefeições/Video';
-import Context from '../contextAPI/Context';
 
 function FoodDetails(props) {
   const { match: { params: { id } }, location, history } = props;
   const [recomendation, setRecomendation] = useState([{}]);
   const [item, setItem] = useState([]);
-  const { recipeInProgress } = useContext(Context);
 
   const fetchById = async (idLocation) => {
     const response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).meals;
@@ -30,14 +28,7 @@ function FoodDetails(props) {
       await fetchFoodOrDrinkRecomendations();
     };
     fetchAndSet();
-
-    if (localStorage
-      .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
-    if (localStorage
-      .getItem('inProgressRecipes') === null) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
-    }
-  }, [id, recipeInProgress]);
+  }, [id]);
 
   if (item.length === 0 || item === null) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
@@ -53,7 +44,7 @@ function FoodDetails(props) {
         <FavoriteButton item={ item } history={ history } />
         <ShareButton location={ location } />
       </div>
-      <Ingredients item={ item } />
+      <Ingredients item={ item } dataTestId="ingredient-name-and-measure" />
       <div className="instructions">
         <Instruction strInstructions={ strInstructions } />
       </div>
