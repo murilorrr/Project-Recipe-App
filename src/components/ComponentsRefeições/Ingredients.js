@@ -17,6 +17,10 @@ function Ingredients({ item, dataTestId, check }) {
     });
     return lista;
   };
+
+  const ingredientsList = getValuesInObject(item[0], 'strIngredient');
+  const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
+
   const saveRecipe = (ingredientPosition) => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
@@ -28,11 +32,22 @@ function Ingredients({ item, dataTestId, check }) {
       );
 
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      if (ingredientList[idPage].length === ingredientsList.length) {
+        document.getElementById('finish-recipe-btn').disabled = false;
+      } else {
+        document.getElementById('finish-recipe-btn').disabled = true;
+      }
+
       return;
     }
 
     ingredientList[idPage].push(ingredientPosition);
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    if (ingredientList[idPage].length === ingredientsList.length) {
+      document.getElementById('finish-recipe-btn').disabled = false;
+    } else {
+      document.getElementById('finish-recipe-btn').disabled = true;
+    }
     return true;
   };
 
@@ -59,9 +74,6 @@ function Ingredients({ item, dataTestId, check }) {
     const { id } = event.target;
     saveRecipe(id);
   };
-
-  const ingredientsList = getValuesInObject(item[0], 'strIngredient');
-  const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
 
   return (
     <div className="ingredients">

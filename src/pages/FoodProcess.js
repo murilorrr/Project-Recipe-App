@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
@@ -7,7 +8,6 @@ import Instruction from '../components/ComponentsRefeições/Instruction';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
-  const [disable, setDisable] = useState(false);
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
@@ -58,15 +58,16 @@ function FoodProcess(props) {
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div>
-        <button
-          id="finish-recipe-btn"
-          type="button"
-          data-testid="finish-recipe-btn"
-          disabled
-        >
-          Finalizar Receita
-
-        </button>
+        <Link to="/receitas-feitas">
+          <button
+            id="finish-recipe-btn"
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled
+          >
+            Finalizar Receita
+          </button>
+        </Link>
       </div>
     </div>
   );

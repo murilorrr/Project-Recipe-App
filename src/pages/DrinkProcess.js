@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FavoriteButton, ShareButton,
-  Loading } from '../components';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
@@ -58,15 +58,16 @@ function DrinkProcess(props) {
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div>
-        <button
-          id="finish-recipe-btn"
-          disabled
-          type="button"
-          data-testid="finish-recipe-btn"
-        >
-          Finalizar Receita
-
-        </button>
+        <Link to="/receitas-feitas">
+          <button
+            id="finish-recipe-btn"
+            disabled
+            type="button"
+            data-testid="finish-recipe-btn"
+          >
+            Finalizar Receita
+          </button>
+        </Link>
       </div>
     </div>
   );
