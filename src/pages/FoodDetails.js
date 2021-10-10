@@ -51,7 +51,6 @@ function FoodDetails(props) {
       <div className="video">
         <Video strYoutube={ strYoutube } />
       </div>
-      <h3>Recomendadas</h3>
       <CarrouselRecomendations recomendation={ recomendation } drink />
       <StartRecipe id={ id } history={ history } />
     </div>
