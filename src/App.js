@@ -18,11 +18,16 @@ import {
   OriginFood,
   Profile,
   RecipesMade,
+  FoodProcess,
+  DrinkProcess,
 } from './pages';
 
 function App() {
   return (
     <Switch>
+      <Route exact path="/bebidas/:id/in-progress" component={ DrinkProcess } />
+      <Route exact path="/comidas/:id/in-progress" component={ FoodProcess } />
+      <Route exact path="/receitas-feitas" component={ RecipesMade } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/explorar/comidas/area" component={ OriginFood } />
       <Route

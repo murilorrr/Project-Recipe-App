@@ -50,10 +50,8 @@ const thecocktaildbFetch = async (params) => {
     name_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`,
     first_letter_search: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${input}`,
   };
-  console.log('themealdbEndPoint[checkRadio]', themealdbEndPoint[checkRadio]);
   try {
     const thecocktaildb = (await (await fetch(themealdbEndPoint[checkRadio])).json());
-    console.log('thecocktaildb', thecocktaildb);
     if (!thecocktaildb.drinks) {
       return alertGlobal();
     }
