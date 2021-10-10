@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 function Instruction({ strInstructions }) {
   return (
-    <p data-testid="instructions">
-      {strInstructions}
-    </p>
+    <div className="instructions-content">
+      <h3> Instruções </h3>
+      <p data-testid="instructions">
+        {strInstructions}
+      </p>
+    </div>
   );
 }
 

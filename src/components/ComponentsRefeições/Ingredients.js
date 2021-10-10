@@ -75,6 +75,7 @@ function Ingredients({ item, dataTestId, check }) {
 
   return (
     <div className="ingredients">
+      <h3> Ingredientes </h3>
       <ul>
         {ingredientsList.map((ingredient, index) => (
           <li

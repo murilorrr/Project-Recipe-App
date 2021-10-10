@@ -1,7 +1,9 @@
 .mini-card-food-container {
-  background-color: white;
-  border-radius: 20px;
   margin: 15px 10px;
+}
+
+.page-food-container {
+  margin-bottom: 15px;
 }
 
 .mini-card-food-container section {
@@ -51,4 +53,8 @@ a:hover {
   overflow-wrap: break-word;
   padding: 5px;
   width: 30%;
+}
+
+.recomendations img {
+  width: 100%;
 }

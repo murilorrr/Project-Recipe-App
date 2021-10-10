@@ -16,6 +16,37 @@ function CarrouselRecomendations(props) {
 
   if (drink) {
     return (
+      <div className="recomedations">
+        <h3>Recomendados</h3>
+        <div
+          className="carousel-recomentations"
+        >
+          {
+            listofObjects.map(({
+              strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
+              index < maxLength ? (
+                <div
+                  onClick={ () => onclick(idDrink) }
+                  aria-hidden="true"
+                  key={ index }
+                  data-testid={ `${index}-recomendation-card` }
+                  id={ idDrink }
+                >
+                  <img alt={ strDrink } width="100px" src={ strDrinkThumb } />
+                  <h4>{strAlcoholic}</h4>
+                  <h3 data-testid={ `${index}-recomendation-title` }>{strDrink}</h3>
+                </div>
+              ) : null
+            ))
+          }
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="recomedations">
+      <h3>Recomendados</h3>
       <div
         style={ { display: 'flex',
           overflowX: 'scroll' } }
@@ -23,62 +54,23 @@ function CarrouselRecomendations(props) {
       >
         {
           listofObjects.map(({
-            strDrinkThumb, strAlcoholic, idDrink, strDrink }, index) => (
+            strMeal, strMealThumb, strCategory, idMeal }, index) => (
             index < maxLength ? (
               <div
-                onClick={ () => onclick(idDrink) }
+                onClick={ () => onclick(idMeal) }
                 aria-hidden="true"
-                style={ {
-                  borderRadius: '5px',
-                  backgroundColor: 'grey',
-                  margin: '4px',
-                  minWidth: '50vw' } }
-                key={ index }
+                key={ strMeal }
                 data-testid={ `${index}-recomendation-card` }
-                id={ idDrink }
+                id={ idMeal }
               >
-                {idDrink}
-                <img alt={ strDrink } width="100px" src={ strDrinkThumb } />
-                <h4>{strAlcoholic}</h4>
-                <h3 data-testid={ `${index}-recomendation-title` }>{strDrink}</h3>
+                <img alt={ strMeal } width="100px" src={ strMealThumb } />
+                <h4>{strCategory}</h4>
+                <h3 data-testid={ `${index}-recomendation-title` }>{strMeal}</h3>
               </div>
             ) : null
           ))
         }
       </div>
-    );
-  }
-
-  return (
-    <div
-      style={ { display: 'flex',
-        overflowX: 'scroll' } }
-      className="carousel-recomentations"
-    >
-      {
-        listofObjects.map(({
-          strMeal, strMealThumb, strCategory, idMeal }, index) => (
-          index < maxLength ? (
-            <div
-              onClick={ () => onclick(idMeal) }
-              aria-hidden="true"
-              style={ {
-                borderRadius: '5px',
-                backgroundColor: 'grey',
-                margin: '4px',
-                minWidth: '50%' } }
-              key={ strMeal }
-              data-testid={ `${index}-recomendation-card` }
-              id={ idMeal }
-            >
-              {idMeal}
-              <img alt={ strMeal } width="100px" src={ strMealThumb } />
-              <h4>{strCategory}</h4>
-              <h3 data-testid={ `${index}-recomendation-title` }>{strMeal}</h3>
-            </div>
-          ) : null
-        ))
-      }
     </div>
   );
 }

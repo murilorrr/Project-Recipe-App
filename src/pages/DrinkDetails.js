@@ -45,7 +45,7 @@ function DrinkDetails(props) {
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
   return (
-    <div>
+    <div className="page-food-container">
       <HeaderRecipes
         title={ strDrink }
         img={ strDrinkThumb }
@@ -59,7 +59,6 @@ function DrinkDetails(props) {
       <div className="instructions">
         <Instruction strInstructions={ strInstructions } />
       </div>
-      <h3>Recomendados</h3>
       <CarrouselRecomendations recomendation={ recomendation } />
       <StartRecipe id={ id } history={ history } />
     </div>

@@ -5,6 +5,7 @@ import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
+import '../CSS/Drink&FoodDetails.css';
 
 const baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 function DrinkProcess(props) {
@@ -34,30 +35,31 @@ function DrinkProcess(props) {
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
   return (
-    <div>
-      <HeaderRecipes
-        title={ strDrink }
-        img={ strDrinkThumb }
-        subtitle={ strAlcoholic }
-      />
-      <div className="options" style={ { display: 'flex' } }>
-        <FavoriteButton
-          favoriteHeartState={ favoriteHeart }
-          setFavoriteHeart={ setFavoriteHeart }
-          item={ item }
-          history={ history }
+    <div className="page-food-container">
+      <div className="infos">
+        <HeaderRecipes
+          title={ strDrink }
+          img={ strDrinkThumb }
+          subtitle={ strAlcoholic }
         />
-        <ShareButton location={ location } inProcess="true" />
+        <div className="options" style={ { display: 'flex' } }>
+          <FavoriteButton
+            favoriteHeartState={ favoriteHeart }
+            setFavoriteHeart={ setFavoriteHeart }
+            item={ item }
+            history={ history }
+          />
+          <ShareButton location={ location } inProcess="true" />
+        </div>
       </div>
       <div className="ingredientes">
         <h3>Ingredientes</h3>
         <Ingredients item={ item } dataTestId="ingredient-step" check />
       </div>
       <div className="instructions">
-        <h3>Instruções</h3>
         <Instruction strInstructions={ strInstructions } />
       </div>
-      <div>
+      <div className="finisher-link">
         <Link to="/receitas-feitas">
           <button
             id="finish-recipe-btn"

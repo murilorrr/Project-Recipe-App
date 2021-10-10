@@ -1,0 +1,109 @@
+li input:checked ~ span {
+  text-decoration: line-through;
+}
+
+.ingredientes, .instructions, .ingredients, .recomedations {
+  padding: 5%;
+  margin: 2%;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255);
+  opacity: 0.8;
+}
+
+li {
+  list-style: none;
+}
+
+.info-share-favorites {
+  margin: 2% 2% 0 2%;
+  border-radius: 5px 5px 0 0;
+}
+
+.options {
+  margin: 0 2% 2% 2%;
+  border-radius: 0 0 5px 5px;
+  justify-content: flex-end;
+}
+
+.options button {
+  margin-left: 20px;
+}
+
+.info-share-favorites, .options {
+  text-align: center;
+  padding: 3px 6%;
+  background-color: rgba(255, 255, 255);
+  opacity: 0.8;
+}
+
+.finisher-link {
+  position: fixed;
+  top: 94%;
+  height: 0px;
+  background: aqua;
+  transition: 0.5s;
+}
+
+.finisher-link button {
+  padding: 5px 15px;
+  margin: 0 105px;
+}
+
+.finisher-link button:disabled {
+  transition: 0.5s;
+  opacity: 1;
+}
+
+.StartButton button{
+  animation: exemplo 3s infinite;
+  margin: 0px 84px;
+  animation-timing-function: ease-in-out;
+  background: #f34f74;
+  color: white;
+  padding: 5px 20px;
+  opacity: 0.8;
+}
+
+.StartButton {
+  position: fixed;
+  bottom: 0;
+}
+
+.finisher-link button:enabled {
+  transition: 0.5s;
+  background: rgb(52, 201, 22);
+  opacity: 1;
+}
+
+.finisher-link a{
+  padding: 5px;
+}
+
+.ingredients li span {
+  margin: 5px;
+}
+
+.recomedations {
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
+}
+
+.recomedations img {
+  width: 100%;
+}
+
+.carousel-recomentations div{
+  border-radius: 5px;
+  background-color: #571089;
+  color: white;
+  text-shadow: 3px 3px 1px black, 1px 1px 1px yellow;
+  margin: 4px;
+  min-width: 45vw;
+  opacity: 0.95;
+}
+
+.carousel-recomentations div h3, .carousel-recomentations div h4 {
+  margin: 0 2px;
+  overflow: hidden;
+}

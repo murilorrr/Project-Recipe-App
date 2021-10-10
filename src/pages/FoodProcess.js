@@ -34,7 +34,7 @@ function FoodProcess(props) {
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
 
   return (
-    <div>
+    <div className="page-food-container">
       <HeaderRecipes
         title={ strMeal }
         img={ strMealThumb }
@@ -54,10 +54,9 @@ function FoodProcess(props) {
         <Ingredients item={ item } dataTestId="ingredient-step" check />
       </div>
       <div className="instructions">
-        <h3>Instruções</h3>
         <Instruction strInstructions={ strInstructions } />
       </div>
-      <div>
+      <div className="finisher-link">
         <Link to="/receitas-feitas">
           <button
             id="finish-recipe-btn"

@@ -34,7 +34,7 @@ function FoodDetails(props) {
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
   return (
-    <div>
+    <div className="page-food-container">
       <HeaderRecipes
         title={ strMeal }
         img={ strMealThumb }

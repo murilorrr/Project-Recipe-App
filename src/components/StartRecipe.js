@@ -34,11 +34,6 @@ function StartRecipe(props) {
     return history.push(`/bebidas/${id}/in-progress`);
   };
 
-  const style = { position: 'fixed',
-    bottom: '0',
-    width: '300px',
-  };
-
   useEffect(() => {
     const assertLocalStore = () => {
       const resultFilter = Object.keys(RecipesInLocal)
@@ -55,7 +50,6 @@ function StartRecipe(props) {
       <div className="StartButton">
         <button
           type="button"
-          style={ style }
           onClick={ () => continuousRecipe() }
           data-testid="start-recipe-btn"
         >
@@ -69,7 +63,6 @@ function StartRecipe(props) {
     <div className="StartButton">
       <button
         type="button"
-        style={ style }
         onClick={ () => startRecipe() }
         data-testid="start-recipe-btn"
       >
