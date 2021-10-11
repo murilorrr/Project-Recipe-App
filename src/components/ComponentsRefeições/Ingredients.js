@@ -33,6 +33,7 @@ function Ingredients({ item, dataTestId, check }) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
     const ingredientList = inProgressRecipes[namePage];
+    if (!inProgressRecipes[namePage]) return null;
 
     if (ingredientList[idPage].includes(ingredientPosition)) {
       ingredientList[idPage].splice(
