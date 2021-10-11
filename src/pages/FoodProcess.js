@@ -14,8 +14,6 @@ function FoodProcess(props) {
   const [item, setItem] = useState(false);
 
   if (localStorage
-    .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
-  if (localStorage
     .getItem('inProgressRecipes') === null) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {}, meals: { [id]: [] },
