@@ -53,6 +53,7 @@ function Ingredients({ item, dataTestId, check }) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!inProgressRecipes) return null;
     const ingredientList = inProgressRecipes[namePage];
+    if (!ingredientList[idPage]) return null;
 
     if (!Object.keys(ingredientList).length) return null;
 
