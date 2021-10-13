@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
@@ -38,6 +37,43 @@ function FoodProcess(props) {
   if (item.length === 0) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
 
+  const data = new Date();
+
+  // [{
+  // id: id-da-receita,
+  // type: comida-ou-bebida,
+  // area: area-da-receita-ou-texto-vazio,
+  // category: categoria-da-receita-ou-texto-vazio,
+  // alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
+  // name: nome-da-receita,
+  // image: imagem-da-receita,
+  // doneDate: quando-a-receita-foi-concluida,
+  // tags: array-de-tags-da-receita-ou-array-vazio
+  // }]
+
+  const retornaComidaOuDrink = () => {
+    const { strArea, idMeal, strTags } = item[0];
+    const retorno = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      doneDate: `${data.getDay}/ ${data.getMonth}/ ${data.getFullYear}`,
+      tags: [...strTags],
+    };
+    return retorno;
+  };
+
+  const finisherButton = () => {
+    const arrayDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    arrayDone.push(retornaComidaOuDrink());
+    localStorage.setItem('doneRecipes', JSON.stringify(arrayDone));
+    return history.push('/receitas-feitas');
+  };
+
   return (
     <div className="page-food-container">
       <HeaderRecipes
@@ -62,16 +98,15 @@ function FoodProcess(props) {
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div className="finisher-link">
-        <Link to="/receitas-feitas">
-          <button
-            id="finish-recipe-btn"
-            type="button"
-            data-testid="finish-recipe-btn"
-            disabled
-          >
-            Finalizar Receita
-          </button>
-        </Link>
+        <button
+          id="finish-recipe-btn"
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled
+          onClick={ finisherButton }
+        >
+          Finalizar Receita
+        </button>
       </div>
     </div>
   );
