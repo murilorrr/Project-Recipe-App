@@ -70,7 +70,9 @@ CardRecipesMade.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
     doneDate: PropTypes.string,
-    tags: PropTypes.arrayOf(),
+    tags: PropTypes.arrayOf(
+      PropTypes.string,
+    ),
     index: PropTypes.string,
   }).isRequired,
 };

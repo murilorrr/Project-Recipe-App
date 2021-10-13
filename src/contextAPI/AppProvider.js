@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
 import Context from './Context';
+
+const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
 
 function AppProvider({ children }) {
   const [heartState, setHeartState] = useState(false);
@@ -13,6 +15,10 @@ function AppProvider({ children }) {
 
   const [recipeInProgress, setInProgress] = useState({ cocktails: {}, meals: {} });
   const [favoriteList, setFavoriteList] = useState([]);
+
+  useEffect(() => {
+    setInProgress({ ...recipeInProgress, ...inProgressRecipes });
+  }, []);
 
   const contextValue = {
     setFavoriteList,

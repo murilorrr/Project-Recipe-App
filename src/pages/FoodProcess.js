@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
+import Context from '../contextAPI/Context';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
@@ -12,6 +13,7 @@ function FoodProcess(props) {
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
+  const { setInProgress, recipeInProgress } = useContext(Context);
 
   if (localStorage
     .getItem('inProgressRecipes') === null) {
@@ -19,6 +21,10 @@ function FoodProcess(props) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {}, meals: { [id]: [] },
     }));
+    setInProgress({ ...recipeInProgress,
+      ...{
+        cocktails: {}, meals: { [id]: [] } },
+    });
   }
 
   useEffect(() => {
