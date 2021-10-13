@@ -11,12 +11,13 @@ function FoodProcess(props) {
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
-  const [item, setItem] = useState(false);
+  const [item, setItem] = useState([]);
 
   if (localStorage
     .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
   if (localStorage
     .getItem('inProgressRecipes') === null) {
+    console.log('estou me progressRecipes');
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {}, meals: { [id]: [] },
     }));
@@ -30,7 +31,7 @@ function FoodProcess(props) {
     fetchById();
   }, [id]);
 
-  if (!item) return (<Loading />);
+  if (item.length === 0) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
 
   return (

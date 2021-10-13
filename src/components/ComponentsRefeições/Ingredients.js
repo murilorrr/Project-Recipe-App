@@ -50,18 +50,20 @@ function Ingredients({ item, dataTestId, check }) {
   };
 
   const handleCheked = () => {
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (!inProgressRecipes) return null;
-    const ingredientList = inProgressRecipes[namePage];
+    if (check) {
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (!inProgressRecipes) return null;
+      const ingredientList = inProgressRecipes[namePage];
 
-    if (!Object.keys(ingredientList).length) return null;
+      if (!Object.keys(ingredientList).length) return null;
 
-    ingredientList[idPage].forEach((index) => {
-      if (!document.getElementById(index)) return null;
-      document.getElementById(index).setAttribute('checked', 'on');
-    });
-    disableTrueOrFalse(ingredientList[idPage], ingredientsList);
-    return true;
+      ingredientList[idPage].forEach((index) => {
+        if (!document.getElementById(index)) return null;
+        document.getElementById(index).setAttribute('checked', 'on');
+      });
+      disableTrueOrFalse(ingredientList[idPage], ingredientsList);
+      return true;
+    }
   };
 
   useEffect(() => {
@@ -99,9 +101,13 @@ function Ingredients({ item, dataTestId, check }) {
 }
 
 Ingredients.propTypes = {
-  check: PropTypes.bool.isRequired,
+  check: PropTypes.bool,
   dataTestId: PropTypes.string.isRequired,
   item: PropTypes.arrayOf().isRequired,
+};
+
+Ingredients.defaultProps = {
+  check: false,
 };
 
 export default Ingredients;
