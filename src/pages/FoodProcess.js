@@ -14,8 +14,6 @@ function FoodProcess(props) {
   const [item, setItem] = useState([]);
 
   if (localStorage
-    .getItem('favoriteRecipes') === null) localStorage.setItem('favoriteRecipes', '[]');
-  if (localStorage
     .getItem('inProgressRecipes') === null) {
     console.log('estou me progressRecipes');
     localStorage.setItem('inProgressRecipes', JSON.stringify({
