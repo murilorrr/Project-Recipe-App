@@ -21,30 +21,31 @@ function CardFavoriteRecipe(props) {
   };
 
   return (
-    <div>
+    <div className="card-recipe">
       <div className="imageCard-favorites">
         <img
           aria-hidden="true"
           onClick={ onclick }
           data-testid={ `${index}-horizontal-image` }
-          width="200px"
           alt={ name }
           src={ image }
         />
       </div>
-      <div
-        data-testid={ `${index}-horizontal-top-text` }
-        className="card-recipes-favorite-category"
-      >
-        {`${area} - ${category} - ${alcoholicOrNot}` }
-      </div>
-      <div
-        data-testid={ `${index}-horizontal-name` }
-        className="card-recipes-favorite-title"
-        onClick={ onclick }
-        aria-hidden="true"
-      >
-        { name }
+      <div>
+        <div
+          data-testid={ `${index}-horizontal-top-text` }
+          className="card-recipes-favorite-category"
+        >
+          {`${area} - ${category} - ${alcoholicOrNot}` }
+        </div>
+        <div
+          data-testid={ `${index}-horizontal-name` }
+          className="card-recipes-favorite-title"
+          onClick={ onclick }
+          aria-hidden="true"
+        >
+          { name }
+        </div>
       </div>
       <div className="options-button">
         <FavoriteButtonFavoriteRecipes

@@ -29,7 +29,7 @@ function FavoriteRecipesContent(props) {
   // if (resultFilter === true) setHeartState(true);
 
   return (
-    <div className="recipeContent">
+    <div className="recipesContent">
       {filter(favoriteList)
         .map((el, index) => (<CardFavoriteRecipe
           history={ history }

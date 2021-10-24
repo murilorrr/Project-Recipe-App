@@ -26,7 +26,7 @@ function IngredientsCard({ id, name, img, onClick, index }) {
 const { number, string, func } = PropTypes;
 
 IngredientsCard.propTypes = {
-  id: number.isRequired,
+  id: string.isRequired,
   img: string.isRequired,
   index: number.isRequired,
   name: string.isRequired,

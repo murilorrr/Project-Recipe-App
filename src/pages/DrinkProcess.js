@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
 import '../CSS/Drink&FoodDetails.css';
+import Context from '../contextAPI/Context';
 
 const baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 function DrinkProcess(props) {
@@ -13,11 +14,19 @@ function DrinkProcess(props) {
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
 
+  const { setInProgress, recipeInProgress, processButton,
+    setProcessButton } = useContext(Context);
+
   if (localStorage
     .getItem('inProgressRecipes') === null) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: { [id]: [] }, meals: { },
     }));
+    setInProgress({ ...recipeInProgress,
+      ...{
+        meals: {}, cocktails: { [id]: [] } },
+    });
+    setProcessButton(false);
   }
 
   useEffect(() => {
@@ -55,14 +64,14 @@ function DrinkProcess(props) {
       alcoholicOrNot: strAlcoholic,
       name: strDrink,
       image: strDrinkThumb,
-      doneDate: `${data.getDay}/ ${data.getMonth}/ ${data.getFullYear}`,
+      doneDate: `${data.getDay()}/ ${data.getMonth()}/ ${data.getFullYear()}`,
       tags: [],
     };
     return retorno;
   };
 
   const finisherButton = () => {
-    const arrayDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    const arrayDone = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     arrayDone.push(retornaComidaOuDrink());
     localStorage.setItem('doneRecipes', JSON.stringify(arrayDone));
     return history.push('/receitas-feitas');
@@ -96,9 +105,9 @@ function DrinkProcess(props) {
       <div className="finisher-link">
         <button
           id="finish-recipe-btn"
-          disabled='problema'
           type="button"
           data-testid="finish-recipe-btn"
+          disabled={ !processButton }
           onClick={ finisherButton }
         >
           Finalizar Receita

@@ -55,7 +55,10 @@ function DrinkDetails(props) {
         <FavoriteButton item={ item } history={ history } />
         <ShareButton location={ location } />
       </div>
-      <Ingredients item={ item } dataTestId="ingredient-name-and-measure" />
+      <div className="ingredientes">
+        <h3>Ingredientes</h3>
+        <Ingredients item={ item } dataTestId="ingredient-name-and-measure" />
+      </div>
       <div className="instructions">
         <Instruction strInstructions={ strInstructions } />
       </div>

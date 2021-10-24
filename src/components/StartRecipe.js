@@ -2,9 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../contextAPI/Context';
 
-const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
-
 function StartRecipe(props) {
+  const RecipesInLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
   const { history, id, history: { location: { pathname } } } = props;
 
   const [WasInLocalStorage, SetIfWasInLocalStorage] = useState(false);
@@ -43,7 +42,7 @@ function StartRecipe(props) {
       });
     };
     assertLocalStore();
-  }, [id, setInProgress]);
+  }, [id, setInProgress, RecipesInLocal]);
 
   if (WasInLocalStorage) {
     return (

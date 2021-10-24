@@ -10,20 +10,19 @@ function RecipesMade() {
   // Essa função serve para filtar a lista de receitas por drink, meal ou se e all
   const filterFood = (receita, Foodtype) => {
     const list = Object.values(receita);
-    if (list.includes(FoodType)) return true;
+    if (list.includes(FoodType)) return receita;
     if (Foodtype === 'All') return true;
-    return false;
   };
 
-  const done = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   useEffect(() => {
+    const done = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     setRecipesMade([...done]);
-  }, [done]);
+  }, []);
 
   return (
     <div>
       <HeaderNoSearch word="Receitas Feitas" />
-      <div>
+      <div className="filters">
         <button
           onClick={ (e) => setFilterFood(e.target.value) }
           type="button"

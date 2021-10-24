@@ -14,15 +14,17 @@ const getValuesInObject = (obj, value) => {
   return lista;
 };
 
-const disableTrueOrFalse = (list1, list2) => {
+const disableTrueOrFalse = (list1, list2, callback) => {
   if (!document.getElementById('finish-recipe-btn')) return;
   if (list1.length === list2.length) {
-    document.getElementById('finish-recipe-btn').disabled = false;
+    callback(true);
+  } else {
+    callback(false);
   }
 };
 
 function Ingredients({ item, dataTestId, check }) {
-  const { recipeInProgress, setInProgress } = useContext(Context);
+  const { recipeInProgress, setInProgress, setProcessButton } = useContext(Context);
   const { pathname } = useLocation();
   const idPage = pathname.split('/')[2];
   const namePage = pathname.split('/')[1] === 'comidas' ? 'meals' : 'cocktails';
@@ -37,7 +39,7 @@ function Ingredients({ item, dataTestId, check }) {
       ingredientList[idPage].splice(
         ingredientList[idPage].indexOf(ingredientPosition), 1,
       );
-      disableTrueOrFalse(ingredientList[idPage], ingredientsList);
+      disableTrueOrFalse(ingredientList[idPage], ingredientsList, setProcessButton);
       localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
       setInProgress({ ...recipeInProgress });
       return;
@@ -46,7 +48,7 @@ function Ingredients({ item, dataTestId, check }) {
     ingredientList[idPage].push(ingredientPosition);
     localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
     setInProgress({ ...recipeInProgress });
-    disableTrueOrFalse(ingredientList[idPage], ingredientsList);
+    disableTrueOrFalse(ingredientList[idPage], ingredientsList, setProcessButton);
     return true;
   };
 
@@ -62,7 +64,7 @@ function Ingredients({ item, dataTestId, check }) {
       if (!document.getElementById(index)) return null;
       document.getElementById(index).setAttribute('checked', 'on');
     });
-    disableTrueOrFalse(ingredientList[idPage], ingredientsList);
+    disableTrueOrFalse(ingredientList[idPage], ingredientsList, setProcessButton);
     return true;
   };
 
@@ -77,22 +79,25 @@ function Ingredients({ item, dataTestId, check }) {
 
   return (
     <div className="ingredients">
-      <h3> Ingredientes </h3>
       <ul>
         {ingredientsList.map((ingredient, index) => (
           <li
-            key={ ingredient }
+            key={ `${ingredient} ${ingredientsMeansure[index]}` }
             data-testid={ `${index}-${dataTestId}` }
           >
-            {
-              !check || <input
-                id={ index }
-                type="checkbox"
-                onClick={ handleClick }
-              />
-            }
-            <span>{ingredient}</span>
-            <span>{ingredientsMeansure[index]}</span>
+            <label
+              htmlFor={ index }
+            >
+              {
+                !check || <input
+                  id={ index }
+                  type="checkbox"
+                  onClick={ handleClick }
+                />
+              }
+              <span>{ingredient}</span>
+              <span>{ingredientsMeansure[index]}</span>
+            </label>
           </li>
         ))}
       </ul>

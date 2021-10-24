@@ -10,7 +10,7 @@ import Video from '../components/ComponentsRefeições/Video';
 function FoodDetails(props) {
   const { match: { params: { id } }, location, history } = props;
   const [recomendation, setRecomendation] = useState([{}]);
-  const [item, setItem] = useState([]);
+  const [item, setItem] = useState(null);
 
   const fetchById = async (idLocation) => {
     const response = (await (await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idLocation}`)).json()).meals;
@@ -30,7 +30,7 @@ function FoodDetails(props) {
     fetchAndSet();
   }, [id]);
 
-  if (item.length === 0 || item === null) return (<Loading />);
+  if (item === null) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = item[0];
 
   return (
@@ -44,7 +44,10 @@ function FoodDetails(props) {
         <FavoriteButton item={ item } history={ history } />
         <ShareButton location={ location } />
       </div>
-      <Ingredients item={ item } dataTestId="ingredient-name-and-measure" />
+      <div className="ingredientes">
+        <h3>Ingredientes</h3>
+        <Ingredients item={ item } dataTestId="ingredient-name-and-measure" />
+      </div>
       <div className="instructions">
         <Instruction strInstructions={ strInstructions } />
       </div>

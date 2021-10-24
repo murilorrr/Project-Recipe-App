@@ -67,7 +67,11 @@ function OriginFood() {
         </option>
         {byArea
           .map((obj, i) => (
-            <option className="dropdown-item" data-testid={ `${obj.strArea}-option` } key={ i }>
+            <option
+              className="dropdown-item"
+              data-testid={ `${obj.strArea}-option` }
+              key={ i }
+            >
               {obj.strArea}
             </option>))}
       </select>

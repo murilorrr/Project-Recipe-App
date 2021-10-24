@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
 import Context from './Context';
 
-const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
-
 function AppProvider({ children }) {
   const [heartState, setHeartState] = useState(false);
   const [listItem, setListItem] = useState([]);
@@ -16,7 +14,10 @@ function AppProvider({ children }) {
   const [recipeInProgress, setInProgress] = useState({ cocktails: {}, meals: {} });
   const [favoriteList, setFavoriteList] = useState([]);
 
+  const [processButton, setProcessButton] = useState(false);
+
   useEffect(() => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
     setInProgress({ ...recipeInProgress, ...inProgressRecipes });
   }, []);
 
@@ -33,6 +34,8 @@ function AppProvider({ children }) {
     setBaseUrlFood,
     baseUrlDrink,
     setBaseUrlDrink,
+    setProcessButton,
+    processButton,
   };
 
   return (

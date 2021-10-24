@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './CardRecipesMade.css';
+import '../CSS/CardRecipesMade.css';
 import ShareIcon from './ShareIcon';
 
 function CardRecipesMade({ args }) {
@@ -19,7 +19,7 @@ function CardRecipesMade({ args }) {
           />
         </Link>
       </div>
-      <div>
+      <div className="infos-content" style={ { maxWidth: '216px' } }>
         <div
           data-testid={ `${index}-horizontal-top-text` }
           className="card-recipes-made-category"
@@ -41,14 +41,19 @@ function CardRecipesMade({ args }) {
           {args.doneDate}
 
         </div>
-        {args.tags.map((tagName, index2) => (
-          <span
-            key={ index2 }
-            data-testid={ `${index}-${tagName}-horizontal-tag` }
-            className="card-recipes-made-tags"
-          >
-            {tagName}
-          </span>))}
+        <div
+          className="tags-container"
+        >
+          {args.tags.map((tagName, index2) => (
+            <span
+              key={ index2 }
+              data-testid={ `${index}-${tagName}-horizontal-tag` }
+              className="card-recipes-made-tags"
+            >
+              {tagName}
+            </span>))}
+
+        </div>
       </div>
       <div>
         <ShareIcon

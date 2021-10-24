@@ -4,6 +4,7 @@ import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
+import '../CSS/Drink&FoodDetails.css';
 import Context from '../contextAPI/Context';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
@@ -12,11 +13,12 @@ function FoodProcess(props) {
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
-  const { setInProgress, recipeInProgress } = useContext(Context);
+
+  const { setInProgress, recipeInProgress, processButton,
+    setProcessButton } = useContext(Context);
 
   if (localStorage
     .getItem('inProgressRecipes') === null) {
-    console.log('estou me progressRecipes');
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {}, meals: { [id]: [] },
     }));
@@ -24,6 +26,7 @@ function FoodProcess(props) {
       ...{
         cocktails: {}, meals: { [id]: [] } },
     });
+    setProcessButton(false);
   }
 
   useEffect(() => {
@@ -53,6 +56,8 @@ function FoodProcess(props) {
 
   const retornaComidaOuDrink = () => {
     const { strArea, idMeal, strTags } = item[0];
+    let tags = [''];
+    if (strTags !== null) tags = strTags.split(',');
     const retorno = {
       id: idMeal,
       type: 'comida',
@@ -61,8 +66,8 @@ function FoodProcess(props) {
       alcoholicOrNot: '',
       name: strMeal,
       image: strMealThumb,
-      doneDate: `${data.getDay}/ ${data.getMonth}/ ${data.getFullYear}`,
-      tags: [...strTags],
+      doneDate: `${data.getDay()}/ ${data.getMonth()}/ ${data.getFullYear()}`,
+      tags: [...tags],
     };
     return retorno;
   };
@@ -76,19 +81,21 @@ function FoodProcess(props) {
 
   return (
     <div className="page-food-container">
-      <HeaderRecipes
-        title={ strMeal }
-        img={ strMealThumb }
-        subtitle={ strCategory }
-      />
-      <div className="options" style={ { display: 'flex' } }>
-        <FavoriteButton
-          favoriteHeartState={ favoriteHeart }
-          setFavoriteHeart={ setFavoriteHeart }
-          item={ item }
-          history={ history }
+      <div className="infos">
+        <HeaderRecipes
+          title={ strMeal }
+          img={ strMealThumb }
+          subtitle={ strCategory }
         />
-        <ShareButton location={ location } inProcess="true" />
+        <div className="options" style={ { display: 'flex' } }>
+          <FavoriteButton
+            favoriteHeartState={ favoriteHeart }
+            setFavoriteHeart={ setFavoriteHeart }
+            item={ item }
+            history={ history }
+          />
+          <ShareButton location={ location } inProcess="true" />
+        </div>
       </div>
       <div className="ingredientes">
         <h3>Ingredientes</h3>
@@ -102,7 +109,7 @@ function FoodProcess(props) {
           id="finish-recipe-btn"
           type="button"
           data-testid="finish-recipe-btn"
-          disabled='problema'
+          disabled={ !processButton }
           onClick={ finisherButton }
         >
           Finalizar Receita

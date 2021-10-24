@@ -1,0 +1,40 @@
+.card-recipes-made-container {
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
+  max-width: 340px;
+  overflow-wrap: anywhere;
+}
+
+.tags-container {
+  overflow-x: hidden;
+}
+
+.infos-content {
+  margin: 0 20px;
+}
+
+.card-recipes-made-thumb {
+  width: 100px;
+}
+
+.card-recipes-made-share {
+  width: 25px;
+  justify-items: flex-end;
+}
+
+.card-recipes-made-tags {
+  margin-right: 5px;
+}
+
+.card-recipe {
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
+  max-width: 340px;
+  overflow-wrap: anywhere;
+}
+
+.imageCard-favorites img {
+  width: 100px;
+}

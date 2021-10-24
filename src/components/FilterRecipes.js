@@ -10,7 +10,7 @@ function FilterRecipes({ setFilterFood }) {
   // };
 
   return (
-    <div>
+    <div className="filters">
       <button
         onClick={ (e) => setFilterFood(e.target.value) }
         type="button"
