@@ -1,13 +1,17 @@
+.ingredients li span {
+  margin: 5px;
+}
+
 li input:checked ~ span {
   text-decoration: line-through;
 }
 
 .ingredientes, .instructions, .ingredients, .recomedations {
-  padding: 5%;
-  margin: 2%;
-  border-radius: 5px;
   background-color: rgba(255, 255, 255);
+  border-radius: 5px;
+  margin: 2%;
   opacity: 0.8;
+  padding: 5%;
 }
 
 li {
@@ -15,14 +19,14 @@ li {
 }
 
 .info-share-favorites {
-  margin: 2% 2% 0 2%;
   border-radius: 5px 5px 0 0;
+  margin: 2% 2% 0;
 }
 
 .options {
-  margin: 0 2% 2% 2%;
   border-radius: 0 0 5px 5px;
   justify-content: flex-end;
+  margin: 0 2% 2%;
 }
 
 .options button {
@@ -30,77 +34,99 @@ li {
 }
 
 .info-share-favorites, .options {
-  text-align: center;
-  padding: 3px 6%;
   background-color: rgba(255, 255, 255);
   opacity: 0.8;
+  padding: 3px 6%;
+  text-align: center;
 }
 
 .finisher-link {
+  background: aqua;
+  height: 0;
   position: fixed;
   top: 94%;
-  height: 0px;
-  background: aqua;
   transition: 0.5s;
 }
 
 .finisher-link button {
-  padding: 5px 15px;
   margin: 0 105px;
+  padding: 5px 15px;
 }
 
-.finisher-link button:disabled {
-  transition: 0.5s;
-  opacity: 1;
-}
-
-.StartButton button{
+.StartButton button {
   animation: exemplo 3s infinite;
-  margin: 0px 84px;
   animation-timing-function: ease-in-out;
   background: #f34f74;
   color: white;
-  padding: 5px 20px;
+  margin: 0 84px;
   opacity: 0.8;
+  padding: 5px 20px;
+}
+
+@keyframes exemplo {
+
+  0% { transform: translateX(2%);}
+
+  25% { transform: translateX(-2%);}
+
+  50% { transform: translateX(2%);}
+
+  75% { transform: translateX(-2%);}
+
+  100% { transform: translateX(2%);}
+
+}
+
+.finisher-link button:disabled {
+  opacity: 1;
+  transition: 0.5s;
 }
 
 .StartButton {
-  position: fixed;
   bottom: 0;
+  position: fixed;
 }
 
 .finisher-link button:enabled {
-  transition: 0.5s;
   background: rgb(52, 201, 22);
   opacity: 1;
+  transition: 0.5s;
 }
 
-.finisher-link a{
+.finisher-link a {
   padding: 5px;
 }
 
-.ingredients li span {
-  margin: 5px;
-}
-
 .recomedations {
-    display: flex;
-    flex-direction: column;
-    overflow-x: scroll;
+  display: flex;
+  flex-direction: column;
 }
 
 .recomedations img {
   width: 100%;
 }
 
-.carousel-recomentations div{
-  border-radius: 5px;
+.carousel-recomentations {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.video {
+  margin: 2%;
+}
+
+iframe {
+  width: 100%;
+}
+
+.carousel-recomentations div {
   background-color: #571089;
+  border-radius: 5px;
   color: white;
-  text-shadow: 3px 3px 1px black, 1px 1px 1px yellow;
   margin: 4px;
   min-width: 45vw;
   opacity: 0.95;
+  text-shadow: 3px 3px 1px black , 1px 1px 1px yellow;
 }
 
 .carousel-recomentations div h3, .carousel-recomentations div h4 {

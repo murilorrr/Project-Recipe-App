@@ -41,9 +41,9 @@ function CardRecipesMade({ args }) {
           {args.doneDate}
 
         </div>
-        {args.tags.map((tagName) => (
+        {args.tags.map((tagName, index2) => (
           <span
-            key={ 10 }
+            key={ index2 }
             data-testid={ `${index}-${tagName}-horizontal-tag` }
             className="card-recipes-made-tags"
           >
@@ -70,8 +70,10 @@ CardRecipesMade.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
     doneDate: PropTypes.string,
-    tags: PropTypes.arrayOf(),
-    index: PropTypes.string,
+    tags: PropTypes.arrayOf(
+      PropTypes.string,
+    ),
+    index: PropTypes.number,
   }).isRequired,
 };
 

@@ -32,7 +32,7 @@ function CarrouselRecomendations(props) {
                   data-testid={ `${index}-recomendation-card` }
                   id={ idDrink }
                 >
-                  <img alt={ strDrink } width="100px" src={ strDrinkThumb } />
+                  <img alt={ strDrink } src={ strDrinkThumb } />
                   <h4>{strAlcoholic}</h4>
                   <h3 data-testid={ `${index}-recomendation-title` }>{strDrink}</h3>
                 </div>
@@ -48,8 +48,6 @@ function CarrouselRecomendations(props) {
     <div className="recomedations">
       <h3>Recomendados</h3>
       <div
-        style={ { display: 'flex',
-          overflowX: 'scroll' } }
         className="carousel-recomentations"
       >
         {
@@ -63,7 +61,7 @@ function CarrouselRecomendations(props) {
                 data-testid={ `${index}-recomendation-card` }
                 id={ idMeal }
               >
-                <img alt={ strMeal } width="100px" src={ strMealThumb } />
+                <img alt={ strMeal } src={ strMealThumb } />
                 <h4>{strCategory}</h4>
                 <h3 data-testid={ `${index}-recomendation-title` }>{strMeal}</h3>
               </div>

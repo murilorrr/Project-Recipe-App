@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { CardRecipesMade, HeaderNoSearch } from '../components';
 
-// Essa função serve para filtar a lista de receitas por drink, meal ou se e all
-const filterFood = (receita, FoodType) => {
-  const list = Object.values(receita);
-  if (list.includes(FoodType)) return true;
-  if (FoodType === 'All') return true;
-  return false;
-};
-
 function RecipesMade() {
   const [FoodType, setFilterFood] = useState('All');
   const { location } = useHistory();
-  const [recipesMade, setRecipesMade] = useState([])
+  const [recipesMade, setRecipesMade] = useState([]);
 
+  // Essa função serve para filtar a lista de receitas por drink, meal ou se e all
+  const filterFood = (receita, Foodtype) => {
+    const list = Object.values(receita);
+    if (list.includes(FoodType)) return true;
+    if (Foodtype === 'All') return true;
+    return false;
+  };
+
+  const done = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   useEffect(() => {
-    const localStorageItems = JSON.parse(localStorage.getItem('doneRecipes')) || [];
-    if (localStorageItems !== null) setRecipesMade(localStorageItems);
-  }, [setRecipesMade]);
+    setRecipesMade([...done]);
+  }, [done]);
 
   return (
     <div>

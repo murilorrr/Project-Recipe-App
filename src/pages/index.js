@@ -13,7 +13,6 @@ export { default as Login } from './Login';
 export { default as NotFound } from './NotFound';
 export { default as OriginFood } from './OriginFood';
 export { default as Profile } from './Profile';
-export { default as RecipeFoods } from './RecipeFoods';
 export { default as RecipesMade } from './RecipesMade';
 export { default as DrinkProcess } from './DrinkProcess';
 export { default as FoodProcess } from './FoodProcess';

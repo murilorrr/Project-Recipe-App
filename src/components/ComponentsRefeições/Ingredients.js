@@ -1,6 +1,7 @@
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Context from '../../contextAPI/Context';
 // finish-recipe-btn
 
 const getValuesInObject = (obj, value) => {
@@ -15,13 +16,13 @@ const getValuesInObject = (obj, value) => {
 
 const disableTrueOrFalse = (list1, list2) => {
   if (!document.getElementById('finish-recipe-btn')) return;
-
   if (list1.length === list2.length) {
     document.getElementById('finish-recipe-btn').disabled = false;
   }
 };
 
 function Ingredients({ item, dataTestId, check }) {
+  const { recipeInProgress, setInProgress } = useContext(Context);
   const { pathname } = useLocation();
   const idPage = pathname.split('/')[2];
   const namePage = pathname.split('/')[1] === 'comidas' ? 'meals' : 'cocktails';
@@ -30,22 +31,21 @@ function Ingredients({ item, dataTestId, check }) {
   const ingredientsMeansure = getValuesInObject(item[0], 'strMeasure');
 
   const saveRecipe = (ingredientPosition) => {
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
-    const ingredientList = inProgressRecipes[namePage];
-    if (!inProgressRecipes[namePage]) return null;
+    const ingredientList = recipeInProgress[namePage];
 
     if (ingredientList[idPage].includes(ingredientPosition)) {
       ingredientList[idPage].splice(
         ingredientList[idPage].indexOf(ingredientPosition), 1,
       );
       disableTrueOrFalse(ingredientList[idPage], ingredientsList);
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+      setInProgress({ ...recipeInProgress });
       return;
     }
 
     ingredientList[idPage].push(ingredientPosition);
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+    setInProgress({ ...recipeInProgress });
     disableTrueOrFalse(ingredientList[idPage], ingredientsList);
     return true;
   };
@@ -101,11 +101,15 @@ function Ingredients({ item, dataTestId, check }) {
 }
 
 Ingredients.propTypes = {
-  check: PropTypes.bool.isRequired,
+  check: PropTypes.bool,
   dataTestId: PropTypes.string.isRequired,
   item: PropTypes.arrayOf(
-    PropTypes.object
+    PropTypes.object,
   ).isRequired,
+};
+
+Ingredients.defaultProps = {
+  check: false,
 };
 
 export default Ingredients;

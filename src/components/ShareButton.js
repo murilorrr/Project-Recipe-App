@@ -95,13 +95,14 @@ ShareButton.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   dataTest: PropTypes.string,
-  inProcess: PropTypes.bool.isRequired,
+  inProcess: PropTypes.string,
 };
 
 ShareButton.defaultProps = {
   id: null,
   type: null,
   dataTest: 'share-btn',
+  inProcess: 'false',
 };
 
 export default ShareButton;

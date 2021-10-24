@@ -4,11 +4,11 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Context from '../contextAPI/Context';
 
-const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-
 function FavoriteButton(props) {
   const { item, history: { location: { pathname } } } = props;
   const { heartState, setHeartState } = useContext(Context);
+  // useMemo(() => function, input)
+  const localStorageItems = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
   useEffect(() => {
     setHeartState(false);
@@ -16,12 +16,13 @@ function FavoriteButton(props) {
     const resultFilter = localStorageItems
       .some((element) => Object.values(element)[0] === Object.values(item[0])[0]);
     if (resultFilter === true) setHeartState(true);
-  }, [setHeartState, item]);
+  }, [setHeartState, item, localStorageItems]);
 
   const desfavoritar = () => {
     const resultFilter = localStorageItems
       .filter((element) => Object.values(element)[0] !== Object.values(item[0])[0]);
     localStorage.setItem('favoriteRecipes', JSON.stringify(resultFilter));
+
     setHeartState(!heartState);
   };
 

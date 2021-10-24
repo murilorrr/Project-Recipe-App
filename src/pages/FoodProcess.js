@@ -1,23 +1,29 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
 import Instruction from '../components/ComponentsRefeições/Instruction';
+import Context from '../contextAPI/Context';
 
 const baseUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 function FoodProcess(props) {
   const { match: { params: { id } }, location, history } = props;
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
-  const [item, setItem] = useState(false);
+  const [item, setItem] = useState([]);
+  const { setInProgress, recipeInProgress } = useContext(Context);
 
   if (localStorage
     .getItem('inProgressRecipes') === null) {
+    console.log('estou me progressRecipes');
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {}, meals: { [id]: [] },
     }));
+    setInProgress({ ...recipeInProgress,
+      ...{
+        cocktails: {}, meals: { [id]: [] } },
+    });
   }
 
   useEffect(() => {
@@ -28,8 +34,45 @@ function FoodProcess(props) {
     fetchById();
   }, [id]);
 
-  if (!item) return (<Loading />);
+  if (item.length === 0) return (<Loading />);
   const { strMeal, strMealThumb, strCategory, strInstructions } = item[0];
+
+  const data = new Date();
+
+  // [{
+  // id: id-da-receita,
+  // type: comida-ou-bebida,
+  // area: area-da-receita-ou-texto-vazio,
+  // category: categoria-da-receita-ou-texto-vazio,
+  // alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
+  // name: nome-da-receita,
+  // image: imagem-da-receita,
+  // doneDate: quando-a-receita-foi-concluida,
+  // tags: array-de-tags-da-receita-ou-array-vazio
+  // }]
+
+  const retornaComidaOuDrink = () => {
+    const { strArea, idMeal, strTags } = item[0];
+    const retorno = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      doneDate: `${data.getDay}/ ${data.getMonth}/ ${data.getFullYear}`,
+      tags: [...strTags],
+    };
+    return retorno;
+  };
+
+  const finisherButton = () => {
+    const arrayDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    arrayDone.push(retornaComidaOuDrink());
+    localStorage.setItem('doneRecipes', JSON.stringify(arrayDone));
+    return history.push('/receitas-feitas');
+  };
 
   return (
     <div className="page-food-container">
@@ -55,16 +98,15 @@ function FoodProcess(props) {
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div className="finisher-link">
-        <Link to="/receitas-feitas">
-          <button
-            id="finish-recipe-btn"
-            type="button"
-            data-testid="finish-recipe-btn"
-            disabled
-          >
-            Finalizar Receita
-          </button>
-        </Link>
+        <button
+          id="finish-recipe-btn"
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled='problema'
+          onClick={ finisherButton }
+        >
+          Finalizar Receita
+        </button>
       </div>
     </div>
   );

@@ -35,14 +35,42 @@ function DrinkProcess(props) {
   if (!item.length) return (<Loading />);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
-  const click = () => {
-    // colocar a receita no local Storage na chave doneRecipes
-    const localStorageItems = JSON.parse(localStorage.getItem('doneRecipes')) || [];
-    localStorageItems.push(item)
-    localStorage.setItem('doneRecipes', JSON.stringify(localStorageItems));
-    console.log('CLICK');
-    handleClick();
-  }
+  const data = new Date();
+
+  // [{
+  // id: id-da-receita,
+  // type: comida-ou-bebida,
+  // area: area-da-receita-ou-texto-vazio,
+  // category: categoria-da-receita-ou-texto-vazio,
+  // alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
+  // name: nome-da-receita,
+  // image: imagem-da-receita,
+  // doneDate: quando-a-receita-foi-concluida,
+  // tags: array-de-tags-da-receita-ou-array-vazio
+  // }]
+
+  const retornaComidaOuDrink = () => {
+    const { idDrink, strCategory } = item[0];
+    const retorno = {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: `${data.getDay}/ ${data.getMonth}/ ${data.getFullYear}`,
+      tags: [],
+    };
+    return retorno;
+  };
+
+  const finisherButton = () => {
+    const arrayDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    arrayDone.push(retornaComidaOuDrink());
+    localStorage.setItem('doneRecipes', JSON.stringify(arrayDone));
+    return history.push('/receitas-feitas');
+  };
 
   return (
     <div className="page-food-container">
@@ -70,16 +98,16 @@ function DrinkProcess(props) {
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div className="finisher-link">
-        
-      </div>
-      <button
+        <button
           id="finish-recipe-btn"
+          disabled='problema'
           type="button"
           data-testid="finish-recipe-btn"
-          onClick={ click }
+          onClick={ finisherButton }
         >
           Finalizar Receita
         </button>
+      </div>
     </div>
   );
 }

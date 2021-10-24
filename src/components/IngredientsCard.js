@@ -3,8 +3,9 @@ import React from 'react';
 
 function IngredientsCard({ id, name, img, onClick, index }) {
   return (
-    <section className="mini-card-food-container card-content" >
+    <section className="mini-card-food-container card-content">
       <section
+        aria-hidden="true"
         type="button"
         className="card-explore-food-ingred"
         data-testid={ `${index}-recipe-card` }
@@ -25,11 +26,11 @@ function IngredientsCard({ id, name, img, onClick, index }) {
 const { number, string, func } = PropTypes;
 
 IngredientsCard.propTypes = {
-  id: number,
-  img: string,
-  index: number,
-  name: string,
-  onClick: func,
-}.isRequired;
+  id: number.isRequired,
+  img: string.isRequired,
+  index: number.isRequired,
+  name: string.isRequired,
+  onClick: func.isRequired,
+};
 
 export default IngredientsCard;
