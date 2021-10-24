@@ -43,14 +43,14 @@ li {
 .finisher-link {
   margin: 0;
   position: fixed;
-  top: 90%;
   right: -5%;
+  top: 90%;
   transition: 0.5s;
 }
 
 .finisher-link button {
-  width: 105vw;
   height: 10vh;
+  width: 105vw;
 }
 
 .StartButton button {
@@ -58,9 +58,9 @@ li {
   animation-timing-function: ease-in-out;
   background: #f34f74;
   color: white;
+  height: 10vh;
   opacity: 0.8;
   width: 105vw;
-  height: 10vh;
 }
 
 @keyframes exemplo {
@@ -84,8 +84,8 @@ li {
 
 .StartButton {
   position: fixed;
-  top: 90%;
   right: -5%;
+  top: 90%;
 }
 
 .finisher-link button:enabled {
