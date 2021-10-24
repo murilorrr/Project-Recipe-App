@@ -5,7 +5,7 @@ import Input from '../components/buttons';
 import { saveToken, saveEmail, initialRecipesFavorites, initialDoneRecipes,
 } from '../localStorage/localStorageSaves';
 import '../CSS/Login.css';
-import LogoLogin from '../images/LogoLogin.png';
+import LogoLogin from '../images/LogoLogin.webp';
 
 function Login(props) {
   const [Email, setEmail] = useState('');

@@ -19,6 +19,7 @@ function AppProvider({ children }) {
   useEffect(() => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
     setInProgress({ ...recipeInProgress, ...inProgressRecipes });
+    // eslint-disable-next-line
   }, []);
 
   const contextValue = {
