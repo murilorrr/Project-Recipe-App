@@ -13,10 +13,6 @@ function DrinkProcess(props) {
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
 
-  function handleClick() {
-    history.push("/receitas-feitas");
-  }
-
   if (localStorage
     .getItem('inProgressRecipes') === null) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
