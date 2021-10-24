@@ -1,34 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { CardRecipesMade, HeaderNoSearch } from '../components';
-
-const listaDeReceitasFeitas = [
-  {
-    id: '52771',
-    type: 'comida',
-    area: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: [
-      'Pasta',
-      'Curry',
-    ],
-  },
-  {
-    id: '178319',
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    doneDate: '23/06/2020',
-    tags: [],
-  },
-];
 
 // Essa função serve para filtar a lista de receitas por drink, meal ou se e all
 const filterFood = (receita, FoodType) => {
@@ -41,6 +13,12 @@ const filterFood = (receita, FoodType) => {
 function RecipesMade() {
   const [FoodType, setFilterFood] = useState('All');
   const { location } = useHistory();
+  const [recipesMade, setRecipesMade] = useState([])
+
+  useEffect(() => {
+    const localStorageItems = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    if (localStorageItems !== null) setRecipesMade(localStorageItems);
+  }, [setRecipesMade]);
 
   return (
     <div>
@@ -72,7 +50,7 @@ function RecipesMade() {
         </button>
       </div>
       <div>
-        {listaDeReceitasFeitas
+        {recipesMade
           .filter((receita) => filterFood(receita, FoodType))
           .map((receita, index) => (<CardRecipesMade
             key={ receita.id }

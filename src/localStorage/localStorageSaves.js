@@ -13,3 +13,10 @@ export function initialRecipesFavorites() {
     localStorage.setItem('favoriteRecipes', JSON.stringify(FavoriteRecipes));
   }
 }
+
+export function initialDoneRecipes() {
+  if (localStorage.getItem('doneRecipes') === null) {
+    const doneRecipes = [];
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+  }
+}

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import TextInput from '../components/textInputs';
 import Input from '../components/buttons';
-import { saveToken, saveEmail, initialRecipesFavorites,
+import { saveToken, saveEmail, initialRecipesFavorites, initialDoneRecipes,
 } from '../localStorage/localStorageSaves';
 import '../CSS/Login.css';
 import LogoLogin from '../images/LogoLogin.png';
@@ -38,6 +38,7 @@ function Login(props) {
     saveToken('mealsToken');
     saveToken('cocktailsToken');
     initialRecipesFavorites();
+    initialDoneRecipes();
     saveEmail(Email);
 
     history.push('/comidas');

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { FavoriteButton, Loading, ShareButton } from '../components';
 import HeaderRecipes from '../components/ComponentsRefeições/HeaderRecipes';
 import Ingredients from '../components/ComponentsRefeições/Ingredients';
@@ -13,6 +12,10 @@ function DrinkProcess(props) {
 
   const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [item, setItem] = useState([]);
+
+  function handleClick() {
+    history.push("/receitas-feitas");
+  }
 
   if (localStorage
     .getItem('inProgressRecipes') === null) {
@@ -32,6 +35,15 @@ function DrinkProcess(props) {
   if (!item.length) return (<Loading />);
   const { strAlcoholic, strDrinkThumb, strDrink, strInstructions } = item[0];
 
+  const click = () => {
+    // colocar a receita no local Storage na chave doneRecipes
+    const localStorageItems = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    localStorageItems.push(item)
+    localStorage.setItem('doneRecipes', JSON.stringify(localStorageItems));
+    console.log('CLICK');
+    handleClick();
+  }
+
   return (
     <div className="page-food-container">
       <div className="infos">
@@ -47,7 +59,7 @@ function DrinkProcess(props) {
             item={ item }
             history={ history }
           />
-          <ShareButton location={ location } inProcess="true" />
+          <ShareButton location={ location } inProcess />
         </div>
       </div>
       <div className="ingredientes">
@@ -58,17 +70,16 @@ function DrinkProcess(props) {
         <Instruction strInstructions={ strInstructions } />
       </div>
       <div className="finisher-link">
-        <Link to="/receitas-feitas">
-          <button
-            id="finish-recipe-btn"
-            disabled
-            type="button"
-            data-testid="finish-recipe-btn"
-          >
-            Finalizar Receita
-          </button>
-        </Link>
+        
       </div>
+      <button
+          id="finish-recipe-btn"
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ click }
+        >
+          Finalizar Receita
+        </button>
     </div>
   );
 }

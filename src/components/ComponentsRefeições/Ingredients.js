@@ -103,7 +103,9 @@ function Ingredients({ item, dataTestId, check }) {
 Ingredients.propTypes = {
   check: PropTypes.bool.isRequired,
   dataTestId: PropTypes.string.isRequired,
-  item: PropTypes.arrayOf().isRequired,
+  item: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired,
 };
 
 export default Ingredients;

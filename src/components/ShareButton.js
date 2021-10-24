@@ -9,7 +9,6 @@ function ShareButton(props) {
   const [feedback, setFeedback] = useState(false);
 
   if (inProcess) {
-    console.log(inProcess);
     const onclick = () => {
       copy(`http://localhost:3000${pathname.split('/in-progress')[0]}`);
       setFeedback(!feedback);
