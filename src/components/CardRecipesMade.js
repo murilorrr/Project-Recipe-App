@@ -24,7 +24,11 @@ function CardRecipesMade({ args }) {
           data-testid={ `${index}-horizontal-top-text` }
           className="card-recipes-made-category"
         >
-          {`${args.area} - ${args.category} - ${args.alcoholicOrNot}` }
+          <p className="area">{args.area ? `${args.area}` : null }</p>
+          <p className="category">{args.category ? `-${args.category}` : null }</p>
+          <p className="alcoholicOrNot">
+            {args.alcoholicOrNot ? `-${args.alcoholicOrNot}` : null }
+          </p>
         </div>
         <div
           data-testid={ `${index}-horizontal-name` }

@@ -31,12 +31,16 @@ function CardFavoriteRecipe(props) {
           src={ image }
         />
       </div>
-      <div>
+      <div className="text">
         <div
           data-testid={ `${index}-horizontal-top-text` }
           className="card-recipes-favorite-category"
         >
-          {`${area} - ${category} - ${alcoholicOrNot}` }
+          <p className="area">{area ? `${area}` : null }</p>
+          <p className="category">{category ? `-${category}` : null }</p>
+          <p className="alcoholicOrNot">
+            {alcoholicOrNot ? `-${alcoholicOrNot}` : null }
+          </p>
         </div>
         <div
           data-testid={ `${index}-horizontal-name` }
@@ -46,20 +50,19 @@ function CardFavoriteRecipe(props) {
         >
           { name }
         </div>
+        <div className="options-button">
+          <FavoriteButtonFavoriteRecipes
+            item={ item }
+            dataTest={ `${index}-horizontal-favorite-btn` }
+          />
+          <ShareButton
+            location={ history.location }
+            id={ id }
+            type={ type }
+            dataTest={ `${index}-horizontal-share-btn` }
+          />
+        </div>
       </div>
-      <div className="options-button">
-        <FavoriteButtonFavoriteRecipes
-          item={ item }
-          dataTest={ `${index}-horizontal-favorite-btn` }
-        />
-        <ShareButton
-          location={ history.location }
-          id={ id }
-          type={ type }
-          dataTest={ `${index}-horizontal-share-btn` }
-        />
-      </div>
-
     </div>
   );
 }

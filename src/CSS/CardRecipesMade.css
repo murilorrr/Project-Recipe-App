@@ -1,13 +1,40 @@
 .card-recipes-made-container {
   display: flex;
   margin: 10px;
-  justify-content: space-between;
   max-width: 340px;
   overflow-wrap: anywhere;
+  padding: 0 5px 0 0;
+  background-color: #2F8E8E;
 }
 
-.tags-container {
-  overflow-x: hidden;
+.card-recipes-made-date::before {
+  content: 'Feita em: ';
+}
+
+.card-recipes-made-container div:nth-child(n+1) {
+  align-self: center;
+}
+
+.card-recipe:nth-child(2n){
+  background-color: #6ec5c5;
+}
+
+.card-recipes-made-container div:nth-child(3) {
+  margin: 0 0 0 auto;
+}
+
+.card-recipes-made-category:nth-child(1) {
+  color: white;
+}
+
+.card-recipes-made-container:nth-child(2n) {
+  background-color: #6ec5c5;
+  color: black;
+}
+
+.card-recipe {
+  padding: 0 5px 0 0;
+  border-radius: 5px;
 }
 
 .infos-content {
@@ -15,7 +42,8 @@
 }
 
 .card-recipes-made-thumb {
-  width: 100px;
+  width: 120px;
+  height: 129px;
 }
 
 .card-recipes-made-share {
@@ -24,17 +52,71 @@
 }
 
 .card-recipes-made-tags {
-  margin-right: 5px;
+  background-color: #d9952f;
+  border-radius: 20px;
+  margin: 4px 3px;
+  padding: 5px;
+  overflow-wrap: normal;
+}
+
+.tags-container {
+  max-width: 150px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .card-recipe {
   display: flex;
   margin: 10px;
-  justify-content: space-between;
   max-width: 340px;
   overflow-wrap: anywhere;
+  background-color: #2F8E8E;
+}
+
+.card-recipes-favorite-category {
+  color: white;
+}
+
+.card-recipe .text {
+  align-self: flex-start;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.options-button {
+  display: flex;
+  margin-top: 15%;
+  width: 162px;
+  justify-content: space-around;
+}
+
+.options-button button {
+  width: 40px;
+  height: 40px;
+}
+
+.options-button button image {
+  width: 100%;
+  height: 100%;
+}
+
+.text p {
+  font-size: 17px;
+}
+
+.card-recipes-favorite-title {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+p {
+  display: inline;
 }
 
 .imageCard-favorites img {
-  width: 100px;
+  width: 140px;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
 }
